@@ -1,24 +1,34 @@
 import { Navigate, Route, Routes } from 'react-router'
-import Layout from './layouts/Layout.jsx'
-import Register from './pages/Register/Register.jsx'
-import Login from './pages/Login/Login.jsx'
-import Welcome from './pages/Welcome/Welcome.jsx'
-import Recommended from './pages/Recommended/Recommended.jsx'
-import Library from './pages/Library/Library.jsx'
-import Reading from './pages/Reading/Reading.jsx'
+import AuthLayout from '@/layouts/AuthLayout.jsx'
+import AuthPage from '@/pages/AuthPage.jsx'
+import LoginPage from '@/pages/LoginPage.jsx'
+import RegisterPage from '@/pages/RegisterPage.jsx'
+import MainLayout from '@/layouts/MainLayout.jsx'
+import WelcomePage from '@/pages/WelcomePage.jsx'
+import RecommendedPage from '@/pages/RecommendedPage.jsx'
+import MyLibraryPage from '@/pages/MyLibraryPage.jsx'
+import ReadingPage from '@/pages/ReadingPage.jsx'
 
 function App() {
+  const isAuth = false
+
   return (
     <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route index element={<Welcome />} />
-        <Route path="login" element={<Login />} />
-        <Route path="register" element={<Register />} />
-        <Route path="recommended" element={<Recommended />} />
-        <Route path="library" element={<Library />} />
-        <Route path="reading" element={<Reading />} />
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Route>
+      {!isAuth ? (
+        <Route path="/" element={<AuthLayout />}>
+          <Route index element={<AuthPage />} />
+          <Route path="login" element={<LoginPage />} />
+          <Route path="register" element={<RegisterPage />} />
+        </Route>
+      ) : (
+        <Route path="/" element={<MainLayout />}>
+          <Route index element={<WelcomePage />} />
+          <Route path="recommended" element={<RecommendedPage />} />
+          <Route path="library" element={<MyLibraryPage />} />
+          <Route path="reading" element={<ReadingPage />} />
+        </Route>
+      )}
+      <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   )
 }
