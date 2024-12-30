@@ -1,6 +1,10 @@
+import { Box, GridItem } from '@chakra-ui/react'
+
 function Header() {
   return (
-    <div>Header</div>
+    <GridItem gridArea="header">
+      <Box>Header</Box>
+    </GridItem>
   )
 }
 
