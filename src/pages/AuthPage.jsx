@@ -9,7 +9,7 @@ function AuthPage() {
       <Flex justify="center" p="5" h="411px" bg="brand.bgSecondary" borderRadius="30px">
         <Box>
           <Image src={logo} alt="logo" pb="10" />
-          <Heading as={'h1'} pb="5" fontFamily="Gilroy-Bold" fontSize="2rem" letterSpacing="2%">
+          <Heading as={'h1'} pb="5" fontFamily="Gilroy-Bold" fontSize="2rem" letterSpacing="wide">
             <Highlight query="a book" styles={{ color: 'brand.bgFilter' }}>
               Expand your mind, reading a book
             </Highlight>
