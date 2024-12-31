@@ -37,7 +37,7 @@ function AuthLayout() {
             color="brand.muted"
             href="/"
           >
-            <Image src={logo} alt="logo" pb="10" />
+            <Image src={logo} alt="logo" mb="10" />
           </Link>
           <Heading
             as={'h1'}

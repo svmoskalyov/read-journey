@@ -1,40 +1,140 @@
-import { Button, Input, InputElement, Stack } from '@chakra-ui/react'
-import { Field } from '@/components/ui/field'
 import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import * as yup from 'yup'
+import {
+  Button,
+  Input,
+  InputElement,
+  Stack,
+  Flex,
+  Link
+} from '@chakra-ui/react'
+import { Field } from '@/components/ui/field'
+import { PasswordInput } from '@/components/ui/password-input'
+
+const schema = yup
+  .object({
+    name: yup.string().min(2).required(),
+    email: yup
+      .string()
+      .email()
+      .min(3)
+      .matches(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/)
+      .required(),
+    password: yup.string().min(7).required()
+  })
+  .required()
 
 function RegisterForm() {
   const {
     register,
     handleSubmit,
     formState: { errors }
-  } = useForm()
+  } = useForm({
+    resolver: yupResolver(schema)
+  })
 
-  const onSubmit = handleSubmit((data) => console.log(data))
+  const onSubmit = handleSubmit(data => console.log(data))
 
   return (
-    <form onSubmit={onSubmit}>
+    <form
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        height: '100%'
+      }}
+      onSubmit={onSubmit}
+    >
       <Stack gap="2" align="flex-start" maxW="295px">
         <Field invalid={!!errors.name} errorText={errors.name?.message}>
-          <InputElement fontFamily="Gilroy-Medium" fontSize="12px" color="brand.muted">
+          <InputElement
+            fontFamily="Gilroy-Medium"
+            fontSize="12px"
+            color="brand.muted"
+          >
             Name:
           </InputElement>
           <Input
-            ps="4.75em"
+            ps="4.65em"
+            h="11"
             fontFamily="Gilroy-Medium"
             fontSize="12px"
             bg="brand.bgInput"
             rounded="12px"
-            placeholder="your name"
+            placeholder="Your Name"
             variant="subtle"
-            {...register('name', { required: 'Name is required' })}
+            {...register('name', { required: 'name is required' })}
           />
         </Field>
 
+        <Field invalid={!!errors.email} errorText={errors.email?.message}>
+          <InputElement
+            fontFamily="Gilroy-Medium"
+            fontSize="12px"
+            color="brand.muted"
+          >
+            Email:
+          </InputElement>
+          <Input
+            ps="4.25em"
+            h="11"
+            fontFamily="Gilroy-Medium"
+            fontSize="12px"
+            bg="brand.bgInput"
+            rounded="12px"
+            placeholder="Your Email"
+            variant="subtle"
+            {...register('email', { required: 'email is required' })}
+          />
+        </Field>
 
-
-
-        <Button type="submit">Submit</Button>
+        <Field invalid={!!errors.password} errorText={errors.password?.message}>
+          <InputElement
+            fontFamily="Gilroy-Medium"
+            fontSize="12px"
+            color="brand.muted"
+          >
+            Password:
+          </InputElement>
+          <PasswordInput
+            ps="6.25em"
+            h="11"
+            fontFamily="Gilroy-Medium"
+            fontSize="12px"
+            bg="brand.bgInput"
+            rounded="12px"
+            placeholder="Your Password"
+            variant="subtle"
+            {...register('password', { required: 'password is required' })}
+          />
+        </Field>
       </Stack>
+
+      <Flex justifyContent="space-between" width="full">
+        <Button
+          h="42px"
+          w="140px"
+          fontFamily="Gilroy-Bold"
+          fontSize="14px"
+          rounded="30px"
+          color="brand.bgSecondary"
+          bg='brand.accent'
+          type="submit"
+        >
+          Registration
+        </Button>
+
+        <Link
+          variant="underline"
+          fontFamily="Gilroy-Medium"
+          fontSize="12px"
+          color="brand.muted"
+          href="/login"
+        >
+          Already have an account?
+        </Link>
+      </Flex>
     </form>
   )
 }
