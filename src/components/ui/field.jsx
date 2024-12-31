@@ -16,7 +16,11 @@ export const Field = React.forwardRef(function Field(props, ref) {
       {helperText && (
         <ChakraField.HelperText>{helperText}</ChakraField.HelperText>
       )}
-      {errorText && <ChakraField.ErrorText>{errorText}</ChakraField.ErrorText>}
+      {errorText && (
+        <ChakraField.ErrorText position="absolute" top="60%" left="12px">
+          {errorText}
+        </ChakraField.ErrorText>
+      )}
     </ChakraField.Root>
   )
 })

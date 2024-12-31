@@ -18,7 +18,7 @@ export const InputGroup = React.forwardRef(function InputGroup(props, ref) {
   return (
     <Group ref={ref} {...rest}>
       {startElement && (
-        <InputElement color='inherit' pointerEvents='none' {...startElementProps}>
+        <InputElement pointerEvents='none' {...startElementProps}>
           {startElement}
         </InputElement>
       )}
