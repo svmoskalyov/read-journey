@@ -8,9 +8,24 @@ import RecommendedPage from '@/pages/RecommendedPage.jsx'
 import MyLibraryPage from '@/pages/MyLibraryPage.jsx'
 import ReadingPage from '@/pages/ReadingPage.jsx'
 
+import { useCallback, useEffect } from 'react'
+import { useNavigate } from 'react-router'
+
 function App() {
-  const isAuth = false
-  // const isAuth = true
+  const navigate = useNavigate()
+
+  // const isAuth = false
+  const isAuth = true
+
+  const handleAuth = useCallback(() => {
+    navigate('/recommended')
+  }, [navigate])
+
+  useEffect(() => {
+    if (isAuth) {
+      handleAuth()
+    }
+  }, [handleAuth, isAuth])
 
   return (
     <Routes>

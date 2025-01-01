@@ -1,10 +1,19 @@
-import { Box, GridItem } from '@chakra-ui/react'
+import { Box, Flex } from '@chakra-ui/react'
 
 function Header() {
   return (
-    <GridItem gridArea="header">
-      <Box>Header</Box>
-    </GridItem>
+    <Flex
+      gridArea="header"
+      alignItems="center"
+      justifyContent="space-between"
+      px="5"
+      bg="brand.bgSecondary"
+      color="brand.accent"
+      borderRadius="15px"
+    >
+      <Box>1</Box>
+      <Box>2</Box>
+    </Flex>
   )
 }
 
