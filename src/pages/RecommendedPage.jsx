@@ -1,3 +1,5 @@
+import Dashboard from '@/components/Dashboard'
+import RecommendedBooks from '@/components/RecommendedBooks'
 import { Flex, Grid } from '@chakra-ui/react'
 
 function RecommendedPage() {
@@ -10,19 +12,20 @@ function RecommendedPage() {
       // p="5"
       bg="brand.bgPrimary"
       color="brand.accent"
-      // borderRadius="30px"
+      // rounded="30px"
     >
       <Flex
-        // direction="column"
+        direction="column"
+        // gap="2.5"
         // align="flex-start"
         // justify="center"
         // justifyContent="flex-start"
         p="5"
         h="478px"
         bg="brand.bgSecondary"
-        borderRadius="30px"
+        rounded="30px"
       >
-        sec1
+        <Dashboard />
       </Flex>
 
       <Flex
@@ -32,9 +35,9 @@ function RecommendedPage() {
         h="382px"
         // overflow="hidden"
         bg="brand.bgSecondary"
-        borderRadius="30px"
+        rounded="30px"
       >
-        sec2
+        <RecommendedBooks />
       </Flex>
     </Grid>
   )
