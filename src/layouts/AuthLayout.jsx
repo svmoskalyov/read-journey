@@ -30,13 +30,7 @@ function AuthLayout() {
         borderRadius="30px"
       >
         <Box>
-          <Link
-            variant="underline"
-            fontFamily="Gilroy-Medium"
-            fontSize="12px"
-            color="brand.muted"
-            href="/"
-          >
+          <Link href="/">
             <Image src={logo} alt="logo" mb="10" />
           </Link>
           <Heading
