@@ -101,6 +101,7 @@ function Dashboard() {
             lineHeight="14px"
             rounded="30px"
             border="1px solid #f9f9f94d"
+            bg="brand.bgSecondary"
             type="submit"
           >
             To apply
