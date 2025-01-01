@@ -41,6 +41,7 @@ function Dashboard() {
       <form style={{ marginBottom: '20px', width: '100%' }} onSubmit={onSubmit}>
         <Heading
           mb="2"
+          pl="3"
           fontFamily="Gilroy-Medium"
           fontSize="10px"
           lineHeight="12px"
@@ -58,7 +59,7 @@ function Dashboard() {
               Book title:
             </InputElement>
             <Input
-              ps="6.25em"
+              ps="6.45em"
               h="11"
               fontFamily="Gilroy-Medium"
               fontSize="12px"
@@ -79,7 +80,7 @@ function Dashboard() {
               The author:
             </InputElement>
             <Input
-              ps="6.85em"
+              ps="7.05em"
               h="11"
               fontFamily="Gilroy-Medium"
               fontSize="12px"
