@@ -25,7 +25,7 @@ function DrawerMenu() {
           <Image src={menu} alt="menu" h="28px" w="28px" />
         </IconButton>
       </DrawerTrigger>
-      <DrawerContent w="200px" bg="brand.bgInput" color="brand.accent">
+      <DrawerContent pb="10" w="200px" bg="brand.bgInput" color="brand.accent">
         <DrawerBody display="flex" justifyContent="center" alignItems="center">
           <UserNav />
         </DrawerBody>
