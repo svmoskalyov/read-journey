@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { IconButton, Image } from '@chakra-ui/react'
 import { Button } from '@/components/ui/button'
 import {
-  DrawerActionTrigger,
   DrawerBackdrop,
   DrawerBody,
   DrawerCloseTrigger,
@@ -30,19 +29,17 @@ function DrawerMenu() {
           <UserNav />
         </DrawerBody>
         <DrawerFooter justifyContent="center">
-          <DrawerActionTrigger asChild>
-            <Button
-              variant="outline"
-              h="38px"
-              w="91px"
-              fontFamily="Gilroy-Bold"
-              color="brand.accent"
-              border="1px solid #f9f9f94d"
-              rounded="30px"
-            >
-              Log out
-            </Button>
-          </DrawerActionTrigger>
+          <Button
+            variant="outline"
+            h="38px"
+            w="91px"
+            fontFamily="Gilroy-Bold"
+            color="brand.accent"
+            border="1px solid #f9f9f94d"
+            rounded="30px"
+          >
+            Log out
+          </Button>
         </DrawerFooter>
         <DrawerCloseTrigger />
       </DrawerContent>
