@@ -37,6 +37,7 @@ function DrawerMenu() {
             color="brand.accent"
             border="1px solid #f9f9f94d"
             rounded="30px"
+            arial-label="button logout"
           >
             Log out
           </Button>
