@@ -18,29 +18,41 @@ import {
 import { Field } from '@/components/ui/field'
 import arrow from '@/assets/icons/arrow-right.svg'
 
-const schema = yup.object({
-  title: yup.string().transform((cv, ov) => {
-    if (ov === '') return undefined
-    return cv
-  }),
+// const schema = yup.object({
+//   title: yup.string().transform((cv, ov) => {
+//     if (ov === '') return undefined
+//     return cv
+//   }),
 
-  author: yup.string().transform((cv, ov) => {
-    if (ov === '') return undefined
-    return cv
-  }),
+//   author: yup.string().transform((cv, ov) => {
+//     if (ov === '') return undefined
+//     return cv
+//   }),
 
-  pages: yup
-    .number()
-    .positive()
-    .integer()
-    .transform((cv, ov) => {
-      if (ov === '') return undefined
-      else if (ov === '')
-        return typeof ov === 'string' ? ov.replace(/\D/g, '') : ov
-      else if (isNaN(cv)) return undefined
-      return cv
-    })
+//   pages: yup
+//     .number()
+//     .positive()
+//     .integer()
+//     .transform((cv, ov) => {
+//       if (ov === '') return undefined
+//       if (ov === '') return typeof ov === 'string' ? ov.replace(/\D/g, '') : ov
+//       if (isNaN(cv)) return undefined
+//       return cv
+//     })
+// })
+
+const schemaRec = yup.object({
+  title: yup.string().notRequired(),
+  author: yup.string().notRequired()
 })
+
+const schemaLib = yup
+  .object({
+    title: yup.string().required(),
+    author: yup.string().required(),
+    pages: yup.number().positive().integer().min(1).required()
+  })
+  .required()
 
 function Dashboard({ page }) {
   const {
@@ -48,7 +60,7 @@ function Dashboard({ page }) {
     handleSubmit,
     formState: { errors }
   } = useForm({
-    resolver: yupResolver(schema)
+    resolver: yupResolver(page === 'recommended' ? schemaRec : schemaLib)
   })
 
   const onSubmit = handleSubmit(data => console.log(data))
