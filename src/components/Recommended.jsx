@@ -65,6 +65,9 @@ function Recommended() {
                 fontSize="14px"
                 lineHeight="18px"
                 letterSpacing="0.02em"
+                overflow="hidden"
+                textWrap="nowrap"
+                textOverflow="ellipsis"
               >
                 Lovers of Justice
               </Card.Title>
@@ -73,6 +76,9 @@ function Recommended() {
                 fontSize="10px"
                 lineHeight="12px"
                 letterSpacing="0.02em"
+                overflow="hidden"
+                textWrap="nowrap"
+                textOverflow="ellipsis"
               >
                 Yuri Andrukhovych
               </Card.Description>
@@ -99,6 +105,9 @@ function Recommended() {
                 fontSize="14px"
                 lineHeight="18px"
                 letterSpacing="0.02em"
+                overflow="hidden"
+                textWrap="nowrap"
+                textOverflow="ellipsis"
               >
                 It doesn&apos;t hurt
               </Card.Title>
@@ -107,6 +116,9 @@ function Recommended() {
                 fontSize="10px"
                 lineHeight="12px"
                 letterSpacing="0.02em"
+                overflow="hidden"
+                textWrap="nowrap"
+                textOverflow="ellipsis"
               >
                 Kateryna Babkina
               </Card.Description>
