@@ -18,14 +18,31 @@ import {
 import { Field } from '@/components/ui/field'
 import arrow from '@/assets/icons/arrow-right.svg'
 
-const schema = yup
-  .object({
-    title: yup.string(),
-    author: yup.string()
-  })
-  .required()
+const schema = yup.object({
+  title: yup.string().transform((cv, ov) => {
+    if (ov === '') return undefined
+    return cv
+  }),
 
-function Dashboard() {
+  author: yup.string().transform((cv, ov) => {
+    if (ov === '') return undefined
+    return cv
+  }),
+
+  pages: yup
+    .number()
+    .positive()
+    .integer()
+    .transform((cv, ov) => {
+      if (ov === '') return undefined
+      else if (ov === '')
+        return typeof ov === 'string' ? ov.replace(/\D/g, '') : ov
+      else if (isNaN(cv)) return undefined
+      return cv
+    })
+})
+
+function Dashboard({ page }) {
   const {
     register,
     handleSubmit,
@@ -65,7 +82,7 @@ function Dashboard() {
               fontSize="12px"
               bg="brand.bgInput"
               rounded="12px"
-              placeholder="Enter text"
+              placeholder="Enter title"
               variant="subtle"
               {...register('title', { required: 'title is required' })}
             />
@@ -86,11 +103,34 @@ function Dashboard() {
               fontSize="12px"
               bg="brand.bgInput"
               rounded="12px"
-              placeholder="Enter text"
+              placeholder="Enter author"
               variant="subtle"
               {...register('author', { required: 'author is required' })}
             />
           </Field>
+
+          {page === 'library' && (
+            <Field invalid={!!errors.pages} errorText={errors.pages?.message}>
+              <InputElement
+                fontFamily="Gilroy-Medium"
+                fontSize="12px"
+                color="brand.muted"
+              >
+                Number of pages:
+              </InputElement>
+              <Input
+                ps="10.05em"
+                h="11"
+                fontFamily="Gilroy-Medium"
+                fontSize="12px"
+                bg="brand.bgInput"
+                rounded="12px"
+                placeholder="Enter pages"
+                variant="subtle"
+                {...register('pages')}
+              />
+            </Field>
+          )}
         </Stack>
 
         <Flex justifyContent="space-between" width="full">
@@ -105,7 +145,7 @@ function Dashboard() {
             bg="brand.bgSecondary"
             type="submit"
           >
-            To apply
+            {page === 'recommended' ? 'To apply' : 'Add book'}
           </Button>
         </Flex>
       </form>
