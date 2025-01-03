@@ -7,39 +7,11 @@ import {
   InputElement,
   Stack,
   Flex,
-  Link,
-  Heading,
-  Text,
-  Mark,
-  Center,
-  IconButton,
-  Image
+  Heading
 } from '@chakra-ui/react'
 import { Field } from '@/components/ui/field'
-import arrow from '@/assets/icons/arrow-right.svg'
-
-// const schema = yup.object({
-//   title: yup.string().transform((cv, ov) => {
-//     if (ov === '') return undefined
-//     return cv
-//   }),
-
-//   author: yup.string().transform((cv, ov) => {
-//     if (ov === '') return undefined
-//     return cv
-//   }),
-
-//   pages: yup
-//     .number()
-//     .positive()
-//     .integer()
-//     .transform((cv, ov) => {
-//       if (ov === '') return undefined
-//       if (ov === '') return typeof ov === 'string' ? ov.replace(/\D/g, '') : ov
-//       if (isNaN(cv)) return undefined
-//       return cv
-//     })
-// })
+import Workout from './Workout'
+import RecommendedBooks from './RecommendedBooks'
 
 const schemaRec = yup.object({
   title: yup.string().notRequired(),
@@ -50,7 +22,7 @@ const schemaLib = yup
   .object({
     title: yup.string().required(),
     author: yup.string().required(),
-    pages: yup.number().positive().integer().min(1).required()
+    pages: yup.number().positive().integer().min(1).max(4).required()
   })
   .required()
 
@@ -162,92 +134,7 @@ function Dashboard({ page }) {
         </Flex>
       </form>
 
-      <Flex
-        direction="column"
-        gap="5"
-        p="5"
-        h="244px"
-        w="295px"
-        bg="brand.bgInput"
-        rounded="12px"
-      >
-        <Heading fontFamily="Gilroy-Bold" fontSize="18px" lineHeight="18px">
-          Start your workout
-        </Heading>
-
-        <Flex gap="3">
-          <Center
-            h="10"
-            minW="10"
-            fontFamily="Gilroy-Bold"
-            fontSize="18px"
-            bg="brand.accent"
-            color="brand.bgPrimary"
-            rounded="50%"
-          >
-            1
-          </Center>
-          <Text
-            fontFamily="Gilroy-Medium"
-            fontSize="14px"
-            lineHeight="18px"
-            letterSpacing="0.02em"
-            color="brand.muted"
-          >
-            <Mark pr="1" color="brand.accent">
-              Create a personal library:
-            </Mark>
-            add the books you intend to read to it.
-          </Text>
-        </Flex>
-
-        <Flex gap="3">
-          <Center
-            h="10"
-            minW="10"
-            fontFamily="Gilroy-Bold"
-            fontSize="18px"
-            bg="brand.accent"
-            color="brand.bgPrimary"
-            rounded="50%"
-          >
-            2
-          </Center>
-          <Text
-            fontFamily="Gilroy-Medium"
-            fontSize="14px"
-            lineHeight="18px"
-            letterSpacing="0.02em"
-            color="brand.muted"
-          >
-            <Mark pr="1" color="brand.accent">
-              Create your first workout:
-            </Mark>
-            define a goal, choose a period, start training.
-          </Text>
-        </Flex>
-
-        <Flex justifyContent="space-between">
-          <Link
-            variant="underline"
-            href="#"
-            color="brand.muted"
-            fontFamily="Gilroy-Medium"
-            fontSize="14px"
-            lineHeight="18px"
-          >
-            My library
-          </Link>
-          <IconButton
-            variant="plain"
-            h="24px"
-            minW="24px"
-            aria-label="link to my library"
-          >
-            <Image src={arrow} alt="arrow" h="24px" w="24px" />
-          </IconButton>
-        </Flex>
-      </Flex>
+      {page === 'recommended' ? <Workout /> : <RecommendedBooks />}
     </>
   )
 }
