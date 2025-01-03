@@ -49,6 +49,9 @@ function DialogBook({ onClose }) {
                 fontSize="18px"
                 lineHeight="18px"
                 letterSpacing="0.02em"
+                overflow="hidden"
+                textWrap="nowrap"
+                textOverflow="ellipsis"
               >
                 Troscha
               </Card.Title>
@@ -57,6 +60,9 @@ function DialogBook({ onClose }) {
                 fontSize="12px"
                 lineHeight="14px"
                 letterSpacing="0.02em"
+                overflow="hidden"
+                textWrap="nowrap"
+                textOverflow="ellipsis"
               >
                 Vasyl Shkliar
               </Card.Description>
