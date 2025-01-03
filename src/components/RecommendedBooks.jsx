@@ -1,121 +1,149 @@
-import { Flex, Heading, HStack, Card, Image } from '@chakra-ui/react'
-import {
-  PaginationNextTrigger,
-  PaginationPrevTrigger,
-  PaginationRoot
-} from '@/components/ui/pagination'
-import book1 from '@/assets/images/image 1.png'
-import book2 from '@/assets/images/image 2.png'
-import { useState } from 'react'
-import DialogBook from './DialogBook'
+import { Flex, Heading, Card, Image, Link } from '@chakra-ui/react'
+import book4 from '@/assets/images/image 4.png'
+import book5 from '@/assets/images/image 5.png'
+import book6 from '@/assets/images/image 6.png'
+import arrow from '@/assets/icons/arrow-right.svg'
 
 function RecommendedBooks() {
-  const [openDialog, setOpenDialog] = useState(false)
-
-  const toogleDialog = () => {
-    setOpenDialog(!openDialog)
-  }
-
   return (
     <>
-      <Flex direction="column" gap="5" w="full">
-        <Flex justify="space-between">
-          <Heading fontFamily="Gilroy-Bold" fontSize="20px" lineHeight="20px">
-            Recommended
-          </Heading>
+      <Flex
+        direction="column"
+        gap="3.5"
+        p="5"
+        bg="brand.bgInput"
+        rounded="12px"
+      >
+        <Heading fontFamily="Gilroy-Bold" fontSize="20px" lineHeight="20px">
+          Recommended books
+        </Heading>
 
-          <PaginationRoot count={20} pageSize={2} defaultPage={1} maxW="240px">
-            <HStack gap="2">
-              <PaginationPrevTrigger
-                h="32px"
-                minW="32px"
-                border="1px solid #f9f9f94d"
-                color="brand.accent"
-                rounded="50%"
-              />
-              <PaginationNextTrigger
-                h="32px"
-                minW="32px"
-                border="1px solid #f9f9f94d"
-                color="brand.accent"
-                rounded="50%"
-              />
-            </HStack>
-          </PaginationRoot>
-        </Flex>
         <Flex justifyContent="space-between">
           <Card.Root
-            maxW="248px"
-            bg="brand.bgSecondary"
+            maxW="71px"
             color="brand.accent"
             border="none"
             overflow="hidden"
-            onClick={toogleDialog}
+            bg="brand.bgInput"
           >
-            <Image
-              h="208px"
-              w="137px"
-              src={book1}
-              alt="image book"
-              rounded="8px"
-            />
-            <Card.Body p="0" pt="2">
+            <Image h="107px" src={book4} alt="image book" rounded="8px" />
+            <Card.Body p="0" pt="1">
               <Card.Title
                 fontFamily="Gilroy-Bold"
-                fontSize="14px"
-                lineHeight="18px"
+                fontSize="10px"
+                lineHeight="12px"
                 letterSpacing="0.02em"
+                overflow="hidden"
+                textWrap="nowrap"
+                textOverflow="ellipsis"
               >
-                Lovers of Justice
+                The Orphanage
               </Card.Title>
               <Card.Description
                 fontFamily="Gilroy-Medium"
                 fontSize="10px"
                 lineHeight="12px"
                 letterSpacing="0.02em"
+                overflow="hidden"
+                textWrap="nowrap"
+                textOverflow="ellipsis"
               >
-                Yuri Andrukhovych
+                Serhiy Zhadan
               </Card.Description>
             </Card.Body>
           </Card.Root>
 
           <Card.Root
-            maxW="248px"
-            bg="brand.bgSecondary"
+            maxW="71px"
+            bg="brand.bgInput"
             color="brand.accent"
             border="none"
             overflow="hidden"
           >
-            <Image
-              h="208px"
-              w="137px"
-              src={book2}
-              alt="image book"
-              rounded="8px"
-            />
-            <Card.Body p="0" pt="2">
+            <Image h="107px" src={book5} alt="image book" rounded="8px" />
+            <Card.Body p="0" pt="1">
               <Card.Title
                 fontFamily="Gilroy-Bold"
-                fontSize="14px"
-                lineHeight="18px"
+                fontSize="10px"
+                lineHeight="12px"
                 letterSpacing="0.02em"
+                overflow="hidden"
+                textWrap="nowrap"
+                textOverflow="ellipsis"
               >
-                It doesn&apos;t hurt
+                Melodіja kavi u tonal'nostі kardamonu
               </Card.Title>
               <Card.Description
                 fontFamily="Gilroy-Medium"
                 fontSize="10px"
                 lineHeight="12px"
                 letterSpacing="0.02em"
+                overflow="hidden"
+                textWrap="nowrap"
+                textOverflow="ellipsis"
               >
-                Kateryna Babkina
+                Natalia Gurnytska
+              </Card.Description>
+            </Card.Body>
+          </Card.Root>
+
+          <Card.Root
+            maxW="71px"
+            bg="brand.bgInput"
+            color="brand.accent"
+            border="none"
+            overflow="hidden"
+          >
+            <Image h="107px" src={book6} alt="image book" rounded="8px" />
+            <Card.Body p="0" pt="1">
+              <Card.Title
+                fontFamily="Gilroy-Bold"
+                fontSize="10px"
+                lineHeight="12px"
+                letterSpacing="0.02em"
+                overflow="hidden"
+                textWrap="nowrap"
+                textOverflow="ellipsis"
+              >
+                SIx doors
+              </Card.Title>
+              <Card.Description
+                fontFamily="Gilroy-Medium"
+                fontSize="10px"
+                lineHeight="12px"
+                letterSpacing="0.02em"
+                overflow="hidden"
+                textWrap="nowrap"
+                textOverflow="ellipsis"
+              >
+                Irene Rozdobudko
               </Card.Description>
             </Card.Body>
           </Card.Root>
         </Flex>
-      </Flex>
 
-      {openDialog && <DialogBook onClose={toogleDialog} />}
+        <Flex justifyContent="space-between">
+          <Link
+            href="/"
+            variant="underline"
+            color="brand.muted"
+            fontFamily="Gilroy-Medium"
+            fontSize="14px"
+            lineHeight="18px"
+          >
+            Home
+          </Link>
+          <Link
+            href="/"
+            variant="plain"
+            h="24px"
+            minW="24px"
+            aria-label="link to home"
+          >
+            <Image src={arrow} alt="arrow" h="24px" w="24px" />
+          </Link>
+        </Flex>
+      </Flex>
     </>
   )
 }
