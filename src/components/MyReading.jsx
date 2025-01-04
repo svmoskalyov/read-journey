@@ -8,7 +8,13 @@ function MyReading() {
   const [reading, setReading] = useState(false)
 
   return (
-    <Flex direction="column" alignItems="center" gap="4" p="5" w="full">
+    <Flex
+      direction="column"
+      justifyContent="space-between"
+      alignItems="center"
+      p="5"
+      w="full"
+    >
       <Flex alignItems="flex-start" w="full">
         <Heading
           mb="10"
@@ -36,7 +42,7 @@ function MyReading() {
           alt="image book"
           rounded="8px"
         />
-        <Card.Body p="0">
+        <Card.Body gap="5px" p="0">
           <Card.Title
             fontFamily="Gilroy-Bold"
             fontSize="14px"
@@ -58,8 +64,8 @@ function MyReading() {
         </Card.Body>
       </Card.Root>
 
-      {!reading && <Image src={read} w="9" h="9" alt="image read book" />}
-      {reading && <Image src={unread} w="9" h="9" alt="image unread book" />}
+      {!reading && <Image src={read} w="10" h="10" alt="image read book" />}
+      {reading && <Image src={unread} w="10" h="10" alt="image unread book" />}
     </Flex>
   )
 }
