@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
@@ -12,6 +13,7 @@ import {
 import { Field } from '@/components/ui/field'
 import Workout from './Workout'
 import RecommendedBooks from './RecommendedBooks'
+import DialogBookStat from './DialogBookStat'
 
 const schemaRec = yup.object({
   title: yup.string().notRequired(),
@@ -22,7 +24,17 @@ const schemaLib = yup
   .object({
     title: yup.string().required(),
     author: yup.string().required(),
-    pages: yup.number().positive().integer().min(1).max(4).required()
+    page: yup
+      .number()
+      .typeError('Must be only digits')
+      .positive('Must be a positive number')
+      .integer('Must be an integer')
+      .test(
+        'is-positive',
+        'page is required',
+        value => value > 0 || value.length <= 9999
+      )
+      .required()
   })
   .required()
 
@@ -34,6 +46,11 @@ function Dashboard({ page }) {
   } = useForm({
     resolver: yupResolver(page === 'recommended' ? schemaRec : schemaLib)
   })
+  const [openDialog, setOpenDialog] = useState(false)
+
+  const toogleDialog = () => {
+    setOpenDialog(!openDialog)
+  }
 
   const onSubmit = handleSubmit(data => console.log(data))
 
@@ -135,6 +152,7 @@ function Dashboard({ page }) {
       </form>
 
       {page === 'recommended' ? <Workout /> : <RecommendedBooks />}
+      {openDialog && <DialogBookStat onClose={toogleDialog} />}
     </>
   )
 }
