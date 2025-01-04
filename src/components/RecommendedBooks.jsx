@@ -17,7 +17,6 @@ function RecommendedBooks() {
         <Heading fontFamily="Gilroy-Bold" fontSize="20px" lineHeight="20px">
           Recommended books
         </Heading>
-
         <Flex justifyContent="space-between">
           <Card.Root
             maxW="71px"
@@ -71,7 +70,7 @@ function RecommendedBooks() {
                 textWrap="nowrap"
                 textOverflow="ellipsis"
               >
-                Melodіja kavi u tonal'nostі kardamonu
+                Melodіja kavi u tonalnostі kardamonu
               </Card.Title>
               <Card.Description
                 fontFamily="Gilroy-Medium"
