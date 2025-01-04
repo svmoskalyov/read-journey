@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Flex, Heading, HStack, Card, Image } from '@chakra-ui/react'
 import {
   PaginationNextTrigger,
@@ -6,7 +7,6 @@ import {
 } from '@/components/ui/pagination'
 import book1 from '@/assets/images/image 1.png'
 import book2 from '@/assets/images/image 2.png'
-import { useState } from 'react'
 import DialogBook from './DialogBook'
 
 function Recommended() {
@@ -23,7 +23,6 @@ function Recommended() {
           <Heading fontFamily="Gilroy-Bold" fontSize="20px" lineHeight="20px">
             Recommended
           </Heading>
-
           <PaginationRoot count={20} pageSize={2} defaultPage={1} maxW="240px">
             <HStack gap="2">
               <PaginationPrevTrigger
@@ -50,7 +49,6 @@ function Recommended() {
             color="brand.accent"
             border="none"
             overflow="hidden"
-            onClick={toogleDialog}
           >
             <Image
               h="208px"
@@ -58,6 +56,7 @@ function Recommended() {
               src={book1}
               alt="image book"
               rounded="8px"
+              onClick={toogleDialog}
             />
             <Card.Body p="0" pt="2">
               <Card.Title
@@ -109,7 +108,7 @@ function Recommended() {
                 textWrap="nowrap"
                 textOverflow="ellipsis"
               >
-                It doesn&apos;t hurt
+                It doesn not hurt
               </Card.Title>
               <Card.Description
                 fontFamily="Gilroy-Medium"
