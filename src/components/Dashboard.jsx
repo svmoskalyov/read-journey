@@ -22,19 +22,16 @@ const schemaRec = yup.object({
 
 const schemaLib = yup
   .object({
-    title: yup.string().required(),
-    author: yup.string().required(),
+    title: yup.string().required('Page is required'),
+    author: yup.string().required('Page is required'),
     page: yup
       .number()
       .typeError('Must be only digits')
       .positive('Must be a positive number')
       .integer('Must be an integer')
-      .test(
-        'is-positive',
-        'page is required',
-        value => value > 0 || value.length <= 9999
-      )
-      .required()
+      .min(1, 'Must be greater than 0')
+      .max(9999, 'Must be less than 9999')
+      .required('Page is required')
   })
   .required()
 
