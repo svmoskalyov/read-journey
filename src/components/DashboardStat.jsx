@@ -15,6 +15,7 @@ import {
 } from '@chakra-ui/react'
 import { Field } from '@/components/ui/field'
 import star from '@/assets/icons/star.svg'
+import Diary from './Diary'
 
 const schemaPage = yup
   .object({
@@ -38,13 +39,13 @@ function DashboardStat() {
     resolver: yupResolver(schemaPage)
   })
   const [page, setPage] = useState()
-  const [progress, setProgress] = useState(true)
+  const [reading, setReading] = useState(true)
 
   const onSubmit = handleSubmit(data => console.log(data))
 
   return (
     <>
-      <form style={{ width: '100%' }} onSubmit={onSubmit}>
+      <form style={{ marginBottom: '40px', width: '100%' }} onSubmit={onSubmit}>
         <Heading
           mb="2"
           pl="3"
@@ -53,7 +54,7 @@ function DashboardStat() {
           lineHeight="12px"
           letterSpacing="0.12em"
         >
-          Start page:
+          {!reading ? 'Start page:' : 'Stop page:'}
         </Heading>
 
         <Stack gap="2" align="flex-start" mb="5" maxW="295px">
@@ -92,13 +93,13 @@ function DashboardStat() {
             bg="brand.bgSecondary"
             type="submit"
           >
-            To start
+            {!reading ? 'To start' : 'To stop'}
           </Button>
         </Flex>
       </form>
 
-      {progress && (
-        <Flex direction="column" mt="10">
+      {!reading && (
+        <Flex direction="column">
           <Heading
             mb="3.5"
             fontFamily="Gilroy-Bold"
@@ -124,6 +125,8 @@ function DashboardStat() {
           </Circle>
         </Flex>
       )}
+
+      {reading && <Diary />}
     </>
   )
 }
