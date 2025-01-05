@@ -9,7 +9,7 @@ function ReadingPage() {
         direction="column"
         // justifyContent="space-between"
         maxW="335px"
-        h="390px"
+        // h="390px"
         p="5"
         bg="brand.bgSecondary"
         rounded="30px"
