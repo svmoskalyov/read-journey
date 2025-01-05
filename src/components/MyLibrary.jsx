@@ -18,7 +18,7 @@ import {
   SelectValueText
 } from '@/components/ui/select'
 import booksIcon from '@/assets/icons/books.svg'
-import bookDel from '@/assets/icons/trash.svg'
+import trash from '@/assets/icons/trash.svg'
 import book7 from '@/assets/images/image 7.png'
 import DialogBook from './DialogBook'
 
@@ -171,7 +171,7 @@ function MyLibrary() {
                     rounded="full"
                     onClick={() => console.log('book delete')}
                   >
-                    <Image src={bookDel} alt="image delete" />
+                    <Image src={trash} alt="delete book" />
                   </IconButton>
                 </Flex>
               </Card.Body>
