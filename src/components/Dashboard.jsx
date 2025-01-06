@@ -149,7 +149,7 @@ function Dashboard({ page }) {
       </form>
 
       {page === 'recommended' ? <Workout /> : <RecommendedBooks />}
-      {openDialog && <DialogBookStat onClose={toogleDialog} />}
+      {openDialog && <DialogBookStat statBook={true} onClose={toogleDialog} />}
     </>
   )
 }
