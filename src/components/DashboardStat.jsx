@@ -15,7 +15,13 @@ import {
 } from '@chakra-ui/react'
 import { Field } from '@/components/ui/field'
 import star from '@/assets/icons/star.svg'
+import hourglassA from '@/assets/icons/hourglass-active.svg'
+import hourglassU from '@/assets/icons/hourglass-unactive.svg'
+import chartA from '@/assets/icons/pie-chart-active.svg'
+import chartU from '@/assets/icons/pie-chart-unactive.svg'
 import Diary from './Diary'
+import Statiatics from './Statiatics'
+import DialogBookStat from './DialogBookStat'
 
 const schemaPage = yup
   .object({
@@ -40,6 +46,13 @@ function DashboardStat() {
   })
   const [page, setPage] = useState()
   const [reading, setReading] = useState(true)
+  const [hourglass, setHourglass] = useState(true)
+  // const [chart, setChart] = useState(false)
+  const [openDialog, setOpenDialog] = useState(false)
+
+  const toogleDialog = () => {
+    setOpenDialog(!openDialog)
+  }
 
   const onSubmit = handleSubmit(data => console.log(data))
 
@@ -126,7 +139,41 @@ function DashboardStat() {
         </Flex>
       )}
 
-      {reading && <Diary />}
+      {reading && (
+        <Flex direction="column">
+          <Flex mb="5" w="full" justifyContent="space-between">
+            <Heading
+              fontFamily="Gilroy-Bold"
+              fontSize="18px"
+              lineHeight="18px"
+              letterSpacing="-0.02em"
+            >
+              {hourglass ? 'Statistics' : 'Diary'}
+            </Heading>
+            <Flex gap="2">
+              <Image
+                cursor="pointer"
+                w="4"
+                h="4"
+                src={hourglass ? hourglassU : hourglassA}
+                alt="button diary"
+              />
+              <Image
+                cursor="pointer"
+                w="4"
+                h="4"
+                src={!hourglass ? chartU : chartA}
+                alt="button statistics"
+              />
+            </Flex>
+          </Flex>
+
+          {hourglass ? <Statiatics /> : <Diary />}
+          {openDialog && (
+            <DialogBookStat statBook={false} onClose={toogleDialog} />
+          )}
+        </Flex>
+      )}
     </>
   )
 }
