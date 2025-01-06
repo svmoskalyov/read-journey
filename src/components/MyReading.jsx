@@ -1,29 +1,41 @@
 import { useState } from 'react'
-import { Flex, Heading, Image, Card } from '@chakra-ui/react'
+import { Flex, Heading, Image, Card, Text } from '@chakra-ui/react'
 import book7 from '@/assets/images/image 7.png'
 import unread from '@/assets/icons/block-run.svg'
 import read from '@/assets/icons/block-stop.svg'
 
 function MyReading() {
   const [reading, setReading] = useState(false)
+  const [stat, setStat] = useState(0)
 
   return (
     <Flex
       direction="column"
       justifyContent="space-between"
       alignItems="center"
-      p="5"
+      py="5"
       w="full"
     >
-      <Flex alignItems="flex-start" w="full">
+      <Flex justify="space-between" alignItems="center" mb="10" w="full">
         <Heading
-          mb="10"
           fontFamily="Gilroy-Bold"
           fontSize="20px"
           lineHeight="20px"
+          letterSpacing="-0.02em"
         >
           My reading
         </Heading>
+        {stat === 100 && (
+          <Text
+            fontFamily="Gilroy-Medium"
+            fontSize="12px"
+            lineHeight="16px"
+            letterSpacing="-0.02em"
+            color="brand.muted"
+          >
+            6 hours and 23 minutes left
+          </Text>
+        )}
       </Flex>
 
       <Card.Root
