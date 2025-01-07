@@ -37,8 +37,7 @@ const customConfig = defineConfig({
         }
       },
       breakpoints: {
-        mobileA: '320px',
-        mobileB: '375px',
+        mobile: '375px',
         tablet: '768px',
         desktop: '1440px'
       }
@@ -46,7 +45,9 @@ const customConfig = defineConfig({
     globalCss: {
       'html, body': {
         margin: 0,
-        padding: 0
+        padding: 0,
+        color: "brand.accent",
+        backgroundColor: "brand.bgPrimary"
       }
     }
   }

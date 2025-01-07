@@ -53,31 +53,36 @@ function Dashboard({ page }) {
 
   return (
     <>
-      <form style={{ marginBottom: '20px', width: '100%' }} onSubmit={onSubmit}>
+      <form
+        style={{ marginBottom: '20px', width: '295px' }}
+        onSubmit={onSubmit}
+      >
         <Heading
           mb="2"
           pl="3"
           fontFamily="Gilroy-Medium"
-          fontSize="10px"
-          lineHeight="12px"
-          letterSpacing="0.12em"
+          fontSize={{ base: '10px', tablet: '14px', desktop: '20px' }}
+          lineHeight={{ base: '12px', tablet: '18px', desktop: '20px' }}
+          letterSpacing="0.02em"
         >
           Filters:
         </Heading>
-        <Stack gap="2" align="flex-start" maxW="295px" mb="5">
+        <Stack align="flex-start" gap="2" maxW="295px" mb="5">
           <Field invalid={!!errors.title} errorText={errors.title?.message}>
             <InputElement
               fontFamily="Gilroy-Medium"
-              fontSize="12px"
+              fontSize={{ base: '12px', tablet: '14px', desktop: '20px' }}
+              lineHeight={{ base: '14px', tablet: '18px', desktop: '20px' }}
               color="brand.muted"
             >
               Book title:
             </InputElement>
             <Input
               ps="6.45em"
-              h="11"
+              h={{ base: '44px', tablet: '50px', desktop: '20px' }}
               fontFamily="Gilroy-Medium"
-              fontSize="12px"
+              fontSize={{ base: '12px', tablet: '14px', desktop: '20px' }}
+              lineHeight={{ base: '14px', tablet: '18px', desktop: '20px' }}
               bg="brand.bgInput"
               rounded="12px"
               placeholder="Enter title"
@@ -89,16 +94,18 @@ function Dashboard({ page }) {
           <Field invalid={!!errors.author} errorText={errors.author?.message}>
             <InputElement
               fontFamily="Gilroy-Medium"
-              fontSize="12px"
+              fontSize={{ base: '12px', tablet: '14px', desktop: '20px' }}
+              lineHeight={{ base: '14px', tablet: '18px', desktop: '20px' }}
               color="brand.muted"
             >
               The author:
             </InputElement>
             <Input
               ps="7.05em"
-              h="11"
+              h={{ base: '44px', tablet: '50px', desktop: '20px' }}
               fontFamily="Gilroy-Medium"
-              fontSize="12px"
+              fontSize={{ base: '12px', tablet: '14px', desktop: '20px' }}
+              lineHeight={{ base: '14px', tablet: '18px', desktop: '20px' }}
               bg="brand.bgInput"
               rounded="12px"
               placeholder="Enter author"
@@ -111,16 +118,18 @@ function Dashboard({ page }) {
             <Field invalid={!!errors.pages} errorText={errors.pages?.message}>
               <InputElement
                 fontFamily="Gilroy-Medium"
-                fontSize="12px"
+                fontSize={{ base: '12px', tablet: '14px', desktop: '20px' }}
+                lineHeight={{ base: '14px', tablet: '18px', desktop: '20px' }}
                 color="brand.muted"
               >
                 Number of pages:
               </InputElement>
               <Input
                 ps="10.05em"
-                h="11"
+                h={{ base: '44px', tablet: '50px', desktop: '20px' }}
                 fontFamily="Gilroy-Medium"
-                fontSize="12px"
+                fontSize={{ base: '12px', tablet: '14px', desktop: '20px' }}
+                lineHeight={{ base: '14px', tablet: '18px', desktop: '20px' }}
                 bg="brand.bgInput"
                 rounded="12px"
                 placeholder="Enter pages"
@@ -133,11 +142,11 @@ function Dashboard({ page }) {
 
         <Flex justifyContent="space-between" width="full">
           <Button
-            h="38px"
-            w="98px"
+            h={{ base: '38px', tablet: '42px', desktop: '20px' }}
+            w={{ base: '98px', tablet: '122px', desktop: '20px' }}
             fontFamily="Gilroy-Bold"
-            fontSize="14px"
-            lineHeight="14px"
+            fontSize={{ base: '14px', tablet: '16px', desktop: '20px' }}
+            lineHeight={{ base: '14px', tablet: '18px', desktop: '20px' }}
             rounded="30px"
             border="1px solid #f9f9f94d"
             bg="brand.bgSecondary"

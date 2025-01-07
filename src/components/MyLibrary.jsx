@@ -46,34 +46,42 @@ function MyLibrary() {
   }
 
   return (
-    <Flex direction="column" gap="3.5" w="full">
+    <Flex
+      direction="column"
+      gap={{ base: '63px', tablet: '14px', desktop: '20px' }}
+      w="full"
+    >
       <Flex justify="space-between" align="center">
-        <Heading fontFamily="Gilroy-Bold" fontSize="20px" lineHeight="20px">
+        <Heading
+          fontFamily="Gilroy-Bold"
+          fontSize={{ base: '20px', tablet: '28px', desktop: '20px' }}
+          lineHeight={{ base: '20px', tablet: '32px', desktop: '20px' }}
+        >
           My library
         </Heading>
         <SelectRoot
-          width="120px"
           size="md"
+          width={{ base: '120px', tablet: '153px', desktop: '20px' }}
           collection={frameworks}
           value={value}
           onValueChange={handleChange}
           fontFamily="Gilroy-Medium"
-          fontSize="12px"
-          lineHeight="16px"
+          fontSize={{ base: '12px', tablet: '14px', desktop: '20px' }}
+          lineHeight={{ base: '16px', tablet: '18px', desktop: '20px' }}
         >
           <SelectTrigger>
             <SelectValueText
               fontFamily="Gilroy-Medium"
-              fontSize="12px"
-              lineHeight="16px"
+              fontSize={{ base: '12px', tablet: '14px', desktop: '20px' }}
+              lineHeight={{ base: '16px', tablet: '18px', desktop: '20px' }}
               color="brand.accent"
               placeholder="All books"
             />
           </SelectTrigger>
           <SelectContent
             fontFamily="Gilroy-Medium"
-            fontSize="12px"
-            lineHeight="16px"
+            fontSize={{ base: '12px', tablet: '14px', desktop: '20px' }}
+            lineHeight={{ base: '16px', tablet: '18px', desktop: '20px' }}
             color="brand.muted"
             bg="brand.bgInput"
             rounded="12px"
@@ -92,15 +100,29 @@ function MyLibrary() {
         align="center"
       >
         {booksLenght === 0 && (
-          <Flex w="197px" h="164px" direction="column" align="center">
-            <Circle mb="2.5" size="100px" bg="brand.bgInput">
-              <Image h="50px" w="50px" src={booksIcon} alt="image books" />
+          <Flex
+            h={{ base: '164px', tablet: '186px', desktop: '20px' }}
+            w={{ base: '197px', tablet: '274px', desktop: '20px' }}
+            direction="column"
+            align="center"
+          >
+            <Circle
+              mb={{ base: '10px', tablet: '20px', desktop: '20px' }}
+              size={{ base: '100px', tablet: '130px', desktop: '20px' }}
+              bg="brand.bgInput"
+            >
+              <Image
+                h={{ base: '50px', tablet: '70px', desktop: '20px' }}
+                w={{ base: '50px', tablet: '70px', desktop: '20px' }}
+                src={booksIcon}
+                alt="image books"
+              />
             </Circle>
             <Text
               fontFamily="Gilroy-Medium"
               fontSize="14px"
               lineHeight="18px"
-              letterSpacing="0.02em"
+              letterSpacing="-0.02em"
               color="brand.accent"
               textAlign="center"
             >
@@ -180,7 +202,7 @@ function MyLibrary() {
         )}
       </Flex>
 
-      {openDialog && <DialogBook onClose={toogleDialog} />}
+      {openDialog && <DialogBook statBook={false} onClose={toogleDialog} />}
     </Flex>
   )
 }

@@ -5,11 +5,16 @@ import Header from '@/components/Header.jsx'
 function MainLayout() {
   return (
     <Grid
-      grid="'header' 57px 'main' 1fr / 1fr"
+      grid={{
+        base: `'header' 57px 'main' 1fr / 1fr`,
+        tablet: `'header' 74px 'main' 1fr / 1fr`,
+        desktop: `'header' 57px 'main' 1fr / 1fr`
+      }}
+      // grid="'header' 57px 'main' 1fr / 1fr"
       gap="2.5"
-      p="5"
-      bg="brand.bgPrimary"
-      color="brand.accent"
+      p={{ base: '20px', tablet: '16px', desktop: '20px' }}
+      // bg="brand.bgPrimary"
+      // color="brand.accent"
       // outline="1px solid red"
     >
       <Header />

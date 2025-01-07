@@ -5,10 +5,23 @@ import MyLibrary from '@/components/MyLibrary'
 function MyLibraryPage() {
   return (
     <Grid gap="2.5" bg="brand.bgPrimary" color="brand.accent">
-      <Flex direction="column" p="5" bg="brand.bgSecondary" rounded="30px">
+      <Flex
+        justifyContent='space-between'
+        direction={{ base: 'column', tablet: 'row', desktop: 'row' }}
+        p={{ base: '20px', tablet: '32px', desktop: '20px' }}
+        bg="brand.bgSecondary"
+        rounded="30px"
+      >
         <Dashboard page="library" />
       </Flex>
-      <Flex px="5" py="10" maxW='335px' h="382px" bg="brand.bgSecondary" rounded="30px">
+      <Flex
+        px={{ base: '20px', tablet: '40px', desktop: '20px' }}
+        py={{ base: '40px', tablet: '40px', desktop: '20px' }}
+        h={{ base: '382px', tablet: '518px', desktop: '20px' }}
+        bg="brand.bgSecondary"
+        rounded="30px"
+        // maxW="335px"
+      >
         <MyLibrary />
       </Flex>
     </Grid>

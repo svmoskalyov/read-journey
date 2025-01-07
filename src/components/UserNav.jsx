@@ -7,17 +7,36 @@ function UserNav() {
     <Tabs.Root defaultValue={local}>
       <Tabs.List
         display="flex"
-        flexDirection="column"
+        gap={{ base: '4px', tablet: '32px', desktop: '20px' }}
+        flexDirection={{ base: 'column', tablet: 'row', desktop: 'row' }}
         colorPalette="blue"
         borderBottom="none"
       >
-        <Tabs.Trigger value="/recommended" asChild>
-          <Link unstyled href="/" color="brand.accent" p="0">
+        <Tabs.Trigger value="/" asChild>
+          <Link
+            unstyled
+            href="/"
+            p="0"
+            fontFamily="Gilroy-Medium"
+            fontSize={{ base: '14px', tablet: '16px', desktop: '20px' }}
+            lineHeight={{ base: '18px', tablet: '18px', desktop: '20px' }}
+            letterSpacing="0.02em"
+            color="brand.accent"
+          >
             Home
           </Link>
         </Tabs.Trigger>
         <Tabs.Trigger value="/library" asChild>
-          <Link unstyled href="library" color="brand.accent" p="0">
+          <Link
+            unstyled
+            href="library"
+            p="0"
+            fontFamily="Gilroy-Medium"
+            fontSize={{ base: '14px', tablet: '16px', desktop: '20px' }}
+            lineHeight={{ base: '18px', tablet: '18px', desktop: '20px' }}
+            letterSpacing="0.02em"
+            color="brand.accent"
+          >
             My library
           </Link>
         </Tabs.Trigger>

@@ -11,6 +11,8 @@ function RecommendedBooks() {
         direction="column"
         gap="3.5"
         p="5"
+        h={{ base: '244px', tablet: '272px', desktop: '20px' }}
+        w={{ base: '295px', tablet: '313px', desktop: '20px' }}
         bg="brand.bgInput"
         rounded="12px"
       >

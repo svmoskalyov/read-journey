@@ -13,14 +13,18 @@ function MyReading() {
       direction="column"
       justifyContent="space-between"
       alignItems="center"
-      py="5"
       w="full"
     >
-      <Flex justify="space-between" alignItems="center" mb="10" w="full">
+      <Flex
+        justify="space-between"
+        alignItems="center"
+        mb={{ base: '40px', tablet: '32px', desktop: '20px' }}
+        w="full"
+      >
         <Heading
           fontFamily="Gilroy-Bold"
-          fontSize="20px"
-          lineHeight="20px"
+          fontSize={{ base: '20px', tablet: '28px', desktop: '20px' }}
+          lineHeight={{ base: '20px', tablet: '32px', desktop: '20px' }}
           letterSpacing="-0.02em"
         >
           My reading
@@ -28,8 +32,8 @@ function MyReading() {
         {stat === 100 && (
           <Text
             fontFamily="Gilroy-Medium"
-            fontSize="12px"
-            lineHeight="16px"
+            fontSize={{ base: '12px', tablet: '14px', desktop: '20px' }}
+            lineHeight={{ base: '16px', tablet: '18px', desktop: '20px' }}
             letterSpacing="-0.02em"
             color="brand.muted"
           >
@@ -40,25 +44,26 @@ function MyReading() {
 
       <Card.Root
         alignItems="center"
-        maxW="146px"
+        mb={{ base: '8px', tablet: '16px', desktop: '20px' }}
+        maxW={{ base: '146px', tablet: '317px', desktop: '20px' }}
         bg="brand.bgSecondary"
         color="brand.accent"
         border="none"
         overflow="hidden"
       >
         <Image
-          mb="2"
-          h="208px"
-          w="137px"
+          mb={{ base: '8px', tablet: '25px', desktop: '20px' }}
+          h={{ base: '208px', tablet: '256px', desktop: '20px' }}
+          w={{ base: '137px', tablet: '169px', desktop: '20px' }}
           src={book7}
           alt="image book"
           rounded="8px"
         />
-        <Card.Body gap="5px" p="0">
+        <Card.Body gap="4px" p="0">
           <Card.Title
             fontFamily="Gilroy-Bold"
-            fontSize="14px"
-            lineHeight="18px"
+            fontSize={{ base: '14px', tablet: '20px', desktop: '20px' }}
+            lineHeight={{ base: '18px', tablet: '20px', desktop: '20px' }}
             letterSpacing="-0.02em"
             textAlign="center"
           >
@@ -66,8 +71,8 @@ function MyReading() {
           </Card.Title>
           <Card.Description
             fontFamily="Gilroy-Medium"
-            fontSize="10px"
-            lineHeight="12px"
+            fontSize={{ base: '10px', tablet: '14px', desktop: '20px' }}
+            lineHeight={{ base: '12px', tablet: '18px', desktop: '20px' }}
             letterSpacing="-0.02em"
             textAlign="center"
           >
@@ -76,8 +81,22 @@ function MyReading() {
         </Card.Body>
       </Card.Root>
 
-      {!reading && <Image src={read} w="10" h="10" alt="image read book" />}
-      {reading && <Image src={unread} w="10" h="10" alt="image unread book" />}
+      {!reading && (
+        <Image
+          src={read}
+          h={{ base: '40px', tablet: '50px', desktop: '20px' }}
+          w={{ base: '40px', tablet: '50px', desktop: '20px' }}
+          alt="image read book"
+        />
+      )}
+      {reading && (
+        <Image
+          src={unread}
+          h={{ base: '40px', tablet: '50px', desktop: '20px' }}
+          w={{ base: '40px', tablet: '50px', desktop: '20px' }}
+          alt="image unread book"
+        />
+      )}
     </Flex>
   )
 }

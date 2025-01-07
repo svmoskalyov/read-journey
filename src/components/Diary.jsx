@@ -8,8 +8,8 @@ function Diary() {
       p="4"
       pb="0"
       pl="23px"
-      maxH="211px"
-      w="295px"
+      h={{ base: '211px', tablet: '252px', desktop: '20px' }}
+      w={{ base: '295px', tablet: '321px', desktop: '20px' }}
       rounded="12px"
       bg="brand.bgInput"
     >

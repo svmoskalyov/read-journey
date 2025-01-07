@@ -46,8 +46,7 @@ function DashboardStat() {
   })
   const [page, setPage] = useState()
   const [reading, setReading] = useState(true)
-  const [hourglass, setHourglass] = useState(true)
-  // const [chart, setChart] = useState(false)
+  const [hourglass, setHourglass] = useState(false)
   const [openDialog, setOpenDialog] = useState(false)
 
   const toogleDialog = () => {
@@ -58,14 +57,16 @@ function DashboardStat() {
 
   return (
     <>
-      <form style={{ marginBottom: '40px', width: '100%' }} onSubmit={onSubmit}>
+      <form
+        style={{ marginBottom: '40px', width: '295px' }}
+        onSubmit={onSubmit}
+      >
         <Heading
           mb="2"
           pl="3"
           fontFamily="Gilroy-Medium"
-          fontSize="10px"
-          lineHeight="12px"
-          letterSpacing="0.12em"
+          fontSize={{ base: '10px', tablet: '14px', desktop: '20px' }}
+          lineHeight={{ base: '12px', tablet: '18px', desktop: '20px' }}
         >
           {!reading ? 'Start page:' : 'Stop page:'}
         </Heading>
@@ -74,16 +75,18 @@ function DashboardStat() {
           <Field invalid={!!errors.page} errorText={errors.page?.message}>
             <InputElement
               fontFamily="Gilroy-Medium"
-              fontSize="12px"
+              fontSize={{ base: '12px', tablet: '14px', desktop: '20px' }}
+              lineHeight={{ base: '14px', tablet: '18px', desktop: '20px' }}
               color="brand.muted"
             >
               Page number:
             </InputElement>
             <Input
               ps="8.05em"
-              h="11"
+              h={{ base: '44px', tablet: '50px', desktop: '20px' }}
               fontFamily="Gilroy-Medium"
-              fontSize="12px"
+              fontSize={{ base: '12px', tablet: '14px', desktop: '20px' }}
+              lineHeight={{ base: '14px', tablet: '18px', desktop: '20px' }}
               bg="brand.bgInput"
               rounded="12px"
               variant="subtle"
@@ -96,11 +99,11 @@ function DashboardStat() {
 
         <Flex justifyContent="space-between" width="full">
           <Button
-            h="38px"
-            w="98px"
+            h={{ base: '38px', tablet: '42px', desktop: '20px' }}
+            w={{ base: '98px', tablet: '122px', desktop: '20px' }}
             fontFamily="Gilroy-Bold"
-            fontSize="14px"
-            lineHeight="14px"
+            fontSize={{ base: '14px', tablet: '16px', desktop: '20px' }}
+            lineHeight={{ base: '14px', tablet: '18px', desktop: '20px' }}
             rounded="30px"
             border="1px solid #f9f9f94d"
             bg="brand.bgSecondary"
@@ -112,18 +115,23 @@ function DashboardStat() {
       </form>
 
       {!reading && (
-        <Flex direction="column">
+        <Flex
+          direction="column"
+          h={{ base: '244px', tablet: '272px', desktop: '20px' }}
+          w={{ base: '295px', tablet: '321px', desktop: '20px' }}
+          px={{ base: '0px', tablet: '10px', desktop: '20px' }}
+        >
           <Heading
             mb="3.5"
             fontFamily="Gilroy-Bold"
-            fontSize="18px"
-            lineHeight="18px"
+            fontSize={{ base: '18px', tablet: '20px', desktop: '20px' }}
+            lineHeight={{ base: '18px', tablet: '20px', desktop: '20px' }}
             letterSpacing="0.02em"
           >
             Progress
           </Heading>
           <Text
-            mb="5"
+            mb={{ base: '20px', tablet: '50px', desktop: '20px' }}
             fontFamily="Gilroy-Medium"
             fontSize="14px"
             lineHeight="18px"
@@ -133,19 +141,32 @@ function DashboardStat() {
             Here you will see when and how much you read. To record, click on
             the red button above.
           </Text>
-          <Circle mx="auto" size="80px" bg="brand.bgInput">
-            <Image h="32px" w="32px" src={star} alt="image star" />
+          <Circle
+            mx="auto"
+            size={{ base: '80px', tablet: '100px', desktop: '20px' }}
+            bg="brand.bgInput"
+          >
+            <Image
+              h={{ base: '32px', tablet: '50px', desktop: '20px' }}
+              w={{ base: '32px', tablet: '50px', desktop: '20px' }}
+              src={star}
+              alt="image star"
+            />
           </Circle>
         </Flex>
       )}
 
       {reading && (
         <Flex direction="column">
-          <Flex mb="5" w="full" justifyContent="space-between">
+          <Flex
+            mb={{ base: '20px', tablet: '16px', desktop: '20px' }}
+            w="full"
+            justifyContent="space-between"
+          >
             <Heading
               fontFamily="Gilroy-Bold"
-              fontSize="18px"
-              lineHeight="18px"
+              fontSize={{ base: '18px', tablet: '20px', desktop: '20px' }}
+              lineHeight={{ base: '18px', tablet: '20px', desktop: '20px' }}
               letterSpacing="-0.02em"
             >
               {hourglass ? 'Statistics' : 'Diary'}
@@ -153,15 +174,15 @@ function DashboardStat() {
             <Flex gap="2">
               <Image
                 cursor="pointer"
-                w="4"
-                h="4"
+                h={{ base: '16px', tablet: '20px', desktop: '20px' }}
+                w={{ base: '16px', tablet: '20px', desktop: '20px' }}
                 src={hourglass ? hourglassU : hourglassA}
                 alt="button diary"
               />
               <Image
                 cursor="pointer"
-                w="4"
-                h="4"
+                h={{ base: '16px', tablet: '20px', desktop: '20px' }}
+                w={{ base: '16px', tablet: '20px', desktop: '20px' }}
                 src={!hourglass ? chartU : chartA}
                 alt="button statistics"
               />

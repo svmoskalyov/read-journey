@@ -10,6 +10,7 @@ import like from '@/assets/icons/like.svg'
 import books from '@/assets/icons/books.svg'
 
 function DialogBookStat({ statBook, onClose }) {
+  console.log("🚀 ~ DialogBookStat ~ statBook:", statBook)
   const [open, setOpen] = useState(true)
 
   const toogle = e => {
@@ -20,9 +21,9 @@ function DialogBookStat({ statBook, onClose }) {
   return (
     <DialogRoot lazyMount placement="center" open={open} onOpenChange={toogle}>
       <DialogContent
-        py="60px"
-        w="335px"
-        h="272px"
+        py={{ base: '60px', tablet: '50px', desktop: '20px' }}
+        h={{ base: '272px', tablet: '290px', desktop: '20px' }}
+        w={{ base: '335px', tablet: '342px', desktop: '20px' }}
         bg="brand.bgSecondary"
         color="brand.accent"
         rounded="12px"
@@ -34,16 +35,27 @@ function DialogBookStat({ statBook, onClose }) {
           justifyContent="center"
         >
           {statBook ? (
-            <Image mb="5" h="50px" w="50px" src={like} alt="image like" />
+            <Image
+              mb="5"
+              h={{ base: '50px', tablet: '70px', desktop: '20px' }}
+              w={{ base: '50px', tablet: '70px', desktop: '20px' }}
+              src={like}
+              alt="image like"
+            />
           ) : (
-            <Image mb="5" h="50px" w="50px" src={books} alt="image like" />
+            <Image
+              mb="5"
+              h={{ base: '50px', tablet: '70px', desktop: '20px' }}
+              w={{ base: '50px', tablet: '70px', desktop: '20px' }}
+              src={books}
+              alt="image like"
+            />
           )}
           <Heading
             mb="2.5"
             fontFamily="Gilroy-Bold"
-            fontSize="18px"
-            lineHeight="18px"
-            letterSpacing="0.02em"
+            fontSize={{ base: '18px', tablet: '20px', desktop: '20px' }}
+            lineHeight={{ base: '18px', tablet: '20px', desktop: '20px' }}
           >
             {statBook ? 'Good job' : 'The book is read'}
           </Heading>
@@ -53,7 +65,6 @@ function DialogBookStat({ statBook, onClose }) {
               fontFamily="Gilroy-Medium"
               fontSize="14px"
               lineHeight="18px"
-              letterSpacing="0.02em"
               color="brand.muted"
               textAlign="center"
             >

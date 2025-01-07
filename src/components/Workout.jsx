@@ -15,21 +15,27 @@ function Workout() {
       direction="column"
       gap="5"
       p="5"
-      h="244px"
-      w="295px"
+      h={{ base: '244px', tablet: '272px', desktop: '20px' }}
+      w={{ base: '295px', tablet: '313px', desktop: '20px' }}
       bg="brand.bgInput"
       rounded="12px"
     >
-      <Heading fontFamily="Gilroy-Bold" fontSize="18px" lineHeight="18px">
+      <Heading
+        mb={{ base: '10px', tablet: '20px', desktop: '20px' }}
+        fontFamily="Gilroy-Bold"
+        fontSize={{ base: '18px', tablet: '20px', desktop: '20px' }}
+        lineHeight={{ base: '18px', tablet: '20px', desktop: '20px' }}
+      >
         Start your workout
       </Heading>
 
       <Flex gap="3">
         <Center
-          h="10"
-          minW="10"
+          h={{ base: '40px', tablet: '44px', desktop: '20px' }}
+          minW={{ base: '40px', tablet: '44px', desktop: '20px' }}
           fontFamily="Gilroy-Bold"
-          fontSize="18px"
+          fontSize={{ base: '18px', tablet: '20px', desktop: '20px' }}
+          lineHeight={{ base: '18px', tablet: '20px', desktop: '20px' }}
           bg="brand.accent"
           color="brand.bgPrimary"
           rounded="50%"
@@ -52,10 +58,11 @@ function Workout() {
 
       <Flex gap="3">
         <Center
-          h="10"
-          minW="10"
+          h={{ base: '40px', tablet: '44px', desktop: '20px' }}
+          minW={{ base: '40px', tablet: '44px', desktop: '20px' }}
           fontFamily="Gilroy-Bold"
-          fontSize="18px"
+          fontSize={{ base: '18px', tablet: '20px', desktop: '20px' }}
+          lineHeight={{ base: '18px', tablet: '20px', desktop: '20px' }}
           bg="brand.accent"
           color="brand.bgPrimary"
           rounded="50%"
