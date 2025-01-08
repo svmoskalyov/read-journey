@@ -21,9 +21,9 @@ function DialogBookStat({ statBook, onClose }) {
   return (
     <DialogRoot lazyMount placement="center" open={open} onOpenChange={toogle}>
       <DialogContent
-        py={{ base: '60px', tablet: '50px', desktop: '20px' }}
-        h={{ base: '272px', tablet: '290px', desktop: '20px' }}
-        w={{ base: '335px', tablet: '342px', desktop: '20px' }}
+        py={{ base: '60px', tablet: '50px' }}
+        h={{ base: '272px', tablet: '290px' }}
+        w={{ base: '335px', tablet: '342px' }}
         bg="brand.bgSecondary"
         color="brand.accent"
         rounded="12px"
@@ -37,25 +37,25 @@ function DialogBookStat({ statBook, onClose }) {
           {statBook ? (
             <Image
               mb="5"
-              h={{ base: '50px', tablet: '70px', desktop: '20px' }}
-              w={{ base: '50px', tablet: '70px', desktop: '20px' }}
+              h={{ base: '50px', tablet: '70px' }}
+              w={{ base: '50px', tablet: '70px' }}
               src={like}
               alt="image like"
             />
           ) : (
             <Image
               mb="5"
-              h={{ base: '50px', tablet: '70px', desktop: '20px' }}
-              w={{ base: '50px', tablet: '70px', desktop: '20px' }}
+              h={{ base: '50px', tablet: '70px' }}
+              w={{ base: '50px', tablet: '70px' }}
               src={books}
-              alt="image like"
+              alt="image books"
             />
           )}
           <Heading
             mb="2.5"
             fontFamily="Gilroy-Bold"
-            fontSize={{ base: '18px', tablet: '20px', desktop: '20px' }}
-            lineHeight={{ base: '18px', tablet: '20px', desktop: '20px' }}
+            fontSize={{ base: '18px', tablet: '20px' }}
+            lineHeight={{ base: '18px', tablet: '20px' }}
           >
             {statBook ? 'Good job' : 'The book is read'}
           </Heading>

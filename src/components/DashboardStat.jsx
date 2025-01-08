@@ -65,8 +65,8 @@ function DashboardStat() {
           mb="2"
           pl="3"
           fontFamily="Gilroy-Medium"
-          fontSize={{ base: '10px', tablet: '14px', desktop: '20px' }}
-          lineHeight={{ base: '12px', tablet: '18px', desktop: '20px' }}
+          fontSize={{ base: '10px', tablet: '14px' }}
+          lineHeight={{ base: '12px', tablet: '18px' }}
         >
           {!reading ? 'Start page:' : 'Stop page:'}
         </Heading>
@@ -75,18 +75,18 @@ function DashboardStat() {
           <Field invalid={!!errors.page} errorText={errors.page?.message}>
             <InputElement
               fontFamily="Gilroy-Medium"
-              fontSize={{ base: '12px', tablet: '14px', desktop: '20px' }}
-              lineHeight={{ base: '14px', tablet: '18px', desktop: '20px' }}
+              fontSize={{ base: '12px', tablet: '14px' }}
+              lineHeight={{ base: '14px', tablet: '18px' }}
               color="brand.muted"
             >
               Page number:
             </InputElement>
             <Input
               ps="8.05em"
-              h={{ base: '44px', tablet: '50px', desktop: '20px' }}
+              h={{ base: '44px', tablet: '50px' }}
               fontFamily="Gilroy-Medium"
-              fontSize={{ base: '12px', tablet: '14px', desktop: '20px' }}
-              lineHeight={{ base: '14px', tablet: '18px', desktop: '20px' }}
+              fontSize={{ base: '12px', tablet: '14px' }}
+              lineHeight={{ base: '14px', tablet: '18px' }}
               bg="brand.bgInput"
               rounded="12px"
               variant="subtle"
@@ -99,11 +99,11 @@ function DashboardStat() {
 
         <Flex justifyContent="space-between" width="full">
           <Button
-            h={{ base: '38px', tablet: '42px', desktop: '20px' }}
-            w={{ base: '98px', tablet: '122px', desktop: '20px' }}
+            h={{ base: '38px', tablet: '42px' }}
+            w={{ base: '98px', tablet: '122px' }}
             fontFamily="Gilroy-Bold"
-            fontSize={{ base: '14px', tablet: '16px', desktop: '20px' }}
-            lineHeight={{ base: '14px', tablet: '18px', desktop: '20px' }}
+            fontSize={{ base: '14px', tablet: '16px' }}
+            lineHeight={{ base: '14px', tablet: '18px' }}
             rounded="30px"
             border="1px solid #f9f9f94d"
             bg="brand.bgSecondary"
@@ -117,21 +117,21 @@ function DashboardStat() {
       {!reading && (
         <Flex
           direction="column"
-          h={{ base: '244px', tablet: '272px', desktop: '20px' }}
-          w={{ base: '295px', tablet: '321px', desktop: '20px' }}
-          px={{ base: '0px', tablet: '10px', desktop: '20px' }}
+          h={{ base: '244px', tablet: '272px' }}
+          w={{ base: '295px', tablet: '321px' }}
+          px={{ base: '0px', tablet: '10px' }}
         >
           <Heading
             mb="3.5"
             fontFamily="Gilroy-Bold"
-            fontSize={{ base: '18px', tablet: '20px', desktop: '20px' }}
-            lineHeight={{ base: '18px', tablet: '20px', desktop: '20px' }}
+            fontSize={{ base: '18px', tablet: '20px' }}
+            lineHeight={{ base: '18px', tablet: '20px' }}
             letterSpacing="0.02em"
           >
             Progress
           </Heading>
           <Text
-            mb={{ base: '20px', tablet: '50px', desktop: '20px' }}
+            mb={{ base: '20px', tablet: '50px' }}
             fontFamily="Gilroy-Medium"
             fontSize="14px"
             lineHeight="18px"
@@ -143,12 +143,12 @@ function DashboardStat() {
           </Text>
           <Circle
             mx="auto"
-            size={{ base: '80px', tablet: '100px', desktop: '20px' }}
+            size={{ base: '80px', tablet: '100px' }}
             bg="brand.bgInput"
           >
             <Image
-              h={{ base: '32px', tablet: '50px', desktop: '20px' }}
-              w={{ base: '32px', tablet: '50px', desktop: '20px' }}
+              h={{ base: '32px', tablet: '50px' }}
+              w={{ base: '32px', tablet: '50px' }}
               src={star}
               alt="image star"
             />
@@ -159,35 +159,54 @@ function DashboardStat() {
       {reading && (
         <Flex direction="column">
           <Flex
-            mb={{ base: '20px', tablet: '16px', desktop: '20px' }}
+            mb={{ base: '20px', tablet: '16px' }}
             w="full"
             justifyContent="space-between"
           >
             <Heading
               fontFamily="Gilroy-Bold"
-              fontSize={{ base: '18px', tablet: '20px', desktop: '20px' }}
-              lineHeight={{ base: '18px', tablet: '20px', desktop: '20px' }}
+              fontSize={{ base: '18px', tablet: '20px' }}
+              lineHeight={{ base: '18px', tablet: '20px' }}
               letterSpacing="-0.02em"
             >
               {hourglass ? 'Statistics' : 'Diary'}
             </Heading>
+
             <Flex gap="2">
               <Image
                 cursor="pointer"
-                h={{ base: '16px', tablet: '20px', desktop: '20px' }}
-                w={{ base: '16px', tablet: '20px', desktop: '20px' }}
+                h={{ base: '16px', tablet: '20px' }}
+                w={{ base: '16px', tablet: '20px' }}
                 src={hourglass ? hourglassU : hourglassA}
                 alt="button diary"
               />
               <Image
                 cursor="pointer"
-                h={{ base: '16px', tablet: '20px', desktop: '20px' }}
-                w={{ base: '16px', tablet: '20px', desktop: '20px' }}
+                h={{ base: '16px', tablet: '20px' }}
+                w={{ base: '16px', tablet: '20px' }}
                 src={!hourglass ? chartU : chartA}
                 alt="button statistics"
               />
             </Flex>
           </Flex>
+
+          {hourglass && (
+            <Text
+              mt="4px"
+              mb="20px"
+              h="72px"
+              w="293px"
+              color="brand.muted"
+              fontFamily="Gilroy-Medium"
+              fontSize={{ desktop: '14px' }}
+              lineHeight={{ desktop: '18px' }}
+              hideBelow="desktop"
+            >
+              Each page, each chapter is a new round of knowledge, a new step
+              towards understanding. By rewriting statistics, we create our own
+              reading history.
+            </Text>
+          )}
 
           {hourglass ? <Statiatics /> : <Diary />}
           {openDialog && (

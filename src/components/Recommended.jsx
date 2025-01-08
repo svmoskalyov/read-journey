@@ -22,23 +22,23 @@ function Recommended() {
         <Flex justify="space-between">
           <Heading
             fontFamily="Gilroy-Bold"
-            fontSize={{ base: '20px', tablet: '28px', desktop: '20px' }}
-            lineHeight={{ base: '20px', tablet: '32px', desktop: '20px' }}
+            fontSize={{ base: '20px', tablet: '28px' }}
+            lineHeight={{ base: '20px', tablet: '32px' }}
           >
             Recommended
           </Heading>
           <PaginationRoot count={20} pageSize={2} defaultPage={1} maxW="240px">
             <HStack gap="2">
               <PaginationPrevTrigger
-                h={{ base: '32px', tablet: '40px', desktop: '20px' }}
-                minW={{ base: '32px', tablet: '40px', desktop: '20px' }}
+                h={{ base: '32px', tablet: '40px' }}
+                minW={{ base: '32px', tablet: '40px' }}
                 border="1px solid #f9f9f94d"
                 color="brand.accent"
                 rounded="50%"
               />
               <PaginationNextTrigger
-                h={{ base: '32px', tablet: '40px', desktop: '20px' }}
-                minW={{ base: '32px', tablet: '40px', desktop: '20px' }}
+                h={{ base: '32px', tablet: '40px' }}
+                minW={{ base: '32px', tablet: '40px' }}
                 border="1px solid #f9f9f94d"
                 color="brand.accent"
                 rounded="50%"
@@ -60,6 +60,8 @@ function Recommended() {
             tablet: 'repeat(4, 1fr)',
             desktop: 'repeat(6, 1fr)'
           }}
+          overflowX="auto"
+          scrollbar="hidden"
         >
           <Card.Root
             maxW="248px"

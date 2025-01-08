@@ -7,22 +7,13 @@ function MainLayout() {
     <Grid
       grid={{
         base: `'header' 57px 'main' 1fr / 1fr`,
-        tablet: `'header' 74px 'main' 1fr / 1fr`,
-        desktop: `'header' 57px 'main' 1fr / 1fr`
+        tablet: `'header' 74px 'main' 1fr / 1fr`
       }}
-      // grid="'header' 57px 'main' 1fr / 1fr"
-      gap="2.5"
-      p={{ base: '20px', tablet: '16px', desktop: '20px' }}
-      // bg="brand.bgPrimary"
-      // color="brand.accent"
-      // outline="1px solid red"
+      gap={{ base: '10px', tablet: '16px' }}
+      p={{ base: '20px', tablet: '16px' }}
     >
       <Header />
-      <GridItem
-        gridArea="main"
-        // h='vh'
-        // outline="1px solid gold"
-      >
+      <GridItem gridArea="main">
         <Outlet />
       </GridItem>
     </Grid>

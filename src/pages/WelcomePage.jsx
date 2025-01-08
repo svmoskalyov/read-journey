@@ -4,14 +4,15 @@ function WelcomePage() {
   return (
     <Box>
       <Text
-        mb={{ base: '16px', tablet: '32px', desktop: '20px' }}
-        fontSize={{ base: '16px', tablet: '20px', desktop: '20px' }}
+        mb={{ base: '16px', tablet: '32px', desktop: '32px' }}
+        w={{ base: '295px', tablet: '444px', desktop: '450px' }}
+        fontSize={{ base: '16px', tablet: '20px', desktop: '28px' }}
       >
         Welcome to the app. You are welcome for choosing this app.
       </Text>
       <Link
-        px={{ base: '36px', tablet: '54px', desktop: '20px' }}
-        py={{ base: '12px', tablet: '16px', desktop: '20px' }}
+        px={{ base: '36px', tablet: '54px', desktop: '54px' }}
+        py={{ base: '12px', tablet: '16px', desktop: '16px' }}
         fontFamily="Gilroy-Bold"
         fontSize={{ base: '14px', tablet: '20px', desktop: '20px' }}
         lineHeight={{ base: '14px', tablet: '20px', desktop: '20px' }}
@@ -21,7 +22,7 @@ function WelcomePage() {
         bg="brand.accent"
         href="/login"
       >
-        get started
+        Get started
       </Link>
     </Box>
   )

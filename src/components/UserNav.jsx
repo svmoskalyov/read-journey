@@ -7,7 +7,7 @@ function UserNav() {
     <Tabs.Root defaultValue={local}>
       <Tabs.List
         display="flex"
-        gap={{ base: '4px', tablet: '32px', desktop: '20px' }}
+        gap={{ base: '4px', tablet: '32px' }}
         flexDirection={{ base: 'column', tablet: 'row', desktop: 'row' }}
         colorPalette="blue"
         borderBottom="none"
@@ -18,8 +18,8 @@ function UserNav() {
             href="/"
             p="0"
             fontFamily="Gilroy-Medium"
-            fontSize={{ base: '14px', tablet: '16px', desktop: '20px' }}
-            lineHeight={{ base: '18px', tablet: '18px', desktop: '20px' }}
+            fontSize={{ base: '14px', tablet: '16px' }}
+            lineHeight={{ base: '18px', tablet: '18px' }}
             letterSpacing="0.02em"
             color="brand.accent"
           >
@@ -32,8 +32,8 @@ function UserNav() {
             href="library"
             p="0"
             fontFamily="Gilroy-Medium"
-            fontSize={{ base: '14px', tablet: '16px', desktop: '20px' }}
-            lineHeight={{ base: '18px', tablet: '18px', desktop: '20px' }}
+            fontSize={{ base: '14px', tablet: '16px' }}
+            lineHeight={{ base: '18px', tablet: '18px' }}
             letterSpacing="0.02em"
             color="brand.accent"
           >

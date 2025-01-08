@@ -1,4 +1,4 @@
-import { Button, Flex, Image, Link } from '@chakra-ui/react'
+import { Button, Flex, Image, Link, Text } from '@chakra-ui/react'
 import logo from '@/assets/icons/logo-mobile.svg'
 import { Avatar } from './ui/avatar'
 import DrawerMenu from './DrawerMenu'
@@ -10,7 +10,7 @@ function Header() {
       gridArea="header"
       alignItems="center"
       justifyContent="space-between"
-      px={{ base: '20px', tablet: '16px', desktop: '20px' }}
+      px={{ base: '20px', tablet: '16px' }}
       bg="brand.bgSecondary"
       color="brand.accent"
       borderRadius="15px"
@@ -25,14 +25,25 @@ function Header() {
 
         <Avatar
           size="md"
-          mr={{ base: '8px', tablet: '16px', desktop: '20px' }}
-          ml={{ base: '0', tablet: '94px', desktop: '20px' }}
+          mr={{ base: '8px', tablet: '16px' }}
+          ml={{ base: '0', tablet: '94px', desktop: '219px' }}
           fontFamily="Gilroy-Bold"
           color="brand.accent"
           bg="brand.bgSecondary"
           border="1px solid #f9f9f94d"
           name="avatar"
         />
+
+        <Text
+          mr={{ desktop: '16px' }}
+          fontFamily="Gilroy-Bold"
+          fontSize={{ desktop: '16px' }}
+          lineHeight={{ desktop: '18px' }}
+          color="brand.accent"
+          hideBelow="desktop"
+        >
+          user name
+        </Text>
 
         <Button
           variant="outline"

@@ -34,7 +34,7 @@ const frameworks = createListCollection({
 function MyLibrary() {
   const [value, setValue] = useState(['all'])
   const [openDialog, setOpenDialog] = useState(false)
-  const booksLenght = 4
+  const booksLenght = 0
 
   const toogleDialog = () => {
     setOpenDialog(!openDialog)
@@ -48,40 +48,40 @@ function MyLibrary() {
   return (
     <Flex
       direction="column"
-      gap={{ base: '63px', tablet: '14px', desktop: '20px' }}
+      gap={{ base: '63px', tablet: '14px', desktop: '161px' }}
       w="full"
     >
       <Flex justify="space-between" align="center">
         <Heading
           fontFamily="Gilroy-Bold"
-          fontSize={{ base: '20px', tablet: '28px', desktop: '20px' }}
-          lineHeight={{ base: '20px', tablet: '32px', desktop: '20px' }}
+          fontSize={{ base: '20px', tablet: '28px' }}
+          lineHeight={{ base: '20px', tablet: '32px' }}
         >
           My library
         </Heading>
         <SelectRoot
           size="md"
-          width={{ base: '120px', tablet: '153px', desktop: '20px' }}
+          width={{ base: '120px', tablet: '153px' }}
           collection={frameworks}
           value={value}
           onValueChange={handleChange}
           fontFamily="Gilroy-Medium"
-          fontSize={{ base: '12px', tablet: '14px', desktop: '20px' }}
-          lineHeight={{ base: '16px', tablet: '18px', desktop: '20px' }}
+          fontSize={{ base: '12px', tablet: '14px' }}
+          lineHeight={{ base: '16px', tablet: '18px' }}
         >
           <SelectTrigger>
             <SelectValueText
               fontFamily="Gilroy-Medium"
-              fontSize={{ base: '12px', tablet: '14px', desktop: '20px' }}
-              lineHeight={{ base: '16px', tablet: '18px', desktop: '20px' }}
+              fontSize={{ base: '12px', tablet: '14px' }}
+              lineHeight={{ base: '16px', tablet: '18px' }}
               color="brand.accent"
               placeholder="All books"
             />
           </SelectTrigger>
           <SelectContent
             fontFamily="Gilroy-Medium"
-            fontSize={{ base: '12px', tablet: '14px', desktop: '20px' }}
-            lineHeight={{ base: '16px', tablet: '18px', desktop: '20px' }}
+            fontSize={{ base: '12px', tablet: '14px' }}
+            lineHeight={{ base: '16px', tablet: '18px' }}
             color="brand.muted"
             bg="brand.bgInput"
             rounded="12px"
@@ -101,19 +101,19 @@ function MyLibrary() {
       >
         {booksLenght === 0 && (
           <Flex
-            h={{ base: '164px', tablet: '186px', desktop: '20px' }}
-            w={{ base: '197px', tablet: '274px', desktop: '20px' }}
+            h={{ base: '164px', tablet: '186px' }}
+            w={{ base: '197px', tablet: '274px' }}
             direction="column"
             align="center"
           >
             <Circle
-              mb={{ base: '10px', tablet: '20px', desktop: '20px' }}
-              size={{ base: '100px', tablet: '130px', desktop: '20px' }}
+              mb={{ base: '10px', tablet: '20px' }}
+              size={{ base: '100px', tablet: '130px' }}
               bg="brand.bgInput"
             >
               <Image
-                h={{ base: '50px', tablet: '70px', desktop: '20px' }}
-                w={{ base: '50px', tablet: '70px', desktop: '20px' }}
+                h={{ base: '50px', tablet: '70px' }}
+                w={{ base: '50px', tablet: '70px' }}
                 src={booksIcon}
                 alt="image books"
               />

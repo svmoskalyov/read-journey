@@ -46,25 +46,25 @@ function RegisterForm() {
     >
       <Stack
         align="flex-start"
-        mb={{ base: '40px', tablet: '82px', desktop: '20px' }}
-        gap={{ base: '8px', tablet: '14px', desktop: '20px' }}
-        maxW={{ base: '295px', tablet: '472px', desktop: '20px' }}
+        mb={{ base: '20px', tablet: '82px' }}
+        gap={{ base: '8px', tablet: '14px' }}
+        maxW={{ base: '295px', tablet: '472px' }}
       >
         <Field invalid={!!errors.name} errorText={errors.name?.message}>
           <InputElement
             fontFamily="Gilroy-Medium"
-            fontSize={{ base: '12px', tablet: '14px', desktop: '20px' }}
-            lineHeight={{ base: '14px', tablet: '18px', desktop: '20px' }}
+            fontSize={{ base: '12px', tablet: '14px' }}
+            lineHeight={{ base: '14px', tablet: '18px' }}
             color="brand.muted"
           >
             Name:
           </InputElement>
           <Input
             ps="4.65em"
-            h={{ base: '44px', tablet: '50px', desktop: '20px' }}
+            h={{ base: '44px', tablet: '50px' }}
             fontFamily="Gilroy-Medium"
-            fontSize={{ base: '12px', tablet: '14px', desktop: '20px' }}
-            lineHeight={{ base: '14px', tablet: '18px', desktop: '20px' }}
+            fontSize={{ base: '12px', tablet: '14px' }}
+            lineHeight={{ base: '14px', tablet: '18px' }}
             bg="brand.bgInput"
             rounded="12px"
             placeholder="Your Name"
@@ -76,18 +76,18 @@ function RegisterForm() {
         <Field invalid={!!errors.email} errorText={errors.email?.message}>
           <InputElement
             fontFamily="Gilroy-Medium"
-            fontSize={{ base: '12px', tablet: '14px', desktop: '20px' }}
-            lineHeight={{ base: '14px', tablet: '18px', desktop: '20px' }}
+            fontSize={{ base: '12px', tablet: '14px' }}
+            lineHeight={{ base: '14px', tablet: '18px' }}
             color="brand.muted"
           >
             Email:
           </InputElement>
           <Input
             ps="4.25em"
-            h={{ base: '44px', tablet: '50px', desktop: '20px' }}
+            h={{ base: '44px', tablet: '50px' }}
             fontFamily="Gilroy-Medium"
-            fontSize={{ base: '12px', tablet: '14px', desktop: '20px' }}
-            lineHeight={{ base: '14px', tablet: '18px', desktop: '20px' }}
+            fontSize={{ base: '12px', tablet: '14px' }}
+            lineHeight={{ base: '14px', tablet: '18px' }}
             bg="brand.bgInput"
             rounded="12px"
             placeholder="Your Email"
@@ -99,18 +99,18 @@ function RegisterForm() {
         <Field invalid={!!errors.password} errorText={errors.password?.message}>
           <InputElement
             fontFamily="Gilroy-Medium"
-            fontSize={{ base: '12px', tablet: '14px', desktop: '20px' }}
-            lineHeight={{ base: '14px', tablet: '18px', desktop: '20px' }}
+            fontSize={{ base: '12px', tablet: '14px' }}
+            lineHeight={{ base: '14px', tablet: '18px' }}
             color="brand.muted"
           >
             Password:
           </InputElement>
           <PasswordInput
             ps="6.25em"
-            h={{ base: '44px', tablet: '50px', desktop: '20px' }}
+            h={{ base: '44px', tablet: '50px' }}
             fontFamily="Gilroy-Medium"
-            fontSize={{ base: '12px', tablet: '14px', desktop: '20px' }}
-            lineHeight={{ base: '14px', tablet: '18px', desktop: '20px' }}
+            fontSize={{ base: '12px', tablet: '14px' }}
+            lineHeight={{ base: '14px', tablet: '18px' }}
             bg="brand.bgInput"
             rounded="12px"
             placeholder="Your Password"
@@ -120,13 +120,13 @@ function RegisterForm() {
         </Field>
       </Stack>
 
-      <Flex gap={{ base: '10px', tablet: '20px', desktop: '20px' }}>
+      <Flex gap={{ base: '10px', tablet: '20px' }}>
         <Button
-          h={{ base: '42px', tablet: '52px', desktop: '20px' }}
-          w={{ base: '140px', tablet: '225px', desktop: '20px' }}
+          h={{ base: '42px', tablet: '52px' }}
+          w={{ base: '140px', tablet: '225px' }}
           fontFamily="Gilroy-Bold"
-          fontSize={{ base: '14px', tablet: '20px', desktop: '20px' }}
-          lineHeight={{ base: '14px', tablet: '20px', desktop: '20px' }}
+          fontSize={{ base: '14px', tablet: '20px' }}
+          lineHeight={{ base: '14px', tablet: '20px' }}
           rounded="30px"
           color="brand.bgSecondary"
           bg="brand.accent"
@@ -138,8 +138,8 @@ function RegisterForm() {
         <Link
           variant="underline"
           fontFamily="Gilroy-Medium"
-          fontSize={{ base: '12px', tablet: '14px', desktop: '20px' }}
-          lineHeight={{ base: '14px', tablet: '18px', desktop: '20px' }}
+          fontSize={{ base: '12px', tablet: '14px' }}
+          lineHeight={{ base: '14px', tablet: '18px' }}
           letterSpacing="-0.02em"
           color="brand.muted"
           href="/login"

@@ -5,11 +5,11 @@ import blockStat from '@/assets/icons/block.svg'
 function Diary() {
   return (
     <Flex
-      p="4"
+      p={{ base: '16px', tablet: '20px', desktop: '20px' }}
       pb="0"
       pl="23px"
-      h={{ base: '211px', tablet: '252px', desktop: '20px' }}
-      w={{ base: '295px', tablet: '321px', desktop: '20px' }}
+      h={{ base: '211px', tablet: '252px', desktop: '373px' }}
+      w={{ base: '295px', tablet: '321px', desktop: '313px' }}
       rounded="12px"
       bg="brand.bgInput"
     >

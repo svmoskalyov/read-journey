@@ -4,23 +4,35 @@ import MyLibrary from '@/components/MyLibrary'
 
 function MyLibraryPage() {
   return (
-    <Grid gap="2.5" bg="brand.bgPrimary" color="brand.accent">
+    <Grid
+      templateColumns={{
+        desktopOnly: '353px 1fr',
+        wideOnly: '353px 1fr'
+      }}
+      gap={{ base: '10px', tablet: '16px' }}
+      bg="brand.bgPrimary"
+      color="brand.accent"
+    >
       <Flex
-        justifyContent='space-between'
-        direction={{ base: 'column', tablet: 'row', desktop: 'row' }}
+        direction={{ base: 'column', tablet: 'row', desktop: 'column' }}
+        justifyContent={{
+          base: 'normal',
+          tablet: 'space-around',
+          desktop: 'normal'
+        }}
         p={{ base: '20px', tablet: '32px', desktop: '20px' }}
+        pt={{ desktop: '40px' }}
         bg="brand.bgSecondary"
         rounded="30px"
       >
         <Dashboard page="library" />
       </Flex>
       <Flex
-        px={{ base: '20px', tablet: '40px', desktop: '20px' }}
-        py={{ base: '40px', tablet: '40px', desktop: '20px' }}
-        h={{ base: '382px', tablet: '518px', desktop: '20px' }}
+        px={{ base: '20px', tablet: '40px' }}
+        py={{ base: '40px', tablet: '40px' }}
+        h={{ base: '382px', tablet: '518px', desktop: '651px' }}
         bg="brand.bgSecondary"
         rounded="30px"
-        // maxW="335px"
       >
         <MyLibrary />
       </Flex>

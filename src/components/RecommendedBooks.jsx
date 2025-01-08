@@ -9,10 +9,10 @@ function RecommendedBooks() {
     <>
       <Flex
         direction="column"
-        gap="3.5"
+        gap={{ base: '14px', tablet: '14px', desktop: '20px' }}
         p="5"
-        h={{ base: '244px', tablet: '272px', desktop: '20px' }}
-        w={{ base: '295px', tablet: '313px', desktop: '20px' }}
+        h={{ base: '244px', tablet: '272px', desktop: '259px' }}
+        w={{ base: '295px', tablet: '313px', desktop: '313px' }}
         bg="brand.bgInput"
         rounded="12px"
       >
