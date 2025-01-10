@@ -34,7 +34,7 @@ const frameworks = createListCollection({
 function MyLibrary() {
   const [value, setValue] = useState(['all'])
   const [openDialog, setOpenDialog] = useState(false)
-  const booksLenght = 4
+  const booksLenght = 0
 
   const toogleDialog = () => {
     setOpenDialog(!openDialog)
@@ -101,6 +101,7 @@ function MyLibrary() {
       >
         {booksLenght === 0 && (
           <Flex
+            mt={{ base: '40px', tablet: '80px', desktop: '20px' }}
             h={{ base: '164px', tablet: '186px' }}
             w={{ base: '197px', tablet: '274px' }}
             direction="column"
@@ -162,7 +163,7 @@ function MyLibrary() {
                 h="208px"
                 w="137px"
                 rounded="8px"
-                bg="navy"
+                bg="#e81530"
                 // bg={cover}
                 boxShadow="0px 0px 16px 2px rgba(255,255,255,0.4) inset"
                 cursor="pointer"
