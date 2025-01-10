@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useForm } from 'react-hook-form'
+import { Controller, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import {
@@ -11,8 +11,14 @@ import {
   Heading,
   Image,
   Text,
-  Mark
+  Mark,
+  parseColor
 } from '@chakra-ui/react'
+import {
+  ColorPickerRoot,
+  ColorPickerSwatchGroup,
+  ColorPickerSwatchTrigger
+} from '@/components/ui/color-picker'
 import { Field } from '@/components/ui/field'
 import Workout from './Workout'
 import RecommendedBooks from './RecommendedBooks'
@@ -28,26 +34,29 @@ const schemaLib = yup
   .object({
     title: yup.string().required('Page is required'),
     author: yup.string().required('Page is required'),
-    page: yup
+    pages: yup
       .number()
       .typeError('Must be only digits')
       .positive('Must be a positive number')
       .integer('Must be an integer')
       .min(1, 'Must be greater than 0')
       .max(9999, 'Must be less than 9999')
-      .required('Page is required')
+      .required('Pages is required')
   })
   .required()
 
 function Dashboard({ page }) {
   const {
     register,
+    control,
     handleSubmit,
     formState: { errors }
   } = useForm({
+    defaultValues: { color: '#e81530' },
     resolver: yupResolver(page === 'recommended' ? schemaRec : schemaLib)
   })
   const [openDialog, setOpenDialog] = useState(false)
+  const swatches = ['#e81530', '#074b90', '#432fa8', '#800080', '#006400']
 
   const toogleDialog = () => {
     setOpenDialog(!openDialog)
@@ -119,28 +128,70 @@ function Dashboard({ page }) {
           </Field>
 
           {page === 'library' && (
-            <Field invalid={!!errors.pages} errorText={errors.pages?.message}>
-              <InputElement
-                fontFamily="Gilroy-Medium"
-                fontSize={{ base: '12px', tablet: '14px' }}
-                lineHeight={{ base: '14px', tablet: '18px' }}
-                color="brand.muted"
-              >
-                Number of pages:
-              </InputElement>
-              <Input
-                ps="10.05em"
-                h={{ base: '44px', tablet: '50px' }}
-                fontFamily="Gilroy-Medium"
-                fontSize={{ base: '12px', tablet: '14px' }}
-                lineHeight={{ base: '14px', tablet: '18px' }}
-                bg="brand.bgInput"
-                rounded="12px"
-                placeholder="Enter pages"
-                variant="subtle"
-                {...register('pages')}
-              />
-            </Field>
+            <>
+              <Field invalid={!!errors.pages} errorText={errors.pages?.message}>
+                <InputElement
+                  fontFamily="Gilroy-Medium"
+                  fontSize={{ base: '12px', tablet: '14px' }}
+                  lineHeight={{ base: '14px', tablet: '18px' }}
+                  color="brand.muted"
+                >
+                  Number of pages:
+                </InputElement>
+                <Input
+                  ps="10.05em"
+                  h={{ base: '44px', tablet: '50px' }}
+                  fontFamily="Gilroy-Medium"
+                  fontSize={{ base: '12px', tablet: '14px' }}
+                  lineHeight={{ base: '14px', tablet: '18px' }}
+                  bg="brand.bgInput"
+                  rounded="12px"
+                  placeholder="Enter pages"
+                  variant="subtle"
+                  {...register('pages', { required: 'pages is required' })}
+                />
+              </Field>
+
+              <Stack>
+                <Controller
+                  name="color"
+                  control={control}
+                  render={({ field }) => (
+                    <ColorPickerRoot
+                      name={field.name}
+                      defaultValue={parseColor(field.value)}
+                      onValueChange={e => field.onChange(e.valueAsString)}
+                    >
+                      <ColorPickerSwatchGroup
+                        alignItems="center"
+                        gap="4"
+                        h={{ base: '44px', tablet: '50px' }}
+                        w="295px"
+                        bg="brand.bgInput"
+                        rounded="12px"
+                      >
+                        <Text
+                          pl="3"
+                          fontFamily="Gilroy-Medium"
+                          fontSize={{ base: '12px', tablet: '14px' }}
+                          lineHeight={{ base: '14px', tablet: '18px' }}
+                          color="brand.muted"
+                        >
+                          Cover color:
+                        </Text>
+                        {swatches.map(item => (
+                          <ColorPickerSwatchTrigger
+                            swatchSize="5"
+                            key={item}
+                            value={item}
+                          />
+                        ))}
+                      </ColorPickerSwatchGroup>
+                    </ColorPickerRoot>
+                  )}
+                />
+              </Stack>
+            </>
           )}
         </Stack>
 
