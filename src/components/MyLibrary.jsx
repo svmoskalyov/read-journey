@@ -34,7 +34,7 @@ const frameworks = createListCollection({
 function MyLibrary() {
   const [value, setValue] = useState(['all'])
   const [openDialog, setOpenDialog] = useState(false)
-  const booksLenght = 0
+  const booksLenght = 4
 
   const toogleDialog = () => {
     setOpenDialog(!openDialog)
@@ -48,7 +48,7 @@ function MyLibrary() {
   return (
     <Flex
       direction="column"
-      gap={{ base: '63px', tablet: '14px', desktop: '161px' }}
+      gap={{ base: '23px', tablet: '14px', desktop: '161px' }}
       w="full"
     >
       <Flex justify="space-between" align="center">
@@ -144,7 +144,7 @@ function MyLibrary() {
               border="none"
               overflow="hidden"
             >
-              <Image
+              {/* <Image
                 mb="2"
                 h="208px"
                 w="137px"
@@ -152,7 +152,51 @@ function MyLibrary() {
                 alt="image book"
                 rounded="8px"
                 onClick={toogleDialog}
-              />
+              /> */}
+
+              <Flex
+                direction="column"
+                alignItems="center"
+                mb="2"
+                p="4"
+                h="208px"
+                w="137px"
+                rounded="8px"
+                bg="navy"
+                // bg={cover}
+                boxShadow="0px 0px 16px 2px rgba(255,255,255,0.4) inset"
+                cursor="pointer"
+                onClick={toogleDialog}
+              >
+                <Text
+                  mb="12"
+                  maxW="98%"
+                  fontFamily="Gilroy-Medium"
+                  fontSize="10px"
+                  lineHeight="12px"
+                  letterSpacing="-0.02em"
+                  overflow="hidden"
+                  textWrap="nowrap"
+                  textOverflow="ellipsis"
+                  userSelect="none"
+                >
+                  Yuri Andrukhovych
+                </Text>
+                <Heading
+                  maxH="50%"
+                  fontFamily="Gilroy-Bold"
+                  fontSize="14px"
+                  lineHeight="18px"
+                  letterSpacing="-0.02em"
+                  overflow="hidden"
+                  textOverflow="ellipsis"
+                  textAlign="center"
+                  userSelect="none"
+                >
+                  Lovers of Justice
+                </Heading>
+              </Flex>
+
               <Card.Body
                 p="0"
                 display="flex"

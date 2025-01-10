@@ -1,4 +1,4 @@
-import { Flex, Heading, Card, Image, Link } from '@chakra-ui/react'
+import { Flex, Heading, Card, Image, Link, Text } from '@chakra-ui/react'
 import book4 from '@/assets/images/image 4.png'
 import book5 from '@/assets/images/image 5.png'
 import book6 from '@/assets/images/image 6.png'
@@ -27,7 +27,47 @@ function RecommendedBooks() {
             overflow="hidden"
             bg="brand.bgInput"
           >
-            <Image h="107px" src={book4} alt="image book" rounded="8px" />
+            {/* <Image h="107px" src={book4} alt="image book" rounded="8px" /> */}
+
+            <Flex
+              direction="column"
+              alignItems="center"
+              p="2"
+              h="107px"
+              rounded="8px"
+              bg="navy"
+              // bg={cover}
+              boxShadow="0px 0px 16px 2px rgba(255,255,255,0.4) inset"
+            >
+              <Text
+                maxW="98%"
+                mb="3"
+                fontFamily="Gilroy-Medium"
+                fontSize="8px"
+                lineHeight="10px"
+                letterSpacing="-0.02em"
+                overflow="hidden"
+                textWrap="nowrap"
+                textOverflow="ellipsis"
+                userSelect="none"
+              >
+                Serhiy Zhadan
+              </Text>
+              <Heading
+                maxH="50%"
+                fontFamily="Gilroy-Medium"
+                fontSize="8px"
+                lineHeight="10px"
+                letterSpacing="-0.02em"
+                overflow="hidden"
+                textOverflow="ellipsis"
+                textAlign="center"
+                userSelect="none"
+              >
+                The Orphanage
+              </Heading>
+            </Flex>
+
             <Card.Body p="0" pt="1">
               <Card.Title
                 fontFamily="Gilroy-Bold"

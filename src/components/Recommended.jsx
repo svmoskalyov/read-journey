@@ -1,5 +1,13 @@
 import { useState } from 'react'
-import { Flex, Heading, HStack, Card, Image, Grid } from '@chakra-ui/react'
+import {
+  Flex,
+  Heading,
+  HStack,
+  Card,
+  Image,
+  Grid,
+  Text
+} from '@chakra-ui/react'
 import {
   PaginationNextTrigger,
   PaginationPrevTrigger,
@@ -60,8 +68,8 @@ function Recommended() {
             tablet: 'repeat(4, 1fr)',
             desktop: 'repeat(6, 1fr)'
           }}
-          overflowX="auto"
-          scrollbar="hidden"
+          // overflow="auto"
+          // scrollbar="hidden"
         >
           <Card.Root
             maxW="248px"
@@ -70,14 +78,57 @@ function Recommended() {
             border="none"
             overflow="hidden"
           >
-            <Image
+            {/* <Image
               h="208px"
               w="137px"
               src={book1}
               alt="image book"
               rounded="8px"
               onClick={toogleDialog}
-            />
+            /> */}
+
+            <Flex
+              direction="column"
+              alignItems="center"
+              p="4"
+              h="208px"
+              w="137px"
+              rounded="8px"
+              bg="navy"
+              // bg={cover}
+              boxShadow="0px 0px 16px 2px rgba(255,255,255,0.4) inset"
+              cursor="pointer"
+              onClick={toogleDialog}
+            >
+              <Text
+                mb="12"
+                maxW="98%"
+                fontFamily="Gilroy-Medium"
+                fontSize="10px"
+                lineHeight="12px"
+                letterSpacing="0.02em"
+                overflow="hidden"
+                textWrap="nowrap"
+                textOverflow="ellipsis"
+                userSelect="none"
+              >
+                Yuri Andrukhovych
+              </Text>
+              <Heading
+                maxH="50%"
+                fontFamily="Gilroy-Bold"
+                fontSize="14px"
+                lineHeight="18px"
+                letterSpacing="-0.02em"
+                overflow="hidden"
+                textOverflow="ellipsis"
+                textAlign="center"
+                userSelect="none"
+              >
+                Lovers of Justice
+              </Heading>
+            </Flex>
+
             <Card.Body p="0" pt="2">
               <Card.Title
                 fontFamily="Gilroy-Bold"
