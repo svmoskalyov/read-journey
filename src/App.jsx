@@ -1,5 +1,6 @@
 import { lazy } from 'react'
 import { Navigate, Route, Routes } from 'react-router'
+import { Toaster } from '@/components/ui/toaster'
 import AuthLayout from '@/layouts/AuthLayout.jsx'
 import WelcomePage from '@/pages/WelcomePage.jsx'
 // import MainLayout from '@/layouts/MainLayout.jsx'
@@ -20,27 +21,30 @@ const ReadingPage = lazy(() => import('./pages/ReadingPage'))
 
 function App() {
   // const isAuth = useAuthStore(state => state.isAuth)
-  // const isAuth = false
-  const isAuth = true
+  const isAuth = false
+  // const isAuth = true
 
   return (
-    <Routes>
-      {!isAuth ? (
-        <Route path="/" element={<AuthLayout />}>
-          <Route index element={<WelcomePage />} />
-          <Route path="login" element={<LoginPage />} />
-          <Route path="register" element={<RegisterPage />} />
-        </Route>
-      ) : (
-        <Route path="/" element={<MainLayout />}>
-          <Route index element={<Navigate to="recommended" replace />} />
-          <Route path="recommended" element={<RecommendedPage />} />
-          <Route path="library" element={<MyLibraryPage />} />
-          <Route path="reading" element={<ReadingPage />} />
-        </Route>
-      )}
-      <Route path="*" element={<Navigate to="/" replace />} />
-    </Routes>
+    <>
+      <Routes>
+        {!isAuth ? (
+          <Route path="/" element={<AuthLayout />}>
+            <Route index element={<WelcomePage />} />
+            <Route path="login" element={<LoginPage />} />
+            <Route path="register" element={<RegisterPage />} />
+          </Route>
+        ) : (
+          <Route path="/" element={<MainLayout />}>
+            <Route index element={<Navigate to="recommended" replace />} />
+            <Route path="recommended" element={<RecommendedPage />} />
+            <Route path="library" element={<MyLibraryPage />} />
+            <Route path="reading" element={<ReadingPage />} />
+          </Route>
+        )}
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+      <Toaster />
+    </>
   )
 }
 
