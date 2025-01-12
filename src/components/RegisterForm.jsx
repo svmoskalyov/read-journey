@@ -1,3 +1,5 @@
+import { useEffect } from 'react'
+import { useNavigate } from 'react-router'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
@@ -7,10 +9,12 @@ import {
   InputElement,
   Stack,
   Flex,
-  Link
+  Link,
+  Spinner
 } from '@chakra-ui/react'
 import { Field } from '@/components/ui/field'
 import { PasswordInput } from '@/components/ui/password-input'
+import { useAuthStore } from '@/stores/authStore'
 
 const schema = yup
   .object({
@@ -33,8 +37,18 @@ function RegisterForm() {
   } = useForm({
     resolver: yupResolver(schema)
   })
+  const navigate = useNavigate()
+  const signupUser = useAuthStore(state => state.signupUser)
+  const isLoading = useAuthStore(state => state.isLoading)
+  const sent = useAuthStore(state => state.sent)
+  
+  const onSubmit = handleSubmit(data => signupUser(data))
 
-  const onSubmit = handleSubmit(data => console.log(data))
+  useEffect(() => {
+    if (sent) {
+      navigate('/login')
+    }
+  }, [navigate, sent])
 
   return (
     <form
@@ -132,7 +146,7 @@ function RegisterForm() {
           bg="brand.accent"
           type="submit"
         >
-          Registration
+          {!isLoading ? 'Registration' : <Spinner />}
         </Button>
 
         <Link

@@ -12,10 +12,10 @@ function UserNav() {
         colorPalette="blue"
         borderBottom="none"
       >
-        <Tabs.Trigger value="/" asChild>
+        <Tabs.Trigger value="/recommended" asChild>
           <Link
             unstyled
-            href="/"
+            href="/recommended"
             p="0"
             fontFamily="Gilroy-Medium"
             fontSize={{ base: '14px', tablet: '16px' }}
@@ -29,7 +29,7 @@ function UserNav() {
         <Tabs.Trigger value="/library" asChild>
           <Link
             unstyled
-            href="library"
+            href="/library"
             p="0"
             fontFamily="Gilroy-Medium"
             fontSize={{ base: '14px', tablet: '16px' }}

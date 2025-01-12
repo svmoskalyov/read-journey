@@ -13,7 +13,7 @@ function Workout() {
   return (
     <Flex
       direction="column"
-      gap="5"
+      gap={{ base: '4', tablet: '5' }}
       p="5"
       h={{ base: '244px', tablet: '272px' }}
       w={{ base: '295px', tablet: '313px' }}

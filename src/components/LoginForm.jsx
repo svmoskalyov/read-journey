@@ -7,10 +7,12 @@ import {
   InputElement,
   Stack,
   Flex,
-  Link
+  Link,
+  Spinner
 } from '@chakra-ui/react'
 import { Field } from '@/components/ui/field'
 import { PasswordInput } from '@/components/ui/password-input'
+import { useAuthStore } from '@/stores/authStore'
 
 const schema = yup
   .object({
@@ -32,8 +34,10 @@ function LoginForm() {
   } = useForm({
     resolver: yupResolver(schema)
   })
-
-  const onSubmit = handleSubmit(data => console.log(data))
+  const signinUser = useAuthStore(state => state.signinUser)
+  const isLoading = useAuthStore(state => state.isLoading)
+  
+  const onSubmit = handleSubmit(data => signinUser(data))
 
   return (
     <form
@@ -108,7 +112,7 @@ function LoginForm() {
           bg="brand.accent"
           type="submit"
         >
-          Log in
+          {!isLoading ? 'Log in' : <Spinner />}
         </Button>
 
         <Link

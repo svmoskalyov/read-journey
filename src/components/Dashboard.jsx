@@ -234,8 +234,11 @@ function Dashboard({ page }) {
             letterSpacing="0.02em"
             color="brand.muted"
           >
-            &quot;Books are<Mark color="brand.accent">windows</Mark>to the
-            world, and reading is a journey into the unknown.&quot;
+            &quot;Books are
+            <Mark px="1" color="brand.accent">
+              windows
+            </Mark>
+            to the world, and reading is a journey into the unknown.&quot;
           </Text>
         </Flex>
       )}

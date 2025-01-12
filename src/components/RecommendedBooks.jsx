@@ -1,5 +1,4 @@
 import { Flex, Heading, Card, Image, Link, Text } from '@chakra-ui/react'
-import book4 from '@/assets/images/image 4.png'
 import book5 from '@/assets/images/image 5.png'
 import book6 from '@/assets/images/image 6.png'
 import arrow from '@/assets/icons/arrow-right.svg'
@@ -9,7 +8,7 @@ function RecommendedBooks() {
     <>
       <Flex
         direction="column"
-        gap={{ base: '14px', tablet: '14px', desktop: '20px' }}
+        gap={{ base: '16px', tablet: '24px', desktop: '20px' }}
         p="5"
         h={{ base: '244px', tablet: '272px', desktop: '259px' }}
         w={{ base: '295px', tablet: '313px', desktop: '313px' }}
