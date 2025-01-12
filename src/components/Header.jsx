@@ -3,8 +3,12 @@ import logo from '@/assets/icons/logo-mobile.svg'
 import { Avatar } from './ui/avatar'
 import DrawerMenu from './DrawerMenu'
 import UserNav from './UserNav'
+import { useAuthStore } from '@/stores/authStore'
 
 function Header() {
+  const name = useAuthStore(state => state.name)
+  const signoutUser = useAuthStore(state => state.signoutUser)
+
   return (
     <Flex
       gridArea="header"
@@ -31,7 +35,7 @@ function Header() {
           color="brand.accent"
           bg="brand.bgSecondary"
           border="1px solid #f9f9f94d"
-          name="avatar"
+          name={name}
         />
 
         <Text
@@ -42,7 +46,7 @@ function Header() {
           color="brand.accent"
           hideBelow="desktop"
         >
-          user name
+          {name}
         </Text>
 
         <Button
@@ -55,6 +59,7 @@ function Header() {
           rounded="30px"
           arial-label="button logout"
           hideBelow="tablet"
+          onClick={() => signoutUser()}
         >
           Log out
         </Button>
