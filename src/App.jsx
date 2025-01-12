@@ -3,14 +3,7 @@ import { Navigate, Route, Routes } from 'react-router'
 import { Toaster } from '@/components/ui/toaster'
 import AuthLayout from '@/layouts/AuthLayout.jsx'
 import WelcomePage from '@/pages/WelcomePage.jsx'
-// import MainLayout from '@/layouts/MainLayout.jsx'
-// import RegisterPage from '@/pages/RegisterPage.jsx'
-// import LoginPage from '@/pages/LoginPage.jsx'
-// import RecommendedPage from '@/pages/RecommendedPage.jsx'
-// import MyLibraryPage from '@/pages/MyLibraryPage.jsx'
-// import ReadingPage from '@/pages/ReadingPage.jsx'
-
-// import useAuthStore from '@/stores/useAuthStore'
+import { useAuthStore } from '@/stores/authStore'
 
 const MainLayout = lazy(() => import('./layouts/MainLayout'))
 const RegisterPage = lazy(() => import('./pages/RegisterPage'))
@@ -20,9 +13,7 @@ const MyLibraryPage = lazy(() => import('./pages/MyLibraryPage'))
 const ReadingPage = lazy(() => import('./pages/ReadingPage'))
 
 function App() {
-  // const isAuth = useAuthStore(state => state.isAuth)
-  const isAuth = false
-  // const isAuth = true
+  const isAuth = useAuthStore(state => state.isAuth)
 
   return (
     <>
