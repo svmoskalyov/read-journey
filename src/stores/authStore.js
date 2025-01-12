@@ -6,11 +6,13 @@ import {
   currentUserApi,
   signoutUserApi
 } from '@/services/api'
+import toast from '@/utils/toast'
 
 const initialState = {
   name: null,
   email: null,
   uid: null,
+  sent: false,
   isAuth: false,
   isLoading: false,
   error: null
@@ -30,10 +32,11 @@ export const useAuthStore = create()(
               password
             })
             if (user !== null) {
-              console.log('Email verification sent!')
+              toast('info', 'Email verification sent!')
+              set({ sent: true })
             }
           } catch (error) {
-            set({ error: error.message })
+            set({ error: error.code })
           } finally {
             set({ isLoading: false })
           }
@@ -54,10 +57,10 @@ export const useAuthStore = create()(
                 error: null
               })
             } else {
-              console.log('Please verify your email.')
+              toast('warning', 'Please verify your email.')
             }
           } catch (error) {
-            set({ error: error.message })
+            set({ error: error.code })
           } finally {
             set({ isLoading: false })
           }
@@ -72,11 +75,11 @@ export const useAuthStore = create()(
                 uid: user.uid
               })
             } else {
-              console.log('User is signed out')
+              toast('warning', 'User is signed out')
             }
           } catch (error) {
-            set({ error: error.message })
-            console.log('Current user. An error happened.')
+            set({ error: error.code })
+            toast('error', 'Current user. An error happened.')
             console.log(error)
           }
         },
@@ -84,10 +87,10 @@ export const useAuthStore = create()(
           try {
             await signoutUserApi()
             set(initialState)
-            console.log('Sign-out successful')
+            toast('success', 'Sign-out successful')
           } catch (error) {
-            set({ error: error.message })
-            console.log('Logout user. An error happened.')
+            set({ error: error.code })
+            toast('error', 'Logout user. An error happened.')
             console.log(error)
           }
         }
@@ -98,7 +101,9 @@ export const useAuthStore = create()(
           Object.fromEntries(
             Object.entries(state).filter(
               ([key]) =>
-                !['isLoading'].includes(key) && !['error'].includes(key)
+                !['isLoading'].includes(key) &&
+                !['error'].includes(key) &&
+                !['sent'].includes(key)
             )
           )
       }
