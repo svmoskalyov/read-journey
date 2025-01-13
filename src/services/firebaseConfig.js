@@ -5,7 +5,7 @@ const firebaseConfig = {
   authDomain: `${import.meta.env.VITE_PROJECT_ID}.firebaseapp.com`,
   databaseURL: `https://${
     import.meta.env.VITE_DATABASE_NAME
-  }.firebasedatabase.app`,
+  }.firebaseio.com`,
   projectId: import.meta.env.VITE_PROJECT_ID,
   storageBucket: `${import.meta.env.VITE_PROJECT_ID}.firebasestorage.com`,
   messagingSenderId: import.meta.env.VITE_SENDER_ID,
