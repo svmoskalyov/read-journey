@@ -1,17 +1,19 @@
 import { useEffect, useState } from 'react'
 import {
-  Flex, Heading, HStack, Card, Grid, Text
+  Flex,
+  Heading,
+  HStack,
+  Grid
 } from '@chakra-ui/react'
 import {
   PaginationNextTrigger, PaginationPrevTrigger, PaginationRoot
 } from '@/components/ui/pagination'
-import DialogBook from './DialogBook'
 import { useRecommendedStore } from '@/stores/booksStore'
 import useMediaQuery from '@/hooks/useMediaQuery'
 import usePagination from '@/hooks/usePagination'
+import BookItem from '@/components/BookItem.jsx'
 
 function Recommended() {
-  const [openDialog, setOpenDialog] = useState(false)
   const [itemsLimit, setItemsLimit] = useState(2)
   const getBooks = useRecommendedStore(state => state.getBooks)
   const books = useRecommendedStore(state => state.books)
@@ -23,10 +25,6 @@ function Recommended() {
   } = usePagination({ contentPerPage: itemsLimit, count: books.length })
 
   if (!books.length) getBooks()
-
-  const toogleDialog = () => {
-    setOpenDialog(!openDialog)
-  }
 
   useEffect(() => {
     if (isMobile) setItemsLimit(2)
@@ -83,83 +81,11 @@ function Recommended() {
       >
         {books
           .slice(firstContentIndex, lastContentIndex)
-          .map((book) => (<Card.Root
-            maxW="248px"
-            bg="brand.bgSecondary"
-            color="brand.accent"
-            border="none"
-            overflow="hidden"
-            key={book.id}
-          >
-            <Flex
-              direction="column"
-              alignItems="center"
-              p="4"
-              h="208px"
-              w="137px"
-              rounded="8px"
-              bg={book.color}
-              boxShadow="0px 0px 16px 2px rgba(255,255,255,0.4) inset"
-              cursor="pointer"
-              onClick={toogleDialog}
-            >
-              <Text
-                mb="12"
-                maxW="98%"
-                fontFamily="Gilroy-Medium"
-                fontSize="10px"
-                lineHeight="12px"
-                letterSpacing="0.02em"
-                overflow="hidden"
-                textWrap="nowrap"
-                textOverflow="ellipsis"
-                userSelect="none"
-              >
-                {book.author}
-              </Text>
-              <Heading
-                maxH="50%"
-                fontFamily="Gilroy-Bold"
-                fontSize="14px"
-                lineHeight="18px"
-                letterSpacing="-0.02em"
-                overflow="hidden"
-                textOverflow="ellipsis"
-                textAlign="center"
-                userSelect="none"
-              >
-                {book.title}
-              </Heading>
-            </Flex>
-            <Card.Body p="0" pt="2">
-              <Card.Title
-                fontFamily="Gilroy-Bold"
-                fontSize="14px"
-                lineHeight="18px"
-                letterSpacing="0.02em"
-                overflow="hidden"
-                textWrap="nowrap"
-                textOverflow="ellipsis"
-              >
-                {book.title}
-              </Card.Title>
-              <Card.Description
-                fontFamily="Gilroy-Medium"
-                fontSize="10px"
-                lineHeight="12px"
-                letterSpacing="0.02em"
-                overflow="hidden"
-                textWrap="nowrap"
-                textOverflow="ellipsis"
-              >
-                {book.author}
-              </Card.Description>
-            </Card.Body>
-          </Card.Root>))}
+          .map((book) => (
+            <BookItem book={book} key={book.id} />
+          ))}
       </Grid>
     </Flex>
-
-    {openDialog && <DialogBook statBook={true} onClose={toogleDialog} />}
   </>)
 }
 
