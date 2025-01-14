@@ -1,9 +1,11 @@
 import { Flex, Heading, Card, Image, Link, Text } from '@chakra-ui/react'
-import book5 from '@/assets/images/image 5.png'
-import book6 from '@/assets/images/image 6.png'
 import arrow from '@/assets/icons/arrow-right.svg'
+import { useRecommendedStore } from '@/stores/booksStore.js'
 
 function RecommendedBooks() {
+  const books = useRecommendedStore(state => state.books)
+  const randomIndex = Math.floor(Math.random() * (books.length - 3))
+
   return (
     <>
       <Flex
@@ -19,147 +21,82 @@ function RecommendedBooks() {
           Recommended books
         </Heading>
         <Flex justifyContent="space-between">
-          <Card.Root
-            maxW="71px"
-            color="brand.accent"
-            border="none"
-            overflow="hidden"
-            bg="brand.bgInput"
-          >
-            {/* <Image h="107px" src={book4} alt="image book" rounded="8px" /> */}
 
-            <Flex
-              direction="column"
-              alignItems="center"
-              p="2"
-              h="107px"
-              rounded="8px"
-              bg="navy"
-              // bg={cover}
-              boxShadow="0px 0px 16px 2px rgba(255,255,255,0.4) inset"
-            >
-              <Text
-                maxW="98%"
-                mb="3"
-                fontFamily="Gilroy-Medium"
-                fontSize="8px"
-                lineHeight="10px"
-                letterSpacing="-0.02em"
+          {books
+            .slice(randomIndex, randomIndex + 3)
+            .map((book) => (
+              <Card.Root
+                maxW="71px"
+                color="brand.accent"
+                border="none"
                 overflow="hidden"
-                textWrap="nowrap"
-                textOverflow="ellipsis"
-                userSelect="none"
+                bg="brand.bgInput"
+                key={book.id}
               >
-                Serhiy Zhadan
-              </Text>
-              <Heading
-                maxH="50%"
-                fontFamily="Gilroy-Medium"
-                fontSize="8px"
-                lineHeight="10px"
-                letterSpacing="-0.02em"
-                overflow="hidden"
-                textOverflow="ellipsis"
-                textAlign="center"
-                userSelect="none"
-              >
-                The Orphanage
-              </Heading>
-            </Flex>
+                <Flex
+                  direction="column"
+                  alignItems="center"
+                  p="2"
+                  h="107px"
+                  rounded="8px"
+                  bg={book.color}
+                  boxShadow="0px 0px 16px 2px rgba(255,255,255,0.4) inset"
+                >
+                  <Text
+                    maxW="98%"
+                    mb="3"
+                    fontFamily="Gilroy-Medium"
+                    fontSize="8px"
+                    lineHeight="10px"
+                    letterSpacing="-0.02em"
+                    overflow="hidden"
+                    textWrap="nowrap"
+                    textOverflow="ellipsis"
+                    userSelect="none"
+                  >
+                    {book.author}
+                  </Text>
+                  <Heading
+                    maxH="50%"
+                    fontFamily="Gilroy-Medium"
+                    fontSize="8px"
+                    lineHeight="10px"
+                    letterSpacing="-0.02em"
+                    overflow="hidden"
+                    textOverflow="ellipsis"
+                    textAlign="center"
+                    userSelect="none"
+                  >
+                    {book.title}
+                  </Heading>
+                </Flex>
 
-            <Card.Body p="0" pt="1">
-              <Card.Title
-                fontFamily="Gilroy-Bold"
-                fontSize="10px"
-                lineHeight="12px"
-                letterSpacing="0.02em"
-                overflow="hidden"
-                textWrap="nowrap"
-                textOverflow="ellipsis"
-              >
-                The Orphanage
-              </Card.Title>
-              <Card.Description
-                fontFamily="Gilroy-Medium"
-                fontSize="10px"
-                lineHeight="12px"
-                letterSpacing="0.02em"
-                overflow="hidden"
-                textWrap="nowrap"
-                textOverflow="ellipsis"
-              >
-                Serhiy Zhadan
-              </Card.Description>
-            </Card.Body>
-          </Card.Root>
-
-          <Card.Root
-            maxW="71px"
-            bg="brand.bgInput"
-            color="brand.accent"
-            border="none"
-            overflow="hidden"
-          >
-            <Image h="107px" src={book5} alt="image book" rounded="8px" />
-            <Card.Body p="0" pt="1">
-              <Card.Title
-                fontFamily="Gilroy-Bold"
-                fontSize="10px"
-                lineHeight="12px"
-                letterSpacing="0.02em"
-                overflow="hidden"
-                textWrap="nowrap"
-                textOverflow="ellipsis"
-              >
-                Melodіja kavi u tonalnostі kardamonu
-              </Card.Title>
-              <Card.Description
-                fontFamily="Gilroy-Medium"
-                fontSize="10px"
-                lineHeight="12px"
-                letterSpacing="0.02em"
-                overflow="hidden"
-                textWrap="nowrap"
-                textOverflow="ellipsis"
-              >
-                Natalia Gurnytska
-              </Card.Description>
-            </Card.Body>
-          </Card.Root>
-
-          <Card.Root
-            maxW="71px"
-            bg="brand.bgInput"
-            color="brand.accent"
-            border="none"
-            overflow="hidden"
-          >
-            <Image h="107px" src={book6} alt="image book" rounded="8px" />
-            <Card.Body p="0" pt="1">
-              <Card.Title
-                fontFamily="Gilroy-Bold"
-                fontSize="10px"
-                lineHeight="12px"
-                letterSpacing="0.02em"
-                overflow="hidden"
-                textWrap="nowrap"
-                textOverflow="ellipsis"
-              >
-                SIx doors
-              </Card.Title>
-              <Card.Description
-                fontFamily="Gilroy-Medium"
-                fontSize="10px"
-                lineHeight="12px"
-                letterSpacing="0.02em"
-                overflow="hidden"
-                textWrap="nowrap"
-                textOverflow="ellipsis"
-              >
-                Irene Rozdobudko
-              </Card.Description>
-            </Card.Body>
-          </Card.Root>
+                <Card.Body p="0" pt="1">
+                  <Card.Title
+                    fontFamily="Gilroy-Bold"
+                    fontSize="10px"
+                    lineHeight="12px"
+                    letterSpacing="0.02em"
+                    overflow="hidden"
+                    textWrap="nowrap"
+                    textOverflow="ellipsis"
+                  >
+                    {book.title}
+                  </Card.Title>
+                  <Card.Description
+                    fontFamily="Gilroy-Medium"
+                    fontSize="10px"
+                    lineHeight="12px"
+                    letterSpacing="0.02em"
+                    overflow="hidden"
+                    textWrap="nowrap"
+                    textOverflow="ellipsis"
+                  >
+                    {book.author}
+                  </Card.Description>
+                </Card.Body>
+              </Card.Root>
+            ))}
         </Flex>
 
         <Flex justifyContent="space-between">
