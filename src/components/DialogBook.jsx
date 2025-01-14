@@ -1,3 +1,5 @@
+import { useState } from 'react'
+import { Card, Flex, Heading, Text } from '@chakra-ui/react'
 import { Button } from '@/components/ui/button'
 import {
   DialogBody,
@@ -5,11 +7,8 @@ import {
   DialogContent,
   DialogRoot
 } from '@/components/ui/dialog'
-import { useState } from 'react'
-import { Card, Flex, Heading, Image, Text } from '@chakra-ui/react'
-import book3 from '@/assets/images/image 3.png'
 
-function DialogBook({ statBook, onClose }) {
+function DialogBook({ statBook, onClose, book }) {
   const [open, setOpen] = useState(true)
 
   const toogle = e => {
@@ -35,15 +34,6 @@ function DialogBook({ statBook, onClose }) {
             border="none"
             overflow="hidden"
           >
-            {/* <Image
-              mb="16px"
-              h={{ base: '208px', tablet: '233px' }}
-              w={{ base: '137px', tablet: '153px' }}
-              src={book3}
-              alt="image book"
-              rounded="8px"
-            /> */}
-
             <Flex
               direction="column"
               justifyContent="space-between"
@@ -53,8 +43,7 @@ function DialogBook({ statBook, onClose }) {
               h={{ base: '208px', tablet: '233px' }}
               w={{ base: '137px', tablet: '153px' }}
               rounded="8px"
-              bg="navy"
-              // bg={cover}
+              bg={book.color}
               boxShadow="0px 0px 16px 2px rgba(255,255,255,0.4) inset"
               cursor="pointer"
             >
@@ -69,7 +58,7 @@ function DialogBook({ statBook, onClose }) {
                 textOverflow="ellipsis"
                 userSelect="none"
               >
-                Vasyl Shkliar
+                {book.author}
               </Text>
               <Heading
                 maxH="50%"
@@ -82,7 +71,7 @@ function DialogBook({ statBook, onClose }) {
                 textAlign="center"
                 userSelect="none"
               >
-                Troscha
+                {book.title}
               </Heading>
               <Text
                 maxW="98%"
@@ -95,7 +84,7 @@ function DialogBook({ statBook, onClose }) {
                 textOverflow="ellipsis"
                 userSelect="none"
               >
-                416 pages
+                {book.totalPages}
               </Text>
             </Flex>
 
@@ -109,7 +98,7 @@ function DialogBook({ statBook, onClose }) {
                 textWrap="nowrap"
                 textOverflow="ellipsis"
               >
-                Troscha
+                {book.title}
               </Card.Title>
               <Card.Description
                 fontFamily="Gilroy-Medium"
@@ -120,7 +109,7 @@ function DialogBook({ statBook, onClose }) {
                 textWrap="nowrap"
                 textOverflow="ellipsis"
               >
-                Vasyl Shkliar
+                {book.author}
               </Card.Description>
               <Text
                 fontFamily="Gilroy-Medium"
@@ -128,7 +117,7 @@ function DialogBook({ statBook, onClose }) {
                 lineHeight={{ base: '14px', tablet: '12px' }}
                 letterSpacing="0.02em"
               >
-                416 pages
+                {book.totalPages}
               </Text>
             </Card.Body>
             <Card.Footer p="0">
