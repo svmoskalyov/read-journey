@@ -1,14 +1,11 @@
 import { Flex, Grid } from '@chakra-ui/react'
-import Dashboard from '@/components/Dashboard'
-import MyLibrary from '@/components/BooksLibrary/MyLibrary.jsx'
+import Dashboard from '@/components/BooksLibrary/Dashboard'
+import MyLibrary from '@/components/BooksLibrary/MyLibrary'
 
 function MyLibraryPage() {
   return (
     <Grid
-      templateColumns={{
-        desktopOnly: '353px 1fr',
-        wideOnly: '353px 1fr'
-      }}
+      templateColumns={{ desktopOnly: '353px 1fr', wideOnly: '353px 1fr' }}
       gap={{ base: '10px', tablet: '16px' }}
       bg="brand.bgPrimary"
       color="brand.accent"
@@ -25,7 +22,7 @@ function MyLibraryPage() {
         bg="brand.bgSecondary"
         rounded="30px"
       >
-        <Dashboard page="library" />
+        <Dashboard />
       </Flex>
       <Flex
         px={{ base: '20px', tablet: '40px' }}

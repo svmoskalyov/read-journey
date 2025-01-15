@@ -1,10 +1,6 @@
 import { useState } from 'react'
 import { Heading, Image, Mark, Text } from '@chakra-ui/react'
-import {
-  DialogBody,
-  DialogCloseTrigger,
-  DialogContent,
-  DialogRoot
+import { DialogBody, DialogCloseTrigger, DialogContent, DialogRoot
 } from '@/components/ui/dialog'
 import like from '@/assets/icons/like.svg'
 import books from '@/assets/icons/books.svg'

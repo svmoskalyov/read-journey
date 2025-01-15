@@ -12,9 +12,10 @@ function RecommendedBooks() {
     <>
       <Flex
         direction="column"
-        gap={{ base: '16px', tablet: '24px', desktop: '20px' }}
+        justifyContent="space-around"
+        mt={{ base: '20px', tablet: '0' }}
         p="5"
-        h={{ base: '244px', tablet: '272px', desktop: '259px' }}
+        h={{ base: '244px', tablet: '312px', desktop: '259px' }}
         w={{ base: '295px', tablet: '313px', desktop: '313px' }}
         bg="brand.bgInput"
         rounded="12px"
@@ -22,6 +23,7 @@ function RecommendedBooks() {
         <Heading fontFamily="Gilroy-Bold" fontSize="20px" lineHeight="20px">
           Recommended books
         </Heading>
+
         <Flex justifyContent="space-between">
           {books
             .slice(randomIndex, randomIndex + 3)
@@ -102,7 +104,7 @@ function RecommendedBooks() {
 
         <Flex justifyContent="space-between">
           <Link
-            href="/public"
+            href="/"
             variant="underline"
             color="brand.muted"
             fontFamily="Gilroy-Medium"
@@ -112,7 +114,7 @@ function RecommendedBooks() {
             Home
           </Link>
           <Link
-            href="/public"
+            href="/"
             variant="plain"
             h="24px"
             minW="24px"

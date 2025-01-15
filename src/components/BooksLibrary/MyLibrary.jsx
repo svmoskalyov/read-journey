@@ -3,8 +3,8 @@ import { Flex, Heading, createListCollection, Grid } from '@chakra-ui/react'
 import {
   SelectContent, SelectItem, SelectRoot, SelectTrigger, SelectValueText
 } from '@/components/ui/select.jsx'
-import LibraryBookZeroItem from '@/components/BooksLibrary/LibraryBookZeroItem.jsx'
-import LibraryBookItem from '@/components/BooksLibrary/LibraryBookItem.jsx'
+import BookZeroItem from '@/components/BooksLibrary/BookZeroItem.jsx'
+import BookItem from '@/components/BooksLibrary/BookItem.jsx'
 
 const frameworks = createListCollection({
   items: [
@@ -77,7 +77,7 @@ function MyLibrary() {
 
       {booksLenght === 0 &&
         <Flex justify="center" align="center" h="full">
-          <LibraryBookZeroItem />
+          <BookZeroItem />
         </Flex>
       }
 
@@ -86,14 +86,18 @@ function MyLibrary() {
           gapX="25px"
           gapY="27px"
           gridTemplateRows={{
-            base: 'repeat(auto-fit, 1fr)', tablet: 'repeat(auto-fit, 1fr)', desktop: 'repeat(auto-fit, 1fr)'
+            base: 'repeat(auto-fit, 1fr)',
+            tablet: 'repeat(auto-fit, 1fr)',
+            desktop: 'repeat(auto-fit, 1fr)'
           }}
           gridTemplateColumns={{
-            base: 'repeat(2, 1fr)', tablet: 'repeat(4, 1fr)', desktop: 'repeat(5, 1fr)'
+            base: 'repeat(2, 1fr)',
+            tablet: 'repeat(4, 1fr)',
+            desktop: 'repeat(5, 1fr)'
           }}
         >
           {books.map((book) => (
-            <LibraryBookItem key={book.id} book={book} />
+            <BookItem key={book.id} book={book} />
           ))}
         </Grid>
       }

@@ -1,6 +1,6 @@
 import { Flex, Grid } from '@chakra-ui/react'
-import Dashboard from '@/components/Dashboard'
-import Recommended from '@/components/BooksRecommendation/Recommended.jsx'
+import Dashboard from '@/components/BooksRecommendation/Dashboard'
+import Recommended from '@/components/BooksRecommendation/Recommended'
 
 function RecommendedPage() {
   return (
@@ -25,7 +25,7 @@ function RecommendedPage() {
         bg="brand.bgSecondary"
         rounded="30px"
       >
-        <Dashboard page="recommended" />
+        <Dashboard />
       </Flex>
       <Flex
         px={{ base: '20px', tablet: '40px' }}

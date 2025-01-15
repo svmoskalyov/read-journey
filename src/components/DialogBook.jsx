@@ -1,11 +1,7 @@
 import { useState } from 'react'
 import { Card, Flex, Heading, Text } from '@chakra-ui/react'
 import { Button } from '@/components/ui/button'
-import {
-  DialogBody,
-  DialogCloseTrigger,
-  DialogContent,
-  DialogRoot
+import { DialogBody, DialogCloseTrigger, DialogContent, DialogRoot
 } from '@/components/ui/dialog'
 
 function DialogBook({ statBook, onClose, book }) {
@@ -28,6 +24,7 @@ function DialogBook({ statBook, onClose, book }) {
       >
         <DialogBody display="flex" justifyContent="center">
           <Card.Root
+            alignItems="center"
             maxW="248px"
             bg="brand.bgSecondary"
             color="brand.accent"
@@ -78,7 +75,7 @@ function DialogBook({ statBook, onClose, book }) {
                 fontFamily="Gilroy-Medium"
                 fontSize={{ base: '12px', tablet: '10px' }}
                 lineHeight={{ base: '14px', tablet: '12px' }}
-                letterSpacing="-0.02em"
+                letterSpacing="0.2em"
                 overflow="hidden"
                 textWrap="nowrap"
                 textOverflow="ellipsis"
@@ -92,7 +89,7 @@ function DialogBook({ statBook, onClose, book }) {
               <Card.Title
                 fontFamily="Gilroy-Bold"
                 fontSize={{ base: '18px', tablet: '20px' }}
-                lineHeight={{ base: '18px', tablet: '20px' }}
+                lineHeight={{ base: '20px', tablet: '24px' }}
                 letterSpacing="0.02em"
                 overflow="hidden"
                 textWrap="nowrap"
@@ -115,7 +112,7 @@ function DialogBook({ statBook, onClose, book }) {
                 fontFamily="Gilroy-Medium"
                 fontSize={{ base: '12px', tablet: '10px' }}
                 lineHeight={{ base: '14px', tablet: '12px' }}
-                letterSpacing="0.02em"
+                letterSpacing="0.2em"
               >
                 {book.totalPages}
               </Text>

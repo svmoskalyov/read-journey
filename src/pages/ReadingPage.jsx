@@ -1,6 +1,6 @@
-import ReadingDashboard from '@/components/BooksReading/ReadingDashboard.jsx'
-import MyReading from '@/components/BooksReading/MyReading.jsx'
 import { Flex, Grid } from '@chakra-ui/react'
+import Dashboard from '@/components/BooksReading/Dashboard'
+import MyReading from '@/components/BooksReading/MyReading'
 
 function ReadingPage() {
   return (
@@ -28,7 +28,7 @@ function ReadingPage() {
         bg="brand.bgSecondary"
         rounded="30px"
       >
-        <ReadingDashboard />
+        <Dashboard />
       </Flex>
       <Flex
         px={{ base: '20px', tablet: '40px', desktop: '20px' }}

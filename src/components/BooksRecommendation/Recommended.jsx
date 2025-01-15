@@ -6,7 +6,7 @@ import {
 import { useRecommendedStore } from '@/stores/booksStore.js'
 import useMediaQuery from '@/hooks/useMediaQuery.js'
 import usePagination from '@/hooks/usePagination.js'
-import RecommendedBookItem from '@/components/BooksRecommendation/RecommendedBookItem.jsx'
+import BookItem from '@/components/BooksRecommendation/BookItem'
 
 function Recommended() {
   const [itemsLimit, setItemsLimit] = useState(2)
@@ -68,16 +68,20 @@ function Recommended() {
         gapX="25px"
         gapY="27px"
         gridTemplateRows={{
-          base: 'repeat(auto-fit, 1fr)', tablet: 'repeat(auto-fit, 1fr)', desktop: 'repeat(auto-fit, 1fr)'
+          base: 'repeat(auto-fit, 1fr)',
+          tablet: 'repeat(auto-fit, 1fr)',
+          desktop: 'repeat(auto-fit, 1fr)'
         }}
         gridTemplateColumns={{
-          base: 'repeat(2, 1fr)', tablet: 'repeat(4, 1fr)', desktop: 'repeat(5, 1fr)'
+          base: 'repeat(2, 1fr)',
+          tablet: 'repeat(4, 1fr)',
+          desktop: 'repeat(5, 1fr)'
         }}
       >
         {books
           .slice(firstContentIndex, lastContentIndex)
           .map((book) => (
-            <RecommendedBookItem key={book.id} book={book} />
+            <BookItem key={book.id} book={book} />
           ))}
       </Grid>
     </Flex>
