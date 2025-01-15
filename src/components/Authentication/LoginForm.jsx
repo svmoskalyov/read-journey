@@ -10,9 +10,9 @@ import {
   Link,
   Spinner
 } from '@chakra-ui/react'
-import { Field } from '@/components/ui/field'
-import { PasswordInput } from '@/components/ui/password-input'
-import { useAuthStore } from '@/stores/authStore'
+import { Field } from '@/components/ui/field.jsx'
+import { PasswordInput } from '@/components/ui/password-input.jsx'
+import { useAuthStore } from '@/stores/authStore.js'
 
 const schema = yup
   .object({

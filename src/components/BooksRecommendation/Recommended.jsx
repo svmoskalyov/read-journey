@@ -1,17 +1,12 @@
 import { useEffect, useState } from 'react'
-import {
-  Flex,
-  Heading,
-  HStack,
-  Grid
-} from '@chakra-ui/react'
+import { Flex, Heading, HStack, Grid } from '@chakra-ui/react'
 import {
   PaginationNextTrigger, PaginationPrevTrigger, PaginationRoot
-} from '@/components/ui/pagination'
-import { useRecommendedStore } from '@/stores/booksStore'
-import useMediaQuery from '@/hooks/useMediaQuery'
-import usePagination from '@/hooks/usePagination'
-import BookItem from '@/components/BookItem.jsx'
+} from '@/components/ui/pagination.jsx'
+import { useRecommendedStore } from '@/stores/booksStore.js'
+import useMediaQuery from '@/hooks/useMediaQuery.js'
+import usePagination from '@/hooks/usePagination.js'
+import RecommendedBookItem from '@/components/BooksRecommendation/RecommendedBookItem.jsx'
 
 function Recommended() {
   const [itemsLimit, setItemsLimit] = useState(2)
@@ -82,7 +77,7 @@ function Recommended() {
         {books
           .slice(firstContentIndex, lastContentIndex)
           .map((book) => (
-            <BookItem book={book} key={book.id} />
+            <RecommendedBookItem key={book.id} book={book} />
           ))}
       </Grid>
     </Flex>

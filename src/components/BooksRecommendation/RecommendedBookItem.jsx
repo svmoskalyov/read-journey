@@ -2,7 +2,7 @@ import { Card, Flex, Heading, Text } from '@chakra-ui/react'
 import DialogBook from '@/components/DialogBook.jsx'
 import { useState } from 'react'
 
-function BookItem({ book }) {
+function RecommendedBookItem({ book }) {
   const [openDialog, setOpenDialog] = useState(false)
 
   const toogleDialog = () => {
@@ -91,4 +91,4 @@ function BookItem({ book }) {
   )
 }
 
-export default BookItem
+export default RecommendedBookItem

@@ -1,6 +1,6 @@
 import { Flex, Grid } from '@chakra-ui/react'
 import Dashboard from '@/components/Dashboard'
-import MyLibrary from '@/components/MyLibrary'
+import MyLibrary from '@/components/BooksLibrary/MyLibrary.jsx'
 
 function MyLibraryPage() {
   return (
@@ -30,7 +30,7 @@ function MyLibraryPage() {
       <Flex
         px={{ base: '20px', tablet: '40px' }}
         py={{ base: '40px', tablet: '40px' }}
-        h={{ base: '382px', tablet: '518px', desktop: '651px' }}
+        h={{ base: '382px', tablet: '663px', desktop: '651px' }}
         bg="brand.bgSecondary"
         rounded="30px"
       >

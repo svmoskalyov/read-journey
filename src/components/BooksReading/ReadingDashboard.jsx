@@ -13,15 +13,15 @@ import {
   Text,
   Image
 } from '@chakra-ui/react'
-import { Field } from '@/components/ui/field'
+import { Field } from '@/components/ui/field.jsx'
 import star from '@/assets/icons/star.svg'
 import hourglassA from '@/assets/icons/hourglass-active.svg'
 import hourglassU from '@/assets/icons/hourglass-unactive.svg'
 import chartA from '@/assets/icons/pie-chart-active.svg'
 import chartU from '@/assets/icons/pie-chart-unactive.svg'
-import Diary from './Diary'
-import Statiatics from './Statiatics'
-import DialogBookStat from './DialogBookStat'
+import Diary from './Diary.jsx'
+import Statiatics from './Statiatics.jsx'
+import DialogBookStat from '../DialogBookStat.jsx'
 
 const schemaPage = yup
   .object({
@@ -36,7 +36,7 @@ const schemaPage = yup
   })
   .required()
 
-function DashboardStat() {
+function ReadingDashboard() {
   const {
     register,
     handleSubmit,
@@ -218,4 +218,4 @@ function DashboardStat() {
   )
 }
 
-export default DashboardStat
+export default ReadingDashboard

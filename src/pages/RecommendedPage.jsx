@@ -1,6 +1,6 @@
 import { Flex, Grid } from '@chakra-ui/react'
 import Dashboard from '@/components/Dashboard'
-import Recommended from '@/components/Recommended'
+import Recommended from '@/components/BooksRecommendation/Recommended.jsx'
 
 function RecommendedPage() {
   return (

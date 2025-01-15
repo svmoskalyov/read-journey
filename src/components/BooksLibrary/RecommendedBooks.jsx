@@ -1,10 +1,12 @@
+import { useRef } from 'react'
 import { Flex, Heading, Card, Image, Link, Text } from '@chakra-ui/react'
 import arrow from '@/assets/icons/arrow-right.svg'
 import { useRecommendedStore } from '@/stores/booksStore.js'
 
 function RecommendedBooks() {
   const books = useRecommendedStore(state => state.books)
-  const randomIndex = Math.floor(Math.random() * (books.length - 3))
+  const random = useRef(Math.floor(Math.random() * (books.length - 3)))
+  const randomIndex = random.current
 
   return (
     <>
@@ -21,7 +23,6 @@ function RecommendedBooks() {
           Recommended books
         </Heading>
         <Flex justifyContent="space-between">
-
           {books
             .slice(randomIndex, randomIndex + 3)
             .map((book) => (
@@ -101,7 +102,7 @@ function RecommendedBooks() {
 
         <Flex justifyContent="space-between">
           <Link
-            href="/"
+            href="/public"
             variant="underline"
             color="brand.muted"
             fontFamily="Gilroy-Medium"
@@ -111,7 +112,7 @@ function RecommendedBooks() {
             Home
           </Link>
           <Link
-            href="/"
+            href="/public"
             variant="plain"
             h="24px"
             minW="24px"

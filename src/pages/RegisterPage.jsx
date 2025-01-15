@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useAuthStore } from '@/stores/authStore'
 import toast from '@/utils/toast'
-import RegisterForm from '@/components/RegisterForm.jsx'
+import RegisterForm from '@/components/Authentication/RegisterForm.jsx'
 
 function RegisterPage() {
   const error = useAuthStore(state => state.error)
