@@ -3,7 +3,7 @@ import { Card, Flex, Heading, IconButton, Image, Text } from '@chakra-ui/react'
 import trash from '@/assets/icons/trash.svg'
 import DialogBook from '@/components/DialogBook.jsx'
 
-function LibraryBookItem({ book }) {
+function BookItem({ book }) {
   const [openDialog, setOpenDialog] = useState(false)
 
   const toogleDialog = () => {
@@ -109,9 +109,11 @@ function LibraryBookItem({ book }) {
         </Card.Root>
       </Flex>
 
-      {openDialog && <DialogBook statBook={false} onClose={toogleDialog} book={book} />}
+      {openDialog &&
+        <DialogBook statBook={false} onClose={toogleDialog} book={book} />
+      }
     </>
   )
 }
 
-export default LibraryBookItem
+export default BookItem

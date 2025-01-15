@@ -36,7 +36,7 @@ const schemaPage = yup
   })
   .required()
 
-function ReadingDashboard() {
+function Dashboard() {
   const {
     register,
     handleSubmit,
@@ -209,13 +209,13 @@ function ReadingDashboard() {
           )}
 
           {hourglass ? <Statiatics /> : <Diary />}
-          {openDialog && (
+          {openDialog &&
             <DialogBookStat statBook={false} onClose={toogleDialog} />
-          )}
+          }
         </Flex>
       )}
     </>
   )
 }
 
-export default ReadingDashboard
+export default Dashboard

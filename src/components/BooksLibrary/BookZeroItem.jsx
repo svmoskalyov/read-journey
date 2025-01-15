@@ -1,7 +1,7 @@
 import { Circle, Flex, Image, Mark, Text } from '@chakra-ui/react'
 import booksIcon from '@/assets/icons/books.svg'
 
-function LibraryBookZeroItem() {
+function BookZeroItem() {
   return (
     <Flex
       h={{ base: '164px', tablet: '186px' }}
@@ -39,4 +39,4 @@ function LibraryBookZeroItem() {
   )
 }
 
-export default LibraryBookZeroItem
+export default BookZeroItem
