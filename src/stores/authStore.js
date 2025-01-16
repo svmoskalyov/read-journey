@@ -7,6 +7,7 @@ import {
   signoutUserApi
 } from '@/services/api'
 import toast from '@/utils/toast'
+import { useRecommendedStore } from '@/stores/booksStore'
 
 const initialState = {
   name: null,
@@ -87,6 +88,8 @@ export const useAuthStore = create()(
           try {
             await signoutUserApi()
             set(initialState)
+            // useRecommendedStore.setState(initialState)
+            useRecommendedStore.getState().setBooks()
             toast('success', 'Sign-out successful')
           } catch (error) {
             set({ error: error.code })
