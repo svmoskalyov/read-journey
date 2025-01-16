@@ -1,17 +1,22 @@
 import { useState } from 'react'
 import { Heading, Image, Mark, Text } from '@chakra-ui/react'
-import { DialogBody, DialogCloseTrigger, DialogContent, DialogRoot
+import {
+  DialogBody, DialogCloseTrigger, DialogContent, DialogRoot
 } from '@/components/ui/dialog'
 import like from '@/assets/icons/like.svg'
 import books from '@/assets/icons/books.svg'
+import { useLibraryStore } from '@/stores/booksStore.js'
 
-function DialogBookStat({ statBook, onClose }) {
-  console.log("🚀 ~ DialogBookStat ~ statBook:", statBook)
+function DialogBookStat({ statBook }) {
   const [open, setOpen] = useState(true)
+  const setIsAdded = useLibraryStore(state => state.setIsAdded)
+
+    console.log('statBook -- ', statBook)
 
   const toogle = e => {
     setOpen(e.open)
-    onClose()
+    if (statBook) setIsAdded(false)
+    // if (!statBook) setIsRead(false)
   }
 
   return (
@@ -93,4 +98,5 @@ function DialogBookStat({ statBook, onClose }) {
     </DialogRoot>
   )
 }
+
 export default DialogBookStat
