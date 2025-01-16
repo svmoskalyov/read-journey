@@ -3,8 +3,8 @@ import { Flex, Heading, createListCollection, Grid } from '@chakra-ui/react'
 import {
   SelectContent, SelectItem, SelectRoot, SelectTrigger, SelectValueText
 } from '@/components/ui/select.jsx'
-import BookZeroItem from '@/components/BooksLibrary/BookZeroItem.jsx'
-import BookItem from '@/components/BooksLibrary/BookItem.jsx'
+import BookZeroItem from './BookZeroItem'
+import BookItem from './BookItem'
 
 const frameworks = createListCollection({
   items: [
