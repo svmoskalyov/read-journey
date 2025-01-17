@@ -32,10 +32,8 @@ export const getRecommendedApi = async () => {
   return get(child(dbRef, 'recommended')).then((snapshot) => {
     if (snapshot.exists()) {
       return snapshot.val()
-      // console.log(snapshot.val())
     } else {
       return 'No data available'
-      // console.log('No data available')
     }
   }).catch((error) => {
     console.error(error)
@@ -44,16 +42,12 @@ export const getRecommendedApi = async () => {
 
 export const addBookApi = async (book) => {
   const uid = auth.currentUser.uid
-  // console.log(book)
-  // console.log(uid)
-  const id = Date.now()
+  const id = book.recommended ? book.id : Date.now()
   const bookRef = ref(db, `users/${uid}/${id}`)
   await set(bookRef, book)
-  // await set(bookRef, {...book, status: 'unread'})
 }
 
-export const removeBookApi = ({ id }) => {
+export const removeBookApi = (id) => {
   const uid = auth.currentUser.uid
-  console.log(uid)
   remove(ref(db, `users/${uid}/${id}`))
 }
