@@ -1,12 +1,15 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Flex, Heading, createListCollection, Grid } from '@chakra-ui/react'
 import {
   SelectContent, SelectItem, SelectRoot, SelectTrigger, SelectValueText
 } from '@/components/ui/select.jsx'
 import BookZeroItem from './BookZeroItem'
 import BookItem from './BookItem'
+import { useAuthStore } from '@/stores/authStore.js'
+import { getDatabase, ref, onValue } from 'firebase/database'
+import { useLibraryStore } from '@/stores/booksStore.js'
 
-const frameworks = createListCollection({
+const filter = createListCollection({
   items: [
     { label: 'Unread', value: 'unread' },
     { label: 'In progress', value: 'progress' },
@@ -17,12 +20,31 @@ const frameworks = createListCollection({
 
 function MyLibrary() {
   const [value, setValue] = useState(['all'])
-  const booksLenght = 0
+  const uid = useAuthStore(state => state.uid)
+  const books = useLibraryStore(state => state.books)
+  const setBooks = useLibraryStore(state => state.setBooks)
 
   const handleChange = e => {
     setValue(e.value)
     console.log('🚀 ~ handleChange ~ value:', e.value[0])
   }
+
+  useEffect(() => {
+    if (uid === null) return
+    const booksRef = ref(getDatabase(), `users/${uid}`)
+    onValue(booksRef, snapshot => {
+      if (snapshot.exists()) {
+        const data = snapshot.val()
+        const books = Object.entries(data).map(([id, book]) => ({
+          id, ...book
+        }))
+        setBooks(books)
+      } else {
+        console.log('No data available')
+        setBooks([])
+      }
+    })
+  }, [setBooks, uid])
 
   return (
     <Flex
@@ -42,7 +64,7 @@ function MyLibrary() {
         <SelectRoot
           size="md"
           width={{ base: '120px', tablet: '153px' }}
-          collection={frameworks}
+          collection={filter}
           value={value}
           onValueChange={handleChange}
           fontFamily="Gilroy-Medium"
@@ -66,22 +88,22 @@ function MyLibrary() {
             bg="brand.bgInput"
             rounded="12px"
           >
-            {frameworks.items.map(movie => (
-              <SelectItem item={movie} key={movie.value}>
-                {movie.label}
+            {filter.items.map(el => (
+              <SelectItem key={el.value} item={el}>
+                {el.label}
               </SelectItem>
             ))}
           </SelectContent>
         </SelectRoot>
       </Flex>
 
-      {booksLenght === 0 &&
+      {books.length === 0 &&
         <Flex justify="center" align="center" h="full">
           <BookZeroItem />
         </Flex>
       }
 
-      {booksLenght > 0 &&
+      {books.length > 0 &&
         <Grid
           gapX="25px"
           gapY="27px"

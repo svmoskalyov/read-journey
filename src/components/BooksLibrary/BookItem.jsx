@@ -2,9 +2,11 @@ import { useState } from 'react'
 import { Card, Flex, Heading, IconButton, Image, Text } from '@chakra-ui/react'
 import trash from '@/assets/icons/trash.svg'
 import DialogBook from '@/components/DialogBook.jsx'
+import { useLibraryStore } from '@/stores/booksStore.js'
 
 function BookItem({ book }) {
   const [openDialog, setOpenDialog] = useState(false)
+  const removeBook = useLibraryStore(state => state.removeBook)
 
   const toogleDialog = () => {
     setOpenDialog(!openDialog)
@@ -100,7 +102,7 @@ function BookItem({ book }) {
                 bg="#E850501d"
                 border="1px solid #E850502d"
                 rounded="full"
-                onClick={() => console.log('book delete')}
+                onClick={() => removeBook(book)}
               >
                 <Image src={trash} alt="delete book" />
               </IconButton>

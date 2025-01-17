@@ -5,7 +5,11 @@ import { useRecommendedStore } from '@/stores/booksStore.js'
 
 function RecommendedBooks() {
   const books = useRecommendedStore(state => state.books)
-  const random = useRef(Math.floor(Math.random() * (books.length - 3)))
+  const filteredBooks = books.filter(book => book.recommended)
+
+  let countIndex = 3
+  if (filteredBooks.length === 0) countIndex = 2
+  const random = useRef(Math.floor(Math.random() * (filteredBooks.length - countIndex)))
   const randomIndex = random.current
 
   return (
@@ -24,9 +28,13 @@ function RecommendedBooks() {
           Recommended books
         </Heading>
 
-        <Flex justifyContent="space-between">
-          {books
-            .slice(randomIndex, randomIndex + 3)
+        {filteredBooks.length === 0 && (
+          <Flex>Recommended books is empty</Flex>
+        )}
+
+        <Flex gap='8'>
+          {filteredBooks
+            .slice(randomIndex, randomIndex + countIndex)
             .map((book) => (
               <Card.Root
                 maxW="71px"
