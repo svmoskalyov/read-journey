@@ -42,7 +42,6 @@ function Dashboard() {
   const swatches = ['#e81530', '#074b90', '#432fa8', '#800080', '#006400']
   const addBook = useLibraryStore(state => state.addBook)
   const isAdded = useLibraryStore(state => state.isAdded)
-  console.log('isAdded -- ', isAdded)
 
   const onSubmit = (data) => {
     addBook(data)
