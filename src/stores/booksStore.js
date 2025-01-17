@@ -1,10 +1,10 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
-import { addBookApi, getRecommendedApi } from '@/services/api'
+import { addBookApi, getRecommendedApi, removeBookApi } from '@/services/api'
 
 export const useRecommendedStore = create()(
   persist(
-    set =>
+    (set, get) =>
       ({
         books: [],
         isLoading: false,
@@ -20,7 +20,21 @@ export const useRecommendedStore = create()(
             set({ isLoading: false })
           }
         },
-        setBooks: () => {
+        changeStatus: (id) => {
+          const books = get().books
+          const updatedBooks = books?.map((book) => {
+            if (book.id === id) {
+              return {
+                ...book,
+                recommended: !book.recommended
+              }
+            } else {
+              return book
+            }
+          })
+          set({ books: updatedBooks })
+        },
+        resetBooks: () => {
           set({ books: [] })
         }
       }),
@@ -53,24 +67,38 @@ export const useLibraryStore = create()(
             set({ isLoading: false })
           }
         },
-        getBooks: async () => {
+        // getBooks: async () => {
+        //   set({ isLoading: true })
+        //   try {
+        //   } catch (error) {
+        //     set({ error: error.code })
+        //   } finally {
+        //     set({ isLoading: false })
+        //   }
+        // },
+        // updateBook: (id) => {
+        //   set({ isLoading: true })
+        //   try {
+        //   } catch (error) {
+        //     set({ error: error.code })
+        //   } finally {
+        //     set({ isLoading: false })
+        //   }
+        // },
+        removeBook: (book) => {
           set({ isLoading: true })
           try {
+            removeBookApi(book.id)
+            if (book.recommended) {
+              useRecommendedStore.getState().changeStatus(book.id)
+            }
           } catch (error) {
             set({ error: error.code })
           } finally {
             set({ isLoading: false })
           }
         },
-        updateBook: async ({ id }) => {
-          set({ isLoading: true })
-          try {
-          } catch (error) {
-            set({ error: error.code })
-          } finally {
-            set({ isLoading: false })
-          }
-        },
+        setBooks: value => set({ books: value }),
         setIsAdded: value => set({ isAdded: value }),
         setIsRead: value => set({ isRead: value })
       }),
