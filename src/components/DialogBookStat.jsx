@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { Heading, Image, Mark, Text } from '@chakra-ui/react'
 import {
   DialogBody, DialogCloseTrigger, DialogContent, DialogRoot
@@ -7,20 +6,23 @@ import like from '@/assets/icons/like.svg'
 import books from '@/assets/icons/books.svg'
 import { useLibraryStore } from '@/stores/booksStore.js'
 
-function DialogBookStat({ statBook }) {
-  const [open, setOpen] = useState(true)
+function DialogBookStat() {
+  const isAdded = useLibraryStore(state => state.isAdded)
+  const isRead = useLibraryStore(state => state.isRead)
   const setIsAdded = useLibraryStore(state => state.setIsAdded)
-
-    console.log('statBook -- ', statBook)
+  const setIsRead = useLibraryStore(state => state.setIsRead)
 
   const toogle = e => {
-    setOpen(e.open)
-    if (statBook) setIsAdded(false)
-    // if (!statBook) setIsRead(false)
+    if (isAdded) setIsAdded(e.open)
+    if (isRead) setIsRead(e.open)
   }
 
   return (
-    <DialogRoot lazyMount placement="center" open={open} onOpenChange={toogle}>
+    <DialogRoot
+      lazyMount placement="center"
+      open={isAdded || isRead}
+      onOpenChange={toogle}
+    >
       <DialogContent
         py={{ base: '60px', tablet: '50px' }}
         h={{ base: '272px', tablet: '290px' }}
@@ -35,7 +37,7 @@ function DialogBookStat({ statBook }) {
           alignItems="center"
           justifyContent="center"
         >
-          {statBook ? (
+          {isAdded ? (
             <Image
               mb="5"
               h={{ base: '50px', tablet: '70px' }}
@@ -58,10 +60,10 @@ function DialogBookStat({ statBook }) {
             fontSize={{ base: '18px', tablet: '20px' }}
             lineHeight={{ base: '18px', tablet: '20px' }}
           >
-            {statBook ? 'Good job' : 'The book is read'}
+            {isAdded ? 'Good job' : 'The book is read'}
           </Heading>
 
-          {statBook ? (
+          {isAdded ? (
             <Text
               fontFamily="Gilroy-Medium"
               fontSize="14px"
@@ -88,8 +90,8 @@ function DialogBookStat({ statBook }) {
               <Mark px="1" color="brand.accent">
                 exciting journey
               </Mark>
-              , where each page revealed new horizons, and the characters became
-              inseparable friends.
+              , where each page revealed new horizons, and the characters
+              became inseparable friends.
             </Text>
           )}
         </DialogBody>
