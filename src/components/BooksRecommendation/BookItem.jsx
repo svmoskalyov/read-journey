@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Card, Flex, Heading, Text } from '@chakra-ui/react'
-import DialogBook from '@/components/DialogBook'
+import DialogBook from '../DialogBook'
 
 function BookItem({ book }) {
   const [openDialog, setOpenDialog] = useState(false)
@@ -86,7 +86,7 @@ function BookItem({ book }) {
       </Card.Root>
 
       {openDialog &&
-        <DialogBook statBook={true} onClose={toogleDialog} book={book} />}
+        <DialogBook statBook={true} book={book} />}
     </>
   )
 }

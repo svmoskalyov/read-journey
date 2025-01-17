@@ -6,7 +6,7 @@ import {
 import { useRecommendedStore } from '@/stores/booksStore.js'
 import useMediaQuery from '@/hooks/useMediaQuery.js'
 import usePagination from '@/hooks/usePagination.js'
-import BookItem from '@/components/BooksRecommendation/BookItem'
+import BookItem from './BookItem'
 
 function Recommended() {
   const [itemsLimit, setItemsLimit] = useState(2)
@@ -20,6 +20,7 @@ function Recommended() {
   } = usePagination({ contentPerPage: itemsLimit, count: books.length })
 
   if (!books.length) getBooks()
+  const filteredBooks = books.filter(book => book.recommended)
 
   useEffect(() => {
     if (isMobile) setItemsLimit(2)
@@ -64,6 +65,10 @@ function Recommended() {
         </PaginationRoot>
       </Flex>
 
+      {filteredBooks.length === 0 && (
+        <Flex>Recommended books is empty</Flex>
+      )}
+
       <Grid
         gapX="25px"
         gapY="27px"
@@ -78,7 +83,7 @@ function Recommended() {
           desktop: 'repeat(5, 1fr)'
         }}
       >
-        {books
+        {filteredBooks
           .slice(firstContentIndex, lastContentIndex)
           .map((book) => (
             <BookItem key={book.id} book={book} />
