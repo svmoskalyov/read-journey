@@ -89,7 +89,7 @@ export const useAuthStore = create()(
             await signoutUserApi()
             set(initialState)
             // useRecommendedStore.setState(initialState)
-            useRecommendedStore.getState().setBooks()
+            useRecommendedStore.getState().resetBooks()
             toast('success', 'Sign-out successful')
           } catch (error) {
             set({ error: error.code })
