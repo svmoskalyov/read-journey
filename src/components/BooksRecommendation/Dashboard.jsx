@@ -1,4 +1,3 @@
-// import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
@@ -6,9 +5,9 @@ import {
   Button, Input, InputElement, Stack, Flex, Heading
 } from '@chakra-ui/react'
 import { Field } from '@/components/ui/field'
-import DialogBookStat from '../DialogBookStat'
 import Workout from './Workout'
 import Expression from './Expression'
+import { useRecommendedStore } from '@/stores/booksStore.js'
 
 const schemaRec = yup.object({
   title: yup.string().notRequired(),
@@ -21,15 +20,12 @@ function Dashboard() {
     handleSubmit,
     formState: { errors }
   } = useForm({ resolver: yupResolver(schemaRec) })
-  // const [openDialog, setOpenDialog] = useState(false)
-
-  // const toogleDialog = () => {
-  //   setOpenDialog(!openDialog)
-  // }
+  const setTitle = useRecommendedStore(state => state.setTitle)
+  const setAuthor = useRecommendedStore(state => state.setAuthor)
 
   const onSubmit = handleSubmit(data => {
-    if (data.title === '' && data.author === '') return
-    console.log(data)
+    setTitle(data.title)
+    setAuthor(data.author)
   })
 
   return (
@@ -112,7 +108,6 @@ function Dashboard() {
 
       <Workout />
       <Expression />
-      {/*{openDialog && <DialogBookStat statBook={true} />}*/}
     </>
   )
 }

@@ -12,6 +12,8 @@ function Recommended() {
   const [itemsLimit, setItemsLimit] = useState(2)
   const getBooks = useRecommendedStore(state => state.getBooks)
   const books = useRecommendedStore(state => state.books)
+  const title = useRecommendedStore(state => state.title)
+  const author = useRecommendedStore(state => state.author)
   const isMobile = useMediaQuery('(max-width: 767px)')
   const isTablet = useMediaQuery('(min-width: 768px)')
   const isDesktop = useMediaQuery('(min-width: 1440px)')
@@ -21,6 +23,15 @@ function Recommended() {
 
   if (!books.length) getBooks()
   const filteredBooks = books.filter(book => book.recommended)
+
+  const booksFiltered = filteredBooks.filter(book => {
+    if (filteredBooks.length === 0) return false
+    if (title === '' && author === '') return true
+    if (book.title === title && author === '' ||
+      book.author === author && title === '' ||
+      book.title === title && book.author === author
+    ) return book
+  })
 
   useEffect(() => {
     if (isMobile) setItemsLimit(2)
@@ -68,6 +79,9 @@ function Recommended() {
       {filteredBooks.length === 0 && (
         <Flex>Recommended books is empty</Flex>
       )}
+      {booksFiltered.length === 0 && (
+        <Flex>Not found books</Flex>
+      )}
 
       <Grid
         gapX="25px"
@@ -83,7 +97,7 @@ function Recommended() {
           desktop: 'repeat(5, 1fr)'
         }}
       >
-        {filteredBooks
+        {booksFiltered
           .slice(firstContentIndex, lastContentIndex)
           .map((book) => (
             <BookItem key={book.id} book={book} />

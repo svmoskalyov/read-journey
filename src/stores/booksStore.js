@@ -7,6 +7,8 @@ export const useRecommendedStore = create()(
     (set, get) =>
       ({
         books: [],
+        title: '',
+        author: '',
         isLoading: false,
         error: null,
         getBooks: async () => {
@@ -34,12 +36,22 @@ export const useRecommendedStore = create()(
           })
           set({ books: updatedBooks })
         },
-        resetBooks: () => {
-          set({ books: [] })
-        }
+        setTitle: (value) => set({ title: value }),
+        setAuthor: (value) => set({ author: value }),
+        resetBooks: () => set({ books: [] })
       }),
     {
-      name: 'books-recommended'
+      name: 'books-recommended',
+      partialize: state =>
+        Object.fromEntries(
+          Object.entries(state).filter(
+            ([key]) =>
+              !['isLoading'].includes(key) &&
+              !['error'].includes(key) &&
+              !['title'].includes(key) &&
+              !['author'].includes(key)
+          )
+        )
     }
   ))
 
@@ -98,9 +110,9 @@ export const useLibraryStore = create()(
             set({ isLoading: false })
           }
         },
-        setBooks: value => set({ books: value }),
-        setIsAdded: value => set({ isAdded: value }),
-        setIsRead: value => set({ isRead: value })
+        setBooks: (value) => set({ books: value }),
+        setIsAdded: (value) => set({ isAdded: value }),
+        setIsRead: (value) => set({ isRead: value })
       }),
     {
       name: 'books-library',
