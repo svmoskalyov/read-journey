@@ -79,24 +79,6 @@ export const useLibraryStore = create()(
             set({ isLoading: false })
           }
         },
-        // getBooks: async () => {
-        //   set({ isLoading: true })
-        //   try {
-        //   } catch (error) {
-        //     set({ error: error.code })
-        //   } finally {
-        //     set({ isLoading: false })
-        //   }
-        // },
-        // updateBook: (id) => {
-        //   set({ isLoading: true })
-        //   try {
-        //   } catch (error) {
-        //     set({ error: error.code })
-        //   } finally {
-        //     set({ isLoading: false })
-        //   }
-        // },
         removeBook: (book) => {
           set({ isLoading: true })
           try {
