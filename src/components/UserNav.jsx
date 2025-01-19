@@ -21,7 +21,7 @@ function UserNav() {
         fontSize={{ base: '14px', tablet: '16px' }}
         lineHeight={{ base: '18px', tablet: '18px' }}
         letterSpacing="0.02em"
-        color="brand.accent"
+        color={pathname === '/recommended' ? "brand.accent" : "brand.muted"}
         css={{
           position: 'relative'
         }}
@@ -51,7 +51,7 @@ function UserNav() {
         fontSize={{ base: '14px', tablet: '16px' }}
         lineHeight={{ base: '18px', tablet: '18px' }}
         letterSpacing="0.02em"
-        color="brand.accent"
+        color={pathname === '/library' ? "brand.accent" : "brand.muted"}
         css={{
           position: 'relative'
         }}
