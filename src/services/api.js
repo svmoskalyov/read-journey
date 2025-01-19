@@ -2,7 +2,7 @@ import {
   getAuth, createUserWithEmailAndPassword, sendEmailVerification,
   signInWithEmailAndPassword, updateProfile, signOut
 } from 'firebase/auth'
-import { getDatabase, ref, child, get, set, remove } from 'firebase/database'
+import { getDatabase, ref, child, get, set, remove, update } from 'firebase/database'
 import './firebaseConfig'
 
 const auth = getAuth()
@@ -45,6 +45,11 @@ export const addBookApi = async (book) => {
   const id = book.recommended ? book.id : Date.now()
   const bookRef = ref(db, `users/${uid}/${id}`)
   await set(bookRef, book)
+}
+
+export const updateBookApi = ({...book}) => {
+  const uid = auth.currentUser.uid
+  update(ref(db, `users/${uid}/${book.id}`), book)
 }
 
 export const removeBookApi = (id) => {

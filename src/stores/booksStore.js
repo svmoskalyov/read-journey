@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
-import { addBookApi, getRecommendedApi, removeBookApi } from '@/services/api'
+import { addBookApi, getRecommendedApi, removeBookApi, updateBookApi } from '@/services/api'
 
 export const useRecommendedStore = create()(
   persist(
@@ -108,6 +108,23 @@ export const useLibraryStore = create()(
               !['isRead'].includes(key)
           )
         )
+    }
+  )
+)
+
+export const useReadingStore = create()(
+  persist(
+    set =>
+      ({
+        book: {},
+        setBook: (book) => set({ book }),
+        updateBook: (book) => {
+          updateBookApi(book)
+        },
+        resetBook: () => set({ book: {} })
+      }),
+    {
+      name: 'book-reading'
     }
   )
 )

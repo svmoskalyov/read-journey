@@ -23,7 +23,7 @@ function DialogBook({ statBook, book }) {
       changeStatus(book.id)
     }
     if (!statBook) {
-      navigate('/reading')
+      navigate('/reading', {state: book})
     }
   }
 
