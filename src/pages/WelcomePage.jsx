@@ -12,6 +12,7 @@ function WelcomePage() {
         Welcome to the app. You are welcome for choosing this app.
       </Text>
       <Link
+        unstyled
         as={NavLink}
         to='login'
         px={{ base: '36px', tablet: '54px', desktop: '54px' }}
