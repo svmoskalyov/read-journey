@@ -55,6 +55,10 @@ function Header() {
           arial-label="button logout"
           hideBelow="tablet"
           onClick={() => signoutUser()}
+          _hover={{
+            bg: 'none',
+            color: 'none'
+          }}
         >
           Log out
         </Button>
