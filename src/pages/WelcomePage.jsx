@@ -1,4 +1,5 @@
 import { Box, Link, Text } from '@chakra-ui/react'
+import { NavLink } from 'react-router'
 
 function WelcomePage() {
   return (
@@ -11,6 +12,8 @@ function WelcomePage() {
         Welcome to the app. You are welcome for choosing this app.
       </Text>
       <Link
+        as={NavLink}
+        to='login'
         px={{ base: '36px', tablet: '54px', desktop: '54px' }}
         py={{ base: '12px', tablet: '16px', desktop: '16px' }}
         fontFamily="Gilroy-Bold"
@@ -20,7 +23,6 @@ function WelcomePage() {
         rounded="30px"
         color="brand.bgSecondary"
         bg="brand.accent"
-        href="/login"
       >
         Get started
       </Link>

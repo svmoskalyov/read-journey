@@ -22,11 +22,8 @@ function Header() {
       <Link href="/">
         <Image src={logo} alt="logo" />
       </Link>
-      <Flex alignItems="center">
-        <Flex hideBelow="tablet">
-          <UserNav />
-        </Flex>
-
+      <Flex alignItems="center" h="full">
+        <UserNav />
         <Avatar
           size="md"
           mr={{ base: '8px', tablet: '16px' }}
@@ -37,7 +34,6 @@ function Header() {
           border="1px solid #f9f9f94d"
           name={name}
         />
-
         <Text
           mr={{ desktop: '16px' }}
           fontFamily="Gilroy-Bold"
@@ -48,7 +44,6 @@ function Header() {
         >
           {name}
         </Text>
-
         <Button
           variant="outline"
           h="38px"
@@ -63,7 +58,6 @@ function Header() {
         >
           Log out
         </Button>
-
         <Flex hideFrom="tablet">
           <DrawerMenu />
         </Flex>

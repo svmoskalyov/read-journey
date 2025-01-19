@@ -5,8 +5,10 @@ import {
   DialogBody, DialogCloseTrigger, DialogContent, DialogRoot
 } from '@/components/ui/dialog'
 import { useLibraryStore, useRecommendedStore } from '@/stores/booksStore.js'
+import { useNavigate } from 'react-router'
 
 function DialogBook({ statBook, book }) {
+  const navigate = useNavigate()
   const [open, setOpen] = useState(true)
   const addBook = useLibraryStore(state => state.addBook)
   const changeStatus = useRecommendedStore(state => state.changeStatus)
@@ -19,6 +21,9 @@ function DialogBook({ statBook, book }) {
     if (statBook) {
       addBook(book)
       changeStatus(book.id)
+    }
+    if (!statBook) {
+      navigate('/reading')
     }
   }
 
