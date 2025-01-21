@@ -79,6 +79,10 @@ export const useLibraryStore = create()(
             set({ isLoading: false })
           }
         },
+        updateBook: (book) => {
+          console.log('update book -- ', book)
+          updateBookApi(book)
+        },
         removeBook: (book) => {
           set({ isLoading: true })
           try {
@@ -114,14 +118,47 @@ export const useLibraryStore = create()(
 
 export const useReadingStore = create()(
   persist(
-    set =>
+    (set, get) =>
       ({
         book: {},
-        setBook: (book) => set({ book }),
-        updateBook: (book) => {
-          updateBookApi(book)
+        readingStart: {},
+        readingStop: {},
+        // isReading: false,
+        setBook: (book) => {
+          console.log('set book -- ', book)
+          set({ book })
         },
-        resetBook: () => set({ book: {} })
+        // updateBook: (book) => {
+        //   console.log('update book -- ', book)
+        //   updateBookApi(book)
+        // },
+        setReadingStart: (startPage) => {
+          console.log('readingStart -- ', startPage)
+          const readBook = {
+            startPage,
+            startReading: '',
+            status: 'active'
+          }
+          console.log('readingStart -- ', readBook)
+          set({ readingStart: readBook })
+        },
+        setReadingStop: () => {
+          // const book = get().book
+          console.log('readingStop -- ')
+          // if (book.progress) {}
+          // if (!book.progress) {}
+          // const changedBook = {
+          //   ...book,
+          //   newProgress
+          // }
+          // set({ book: changedBook })
+          // set({ readingStatus: false })
+        },
+        readingFinish: () => {
+          console.log('readingFinish -- ')
+        },
+        // setIsReading: (value) => set({ isReading: value }),
+        deleteBook: () => set({ book: {} })
       }),
     {
       name: 'book-reading'
