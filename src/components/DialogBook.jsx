@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button'
 import {
   DialogBody, DialogCloseTrigger, DialogContent, DialogRoot
 } from '@/components/ui/dialog'
-import { useLibraryStore, useRecommendedStore } from '@/stores/booksStore.js'
+import { useLibraryStore, useReadingStore, useRecommendedStore } from '@/stores/booksStore.js'
 import { useNavigate } from 'react-router'
 
 function DialogBook({ statBook, book }) {
@@ -12,6 +12,7 @@ function DialogBook({ statBook, book }) {
   const [open, setOpen] = useState(true)
   const addBook = useLibraryStore(state => state.addBook)
   const changeStatus = useRecommendedStore(state => state.changeStatus)
+  const setBook = useReadingStore(state => state.setBook)
 
   const toogle = e => {
     setOpen(e.open)
@@ -23,7 +24,8 @@ function DialogBook({ statBook, book }) {
       changeStatus(book.id)
     }
     if (!statBook) {
-      navigate('/reading', {state: book})
+      setBook(book)
+      navigate('/reading')
     }
   }
 
@@ -145,6 +147,10 @@ function DialogBook({ statBook, book }) {
                   border="1px solid #f9f9f94d"
                   rounded="30px"
                   onClick={handleClick}
+                  _hover={{
+                    bg: 'none',
+                    color: 'none'
+                  }}
                 >
                   {statBook ? 'Add to library' : 'Start reading'}
                 </Button>
