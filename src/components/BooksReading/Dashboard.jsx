@@ -19,9 +19,10 @@ import hourglassA from '@/assets/icons/hourglass-active.svg'
 import hourglassU from '@/assets/icons/hourglass-unactive.svg'
 import chartA from '@/assets/icons/pie-chart-active.svg'
 import chartU from '@/assets/icons/pie-chart-unactive.svg'
-import Diary from './Diary.jsx'
-import Statiatics from './Statiatics.jsx'
-import DialogBookStat from '../DialogBookStat.jsx'
+import Diary from './Diary'
+import Statiatics from './Statiatics'
+import DialogBookStat from '../DialogBookStat'
+import { useReadingStore } from '@/stores/booksStore.js'
 
 const schemaPage = yup
   .object({
@@ -44,16 +45,53 @@ function Dashboard() {
   } = useForm({
     resolver: yupResolver(schemaPage)
   })
-  const [page, setPage] = useState()
-  const [reading, setReading] = useState(true)
+  const book = useReadingStore(state => state.book)
+  const [page, setPage] = useState(()=>
+    book.finishPage ? book.finishPage + 1 : 1)
+  // const [page, setPage] = useState(0)
+  const [reading, setReading] = useState(false)
   const [hourglass, setHourglass] = useState(false)
   const [openDialog, setOpenDialog] = useState(false)
+
+  // console.log('book -- ',book)
+  // console.log('finishPage -- ', Boolean(book.finishPage))
 
   const toogleDialog = () => {
     setOpenDialog(!openDialog)
   }
 
-  const onSubmit = handleSubmit(data => console.log(data))
+// if (book.finishPage) setPage(book.finishPage)
+
+
+  const onSubmit = handleSubmit(data => {
+    console.log('- to start -', data)
+    // console.log(new Date())
+    // console.log(new Date().toJSON())
+
+    const dateStart = new Date('2025-01-20T13:15:43.317Z')
+    const dateEnd = new Date('2025-01-20T16:24:12.773Z')
+    console.log(dateStart)
+    console.log(dateEnd)
+    const timeDifferenceMS = dateEnd - dateStart
+    console.log(timeDifferenceMS)
+    const timeDifferenceMins = Math.floor(timeDifferenceMS / 60000) % 60
+    const timeDifferenceHours = Math.floor(timeDifferenceMS / 3600000) % 24
+    console.log(`Time difference in minutes: ${timeDifferenceMins}`)
+    console.log(`Time difference in hours: ${timeDifferenceHours}`)
+
+    // ---
+    // const startDate = new Date('2025-01-20T13:15:43.317Z')
+    // const endDate = Date.now()
+    // console.log(startDate)
+    // console.log(endDate)
+    // const timeDifferenceMS = endDate - startDate;
+    // const timeDifferenceMins = Math.floor(timeDifferenceMS / 60000);
+    // const timeDifferenceHours = Math.floor(timeDifferenceMS / 3600000);
+    // const timeDifferenceDays = Math.floor(timeDifferenceMS / 86400000);
+    // console.log(`Time difference in minutes: ${timeDifferenceMins}`);
+    // console.log(`Time difference in hours: ${timeDifferenceHours}`);
+    // console.log(`Time difference in days: ${timeDifferenceDays}`);
+  })
 
   return (
     <>
@@ -209,9 +247,7 @@ function Dashboard() {
           )}
 
           {hourglass ? <Statiatics /> : <Diary />}
-          {openDialog &&
-            <DialogBookStat statBook={false} onClose={toogleDialog} />
-          }
+          {openDialog && <DialogBookStat statBook={false} />}
         </Flex>
       )}
     </>
