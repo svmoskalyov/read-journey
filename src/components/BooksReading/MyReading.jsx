@@ -1,12 +1,14 @@
 import { useState } from 'react'
 import { Flex, Heading, Image, Card, Text } from '@chakra-ui/react'
-import book7 from '@/assets/images/image 7.png'
 import unread from '@/assets/icons/block-run.svg'
 import read from '@/assets/icons/block-stop.svg'
+import { useReadingStore } from '@/stores/booksStore.js'
 
 function MyReading() {
   const [reading, setReading] = useState(false)
   const [stat, setStat] = useState(0)
+  const book = useReadingStore(state => state.book)
+  // console.log(book)
 
   return (
     <Flex
@@ -51,15 +53,6 @@ function MyReading() {
         border="none"
         overflow="hidden"
       >
-        {/* <Image
-          mb={{ base: '8px', tablet: '25px' }}
-          h={{ base: '208px', tablet: '256px', desktop: '340px' }}
-          w={{ base: '137px', tablet: '169px', desktop: '224px' }}
-          src={book7}
-          alt="image book"
-          rounded="8px"
-        /> */}
-
         <Flex
           direction="column"
           alignItems="center"
@@ -68,8 +61,7 @@ function MyReading() {
           h={{ base: '208px', tablet: '256px', desktop: '340px' }}
           w={{ base: '137px', tablet: '169px', desktop: '224px' }}
           rounded="8px"
-          bg="navy"
-          // bg={cover}
+          bg={book.color}
           boxShadow="0px 0px 16px 2px rgba(255,255,255,0.4) inset"
         >
           <Text
@@ -84,7 +76,7 @@ function MyReading() {
             textOverflow="ellipsis"
             userSelect="none"
           >
-            Serhiy Zhadan qweqwee
+            {book.author}
           </Text>
           <Heading
             maxH="50%"
@@ -97,7 +89,7 @@ function MyReading() {
             textAlign="center"
             userSelect="none"
           >
-            The Orphanage
+            {book.title}
           </Heading>
         </Flex>
 
@@ -109,7 +101,7 @@ function MyReading() {
             letterSpacing="-0.02em"
             textAlign="center"
           >
-            I See You Are Interested In The Dark
+            {book.title}
           </Card.Title>
           <Card.Description
             fontFamily="Gilroy-Medium"
@@ -118,7 +110,7 @@ function MyReading() {
             letterSpacing="-0.02em"
             textAlign="center"
           >
-            Hilarion Pavlyuk
+            {book.author}
           </Card.Description>
         </Card.Body>
       </Card.Root>
