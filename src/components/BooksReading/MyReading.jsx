@@ -5,10 +5,9 @@ import read from '@/assets/icons/block-stop.svg'
 import { useReadingStore } from '@/stores/booksStore.js'
 
 function MyReading() {
-  const [reading, setReading] = useState(false)
   const [stat, setStat] = useState(0)
   const book = useReadingStore(state => state.book)
-  // console.log(book)
+  const isReading = useReadingStore(state => state.isReading)
 
   return (
     <Flex
@@ -115,7 +114,7 @@ function MyReading() {
         </Card.Body>
       </Card.Root>
 
-      {!reading && (
+      {!isReading && (
         <Image
           src={read}
           h={{ base: '40px', tablet: '50px' }}
@@ -123,7 +122,7 @@ function MyReading() {
           alt="image read book"
         />
       )}
-      {reading && (
+      {isReading && (
         <Image
           src={unread}
           h={{ base: '40px', tablet: '50px' }}
