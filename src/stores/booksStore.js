@@ -138,16 +138,17 @@ export const useReadingStore = create()(
         setReadingStop: ({ page }) => {
           const book = get().book
           const readingBook = get().readingBook
-          const dateStart = new Date(readingBook.startReading)
-          const dateEnd = Date.now()
-          const timeDifferenceMS = dateEnd - dateStart
-          const timeDifferenceMins = Math.floor(timeDifferenceMS / 60000) % 60
-          const readingSpeed = Math.floor((page * 60) / timeDifferenceMins)
+          // const dateStart = new Date(readingBook.startReading)
+          // const dateEnd = Date.now()
+          // const timeDifferenceMS = dateEnd - dateStart
+          // const timeDifferenceMins = Math.floor(timeDifferenceMS / 60000) % 60
+          // const readingSpeed = Math.floor((page * 60) / timeDifferenceMins)
           const readBook = {
             ...readingBook,
             finishPage: page,
             finishReading: new Date().toJSON(),
-            speed: readingSpeed,
+            // speed: readingSpeed,
+            speed: 44,
             status: 'inactive'
           }
           const progressBook = book.progress ? book.progress : []
@@ -158,7 +159,7 @@ export const useReadingStore = create()(
             progress: progressBook
           }
           useLibraryStore.getState().updateBook(newBook)
-          set({ readingBook: {}, isReading: false })
+          set({ book: newBook, readingBook: {}, isReading: false })
         },
         readingFinish: () => {
           console.log('readingFinish -- ')
