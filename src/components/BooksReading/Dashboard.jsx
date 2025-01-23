@@ -46,10 +46,13 @@ function Dashboard() {
     resolver: yupResolver(schemaPage)
   })
   const book = useReadingStore(state => state.book)
+  const isReading = useReadingStore(state => state.isReading)
+  const setReadingStart = useReadingStore(state => state.setReadingStart)
+  const setReadingStop = useReadingStore(state => state.setReadingStop)
   const [page, setPage] = useState(()=>
     book.finishPage ? book.finishPage + 1 : 1)
   // const [page, setPage] = useState(0)
-  const [reading, setReading] = useState(false)
+  // const [reading, setReading] = useState(false)
   const [hourglass, setHourglass] = useState(false)
   const [openDialog, setOpenDialog] = useState(false)
 
@@ -64,20 +67,31 @@ function Dashboard() {
 
 
   const onSubmit = handleSubmit(data => {
-    console.log('- to start -', data)
+    if (!isReading) {
+      // console.log('if !isReading')
+    console.log('to start page -- ', data)
+    setReadingStart(data)
+    }
+    if (isReading) {
+      // console.log('if isReading')
+      console.log('to stop page -- ', data)
+      // if (book.page <= page) return console.log('enter to finish page > start page')
+    setReadingStop(data)
+    }
+
     // console.log(new Date())
     // console.log(new Date().toJSON())
 
-    const dateStart = new Date('2025-01-20T13:15:43.317Z')
-    const dateEnd = new Date('2025-01-20T16:24:12.773Z')
-    console.log(dateStart)
-    console.log(dateEnd)
-    const timeDifferenceMS = dateEnd - dateStart
-    console.log(timeDifferenceMS)
-    const timeDifferenceMins = Math.floor(timeDifferenceMS / 60000) % 60
-    const timeDifferenceHours = Math.floor(timeDifferenceMS / 3600000) % 24
-    console.log(`Time difference in minutes: ${timeDifferenceMins}`)
-    console.log(`Time difference in hours: ${timeDifferenceHours}`)
+    // const dateStart = new Date('2025-01-20T13:15:43.317Z')
+    // const dateEnd = new Date('2025-01-20T16:24:12.773Z')
+    // console.log(dateStart)
+    // console.log(dateEnd)
+    // const timeDifferenceMS = dateEnd - dateStart
+    // console.log(timeDifferenceMS)
+    // const timeDifferenceMins = Math.floor(timeDifferenceMS / 60000) % 60
+    // const timeDifferenceHours = Math.floor(timeDifferenceMS / 3600000) % 24
+    // console.log(`Time difference in minutes: ${timeDifferenceMins}`)
+    // console.log(`Time difference in hours: ${timeDifferenceHours}`)
 
     // ---
     // const startDate = new Date('2025-01-20T13:15:43.317Z')
@@ -106,7 +120,7 @@ function Dashboard() {
           fontSize={{ base: '10px', tablet: '14px' }}
           lineHeight={{ base: '12px', tablet: '18px' }}
         >
-          {!reading ? 'Start page:' : 'Stop page:'}
+          {!isReading ? 'Start page:' : 'Stop page:'}
         </Heading>
 
         <Stack gap="2" align="flex-start" mb="5" maxW="295px">
@@ -147,12 +161,12 @@ function Dashboard() {
             bg="brand.bgSecondary"
             type="submit"
           >
-            {!reading ? 'To start' : 'To stop'}
+            {!isReading ? 'To start' : 'To stop'}
           </Button>
         </Flex>
       </form>
 
-      {!reading && (
+      {!isReading && (
         <Flex
           direction="column"
           h={{ base: '244px', tablet: '272px' }}
@@ -194,7 +208,7 @@ function Dashboard() {
         </Flex>
       )}
 
-      {reading && (
+      {isReading && (
         <Flex direction="column">
           <Flex
             mb={{ base: '20px', tablet: '16px' }}
