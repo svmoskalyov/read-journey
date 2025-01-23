@@ -121,43 +121,56 @@ export const useReadingStore = create()(
     (set, get) =>
       ({
         book: {},
-        readingStart: {},
-        readingStop: {},
-        // isReading: false,
+        readingBook: {},
+        isReading: false,
         setBook: (book) => {
-          console.log('set book -- ', book)
           set({ book })
         },
-        // updateBook: (book) => {
-        //   console.log('update book -- ', book)
-        //   updateBookApi(book)
-        // },
-        setReadingStart: (startPage) => {
-          console.log('readingStart -- ', startPage)
+        setReadingStart: ({ page }) => {
           const readBook = {
-            startPage,
-            startReading: '',
+            startPage: page,
+            startReading: new Date().toJSON(),
             status: 'active'
           }
-          console.log('readingStart -- ', readBook)
-          set({ readingStart: readBook })
+          set({ readingBook: readBook })
+          set({ isReading: true })
         },
-        setReadingStop: () => {
-          // const book = get().book
-          console.log('readingStop -- ')
-          // if (book.progress) {}
-          // if (!book.progress) {}
-          // const changedBook = {
-          //   ...book,
-          //   newProgress
-          // }
-          // set({ book: changedBook })
-          // set({ readingStatus: false })
+        setReadingStop: ({ page }) => {
+          const book = get().book
+          const readingBook = get().readingBook
+          const dateStart = new Date(readingBook.startReading)
+          const dateEnd = Date.now()
+          const timeDifferenceMS = dateEnd - dateStart
+          const timeDifferenceMins = Math.floor(timeDifferenceMS / 60000) % 60
+          const readingSpeed = Math.floor((page * 60) / timeDifferenceMins)
+          const readBook = {
+            ...readingBook,
+            finishPage: page,
+            finishReading: new Date().toJSON(),
+            speed: readingSpeed,
+            status: 'inactive'
+          }
+          const progressBook = book.progress ? book.progress : []
+          progressBook.push(readBook)
+          const newBook = {
+            ...book,
+            status: 'in-progress',
+            progress: progressBook
+          }
+          useLibraryStore.getState().updateBook(newBook)
+          set({ readingBook: {}, isReading: false })
         },
         readingFinish: () => {
           console.log('readingFinish -- ')
+          // const readingBook = get().readingBook
+          // const readBook = {
+          //   ...readingBook,
+          // }
+          // console.log('readingStop -- ', readBook)
+          // set({ readingBook: readBook })
+          // set({ isReading: false })
         },
-        // setIsReading: (value) => set({ isReading: value }),
+        setIsReading: (value) => set({ isReading: value }),
         deleteBook: () => set({ book: {} })
       }),
     {
