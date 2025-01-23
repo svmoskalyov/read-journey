@@ -49,34 +49,44 @@ function Dashboard() {
   const isReading = useReadingStore(state => state.isReading)
   const setReadingStart = useReadingStore(state => state.setReadingStart)
   const setReadingStop = useReadingStore(state => state.setReadingStop)
-  const [page, setPage] = useState(()=>
-    book.finishPage ? book.finishPage + 1 : 1)
-  // const [page, setPage] = useState(0)
+  // const [page, setPage] = useState(() =>
+  //   book.progress ? book.progress[book.progress.length - 1].finishPage : 1)
+  // const [page, setPage] = useState(1)
   // const [reading, setReading] = useState(false)
   const [hourglass, setHourglass] = useState(false)
   const [openDialog, setOpenDialog] = useState(false)
+  const page = book.progress ?
+    book.progress[book.progress.length - 1].finishPage : 1
 
-  // console.log('book -- ',book)
+  console.log('book -- ', book)
   // console.log('finishPage -- ', Boolean(book.finishPage))
 
   const toogleDialog = () => {
     setOpenDialog(!openDialog)
   }
 
-// if (book.finishPage) setPage(book.finishPage)
-
+// if (book.progress) {
+//   console.log('if book.progress' )
+//   console.log(book.progress[book.progress.length - 1].finishPage)
+// }
 
   const onSubmit = handleSubmit(data => {
     if (!isReading) {
-      // console.log('if !isReading')
-    console.log('to start page -- ', data)
-    setReadingStart(data)
+      console.log('to start page -- ', data)
+      if (data.page < page) {
+        return console.log('The page number cannot be less than the page number read.')
+      }
+      setReadingStart(data)
     }
     if (isReading) {
-      // console.log('if isReading')
       console.log('to stop page -- ', data)
-      // if (book.page <= page) return console.log('enter to finish page > start page')
-    setReadingStop(data)
+      // if (book.progress[book.progress.length - 1].finishPage <= page) {
+      //   return console.log('The page number must be greater than the number read')
+      // }
+      if (data.page === page) {
+        return console.log('The page number read must be greater than the starting page number.')
+      }
+      setReadingStop(data)
     }
 
     // console.log(new Date())
