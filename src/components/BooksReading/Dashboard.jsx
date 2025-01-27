@@ -2,16 +2,7 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
-import {
-  Button,
-  Input,
-  InputElement,
-  Stack,
-  Flex,
-  Heading,
-  Circle,
-  Text,
-  Image
+import { Button, Input, InputElement, Stack, Flex, Heading, Circle, Text, Image
 } from '@chakra-ui/react'
 import { Field } from '@/components/ui/field.jsx'
 import star from '@/assets/icons/star.svg'
