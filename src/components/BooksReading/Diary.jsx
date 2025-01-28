@@ -93,28 +93,30 @@ function Diary() {
             <List.Item
               key={id}
               position="relative"
-              ml="2"
+              ml="10px"
               pl="4"
               color="brand.muted"
               borderLeft="3px solid"
               borderColor="brand.bgSecondary"
-              // _hover={{
-              //   '&>div:first-child, & h2': {
-              //     borderColor: 'brand.accent',
-              //     color: 'brand.accent'
-              //   }
-              // }}
+              _hover={{
+                '&>div:first-child': {
+                  bg: 'brand.accent'
+                },
+                '& h2': {
+                  color: 'brand.accent'
+                }
+              }}
             >
               <Center
                 position="absolute"
                 top="0"
-                left="-9.5px"
-                h="16px"
-                w="16px"
+                left="-12px"
+                h="20px"
+                w="20px"
                 bg="brand.muted"
                 borderRadius="4px"
               >
-                <Box h="8px" w="8px" bg="brand.bgPrimary" borderRadius="2px"></Box>
+                <Box h="12px" w="12px" bg="brand.bgPrimary" borderRadius="2px"></Box>
               </Center>
 
               <Flex direction="column" w="full">
@@ -197,10 +199,12 @@ function Diary() {
                         </Text>
                       </Flex>
                     </Flex>
-                  )})}
+                  )
+                })}
               </Flex>
             </List.Item>
-          )})}
+          )
+        })}
       </List.Root>
     </Flex>
   )
