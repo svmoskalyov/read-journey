@@ -1,3 +1,4 @@
+import { nanoid } from 'nanoid'
 import {
   getAuth, createUserWithEmailAndPassword, sendEmailVerification,
   signInWithEmailAndPassword, updateProfile, signOut
@@ -42,7 +43,8 @@ export const getRecommendedApi = async () => {
 
 export const addBookApi = async (book) => {
   const uid = auth.currentUser.uid
-  const id = book.recommended ? book.id : Date.now()
+  const id = book.recommended ? book.id : nanoid()
+  // const id = book.recommended ? book.id : Date.now()
   const bookRef = ref(db, `users/${uid}/${id}`)
   await set(bookRef, book)
 }
