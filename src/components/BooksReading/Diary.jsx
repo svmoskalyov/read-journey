@@ -1,14 +1,13 @@
+import { useEffect, useState } from 'react'
 import { nanoid } from 'nanoid'
 import { Box, Center, Flex, Heading, Image, List, Mark, Text } from '@chakra-ui/react'
 import trash2 from '@/assets/icons/trash-2.svg'
 import blockStat from '@/assets/icons/block.svg'
 import { useReadingStore } from '@/stores/booksStore.js'
-import { useEffect, useState } from 'react'
 
 function Diary() {
   const book = useReadingStore(state => state.book)
   const [progress, setProgress] = useState([])
-  console.log(progress)
 
   const dateToLocal = (startDay) => {
     return new Date(startDay).toLocaleDateString('de-DE')
@@ -98,14 +97,6 @@ function Diary() {
               color="brand.muted"
               borderLeft="3px solid"
               borderColor="brand.bgSecondary"
-              _hover={{
-                '&>div:first-child': {
-                  bg: 'brand.accent'
-                },
-                '& h2': {
-                  color: 'brand.accent'
-                }
-              }}
             >
               <Center
                 position="absolute"
