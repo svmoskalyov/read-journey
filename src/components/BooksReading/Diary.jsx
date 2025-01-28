@@ -181,8 +181,12 @@ function Diary() {
                           lineHeight="14px"
                           letterSpacing="-0.02em"
                         >
-                          {reading.time}
-                          <Mark ml="2px">minutes</Mark>
+                          {reading.time <= 59 ? reading.time :
+                            Math.floor(reading.time / 60)
+                          }
+                          <Mark ml="2px">
+                            {reading.time <= 59 ? 'minutes' : 'hours'}
+                          </Mark>
                         </Text>
                         <Text
                           pt="4px"
