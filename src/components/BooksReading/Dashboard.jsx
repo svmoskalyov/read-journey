@@ -46,10 +46,11 @@ function Dashboard() {
   // const [reading, setReading] = useState(false)
   const [hourglass, setHourglass] = useState(false)
   const [openDialog, setOpenDialog] = useState(false)
+
+  console.log('book in dashboard -- ', book)
   const page = book.progress ?
     book.progress[book.progress.length - 1].finishPage : 1
 
-  console.log('book -- ', book)
   // console.log('finishPage -- ', Boolean(book.finishPage))
 
   const toogleDialog = () => {
