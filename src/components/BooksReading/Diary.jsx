@@ -1,13 +1,19 @@
 import { useEffect, useState } from 'react'
-import { nanoid } from 'nanoid'
 import { Box, Center, Flex, Heading, Image, List, Mark, Text } from '@chakra-ui/react'
 import trash2 from '@/assets/icons/trash-2.svg'
 import blockStat from '@/assets/icons/block.svg'
 import { useReadingStore } from '@/stores/booksStore.js'
+import { getDatabase, onValue, ref } from 'firebase/database'
+import { useAuthStore } from '@/stores/authStore.js'
 
 function Diary() {
+  const uid = useAuthStore(state => state.uid)
   const book = useReadingStore(state => state.book)
+  const setBook = useReadingStore(state => state.setBook)
+  // const removeProgressItem = useReadingStore(state => state.removeProgressItem)
   const [progress, setProgress] = useState([])
+  console.log('bbbbook --', book)
+  console.log('pppprog --', book.progress)
 
   const dateToLocal = (startDay) => {
     return new Date(startDay).toLocaleDateString('de-DE')
@@ -52,22 +58,53 @@ function Diary() {
       const booksFilter = book.progress.filter(el =>
         dateToLocal(el.startReading) === date)
       const booksFiltered = booksFilter.map(el => {
-        const pid = nanoid()
+        // const pid = nanoid()
+        const id = el.id
         pages = Math.floor(el.finishPage - el.startPage)
         const procent = procentReading(el.startPage, el.finishPage)
         const time = timeReading(el.startReading, el.finishReading)
         const pageHour = pagesReadingHour(el.startPage, el.finishPage,
           el.startReading, el.finishReading)
-        return { pid, procent, time, pageHour }
+        return { id, procent, time, pageHour }
       })
       newBooks.push({ date, pages, items: booksFiltered })
     }
     return newBooks
   }
 
+  // useEffect(() => {
+  //   // if (!book.progress) return
+  //   setProgress(progressReading(book.progress))
+  // }, [book.progress])
+
   useEffect(() => {
-    if (!book) return
-    setProgress(progressReading(book.progress))
+    console.log('book.id --', book.id)
+    console.log('book.progress --', Boolean(book.progress))
+    console.log('book.progress --', Boolean(!book.progress))
+    // if (uid === null) return
+    if (!book.progress) return
+    const booksRef = ref(getDatabase(), `users/${uid}/${book.id}`)
+    onValue(booksRef, snapshot => {
+      if (snapshot.exists()) {
+        const data = snapshot.val()
+        console.log('data-prog --', data.progress)
+        const prBook = Object.entries(data.progress).map(([id, pr]) => ({
+          id, ...pr
+        }))
+        console.log('prBook --', prBook)
+        const updBook = {
+          ...book,
+          progress: prBook,
+        }
+        console.log('updBook --', updBook)
+        setBook(updBook)
+        // setProgress(progressReading(updBook))
+        // setBook({ ...book, progress: prBook })
+      } else {
+        console.log('No data available')
+        setBook([])
+      }
+    })
   }, [book])
 
   return (
@@ -87,7 +124,7 @@ function Diary() {
         overflowY="auto"
         scrollbar="hidden"
       >
-        {progress.map((book, id) => {
+        {progress.map((item, id) => {
           return (
             <List.Item
               key={id}
@@ -118,7 +155,7 @@ function Diary() {
                     lineHeight="18px"
                     letterSpacing="0.02em"
                   >
-                    {book.date}
+                    {item.date}
                   </Heading>
                   <Heading
                     as="h3"
@@ -127,14 +164,14 @@ function Diary() {
                     lineHeight="18px"
                     letterSpacing="-0.02em"
                   >
-                    {book.pages}
+                    {item.pages}
                     <Mark ml="2px">pages</Mark>
                   </Heading>
                 </Flex>
 
-                {book.items.map((reading) => {
+                {item.items.map((reading) => {
                   return (
-                    <Flex key={reading.pid} direction="column">
+                    <Flex key={reading.id} direction="column">
                       <Flex justifyContent="space-between">
                         <Heading
                           as="h3"
@@ -160,7 +197,8 @@ function Diary() {
                             src={trash2}
                             alt="delete day"
                             cursor="pointer"
-                            onClick={() => console.log('delete item')}
+                            onClick={() =>
+                              console.log('delete item', book.id, reading.id)}
                           />
                         </Flex>
                       </Flex>
