@@ -1,6 +1,14 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
-import { addBookApi, getRecommendedApi, removeBookApi, updateBookApi } from '@/services/api'
+import {
+  addBookApi,
+  addProgressItemApi, getProgressItemsApi,
+  getRecommendedApi,
+  removeBookApi,
+  removeProgressItemApi, statusBookApi,
+  updateBookApi
+} from '@/services/api'
+import { nanoid } from 'nanoid'
 
 export const useRecommendedStore = create()(
   persist(
@@ -79,6 +87,9 @@ export const useLibraryStore = create()(
             set({ isLoading: false })
           }
         },
+        changeStatus: (id) => {
+          statusBookApi(id)
+        },
         updateBook: (book) => {
           console.log('update book -- ', book)
           updateBookApi(book)
@@ -135,7 +146,7 @@ export const useReadingStore = create()(
           set({ readingBook: readBook })
           set({ isReading: true })
         },
-        setReadingStop: ({ page }) => {
+        setReadingStop: async ({ page }) => {
           const book = get().book
           const readingBook = get().readingBook
           // const dateStart = new Date(readingBook.startReading)
@@ -151,15 +162,34 @@ export const useReadingStore = create()(
             speed: 44,
             status: 'inactive'
           }
-          const progressBook = book.progress ? book.progress : []
-          progressBook.push(readBook)
-          const newBook = {
-            ...book,
-            status: 'in-progress',
-            progress: progressBook
-          }
-          useLibraryStore.getState().updateBook(newBook)
-          set({ book: newBook, readingBook: {}, isReading: false })
+          console.log('readBook --', readBook)
+
+          // const progressBook = book.progress ? book.progress : []
+          // progressBook.push(readBook)
+          // progressBook.push({ ...readBook, id: nanoid() })
+          // console.log('progressBook --', progressBook)
+          // const newBook = {
+          //   ...book,
+          //   status: 'in-progress',
+          //   progress: progressBook
+          // }
+          // console.log('newBook --', newBook)
+
+          addProgressItemApi(book.id, readBook)
+          // useLibraryStore.getState().updateBook(newBook)
+          useLibraryStore.getState().changeStatus(book.id)
+          // const updProg = await getProgressItemsApi(book.id)
+          // console.log('updProg --', updProg.progress)
+          // const prog = Object.entries(updProg.progress).map(([id, pr]) => ({
+          //   id, ...pr
+          // }))
+          // console.log('prog --', prog)
+
+          // set({ book: newBook, readingBook: {}, isReading: false })
+          set({ readingBook: {}, isReading: false })
+        },
+        removeProgressItem: (idBook, idItem) => {
+          removeProgressItemApi(idBook, idItem)
         },
         readingFinish: () => {
           console.log('readingFinish -- ')
