@@ -1,8 +1,9 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
-import { Button, Input, InputElement, Stack, Flex, Heading, Circle, Text, Image
+import {
+  Button, Input, InputElement, Stack, Flex, Heading, Circle, Text, Image
 } from '@chakra-ui/react'
 import { Field } from '@/components/ui/field.jsx'
 import star from '@/assets/icons/star.svg'
@@ -14,6 +15,8 @@ import Diary from './Diary'
 import Statiatics from './Statiatics'
 import DialogBookStat from '../DialogBookStat'
 import { useReadingStore } from '@/stores/booksStore.js'
+import { getDatabase, onValue, ref } from 'firebase/database'
+import { useAuthStore } from '@/stores/authStore.js'
 
 const schemaPage = yup
   .object({
@@ -36,31 +39,22 @@ function Dashboard() {
   } = useForm({
     resolver: yupResolver(schemaPage)
   })
+  const uid = useAuthStore(state => state.uid)
   const book = useReadingStore(state => state.book)
+  const setBook = useReadingStore(state => state.setBook)
   const isReading = useReadingStore(state => state.isReading)
   const setReadingStart = useReadingStore(state => state.setReadingStart)
   const setReadingStop = useReadingStore(state => state.setReadingStop)
-  // const [page, setPage] = useState(() =>
-  //   book.progress ? book.progress[book.progress.length - 1].finishPage : 1)
-  // const [page, setPage] = useState(1)
-  // const [reading, setReading] = useState(false)
   const [hourglass, setHourglass] = useState(false)
   const [openDialog, setOpenDialog] = useState(false)
-
-  console.log('book in dashboard -- ', book)
   const page = book.progress ?
-    book.progress[book.progress.length - 1].finishPage : 1
+    Math.max(...book.progress.map(b => b.finishPage)) : 1
 
-  // console.log('finishPage -- ', Boolean(book.finishPage))
+  console.log('book in dashboard reading -- ', book)
 
   const toogleDialog = () => {
     setOpenDialog(!openDialog)
   }
-
-// if (book.progress) {
-//   console.log('if book.progress' )
-//   console.log(book.progress[book.progress.length - 1].finishPage)
-// }
 
   const onSubmit = handleSubmit(data => {
     if (!isReading) {
@@ -72,42 +66,34 @@ function Dashboard() {
     }
     if (isReading) {
       console.log('to stop page -- ', data)
-      // if (book.progress[book.progress.length - 1].finishPage <= page) {
-      //   return console.log('The page number must be greater than the number read')
-      // }
       if (data.page === page) {
         return console.log('The page number read must be greater than the starting page number.')
       }
       setReadingStop(data)
     }
-
-    // console.log(new Date())
-    // console.log(new Date().toJSON())
-
-    // const dateStart = new Date('2025-01-20T13:15:43.317Z')
-    // const dateEnd = new Date('2025-01-20T16:24:12.773Z')
-    // console.log(dateStart)
-    // console.log(dateEnd)
-    // const timeDifferenceMS = dateEnd - dateStart
-    // console.log(timeDifferenceMS)
-    // const timeDifferenceMins = Math.floor(timeDifferenceMS / 60000) % 60
-    // const timeDifferenceHours = Math.floor(timeDifferenceMS / 3600000) % 24
-    // console.log(`Time difference in minutes: ${timeDifferenceMins}`)
-    // console.log(`Time difference in hours: ${timeDifferenceHours}`)
-
-    // ---
-    // const startDate = new Date('2025-01-20T13:15:43.317Z')
-    // const endDate = Date.now()
-    // console.log(startDate)
-    // console.log(endDate)
-    // const timeDifferenceMS = endDate - startDate;
-    // const timeDifferenceMins = Math.floor(timeDifferenceMS / 60000);
-    // const timeDifferenceHours = Math.floor(timeDifferenceMS / 3600000);
-    // const timeDifferenceDays = Math.floor(timeDifferenceMS / 86400000);
-    // console.log(`Time difference in minutes: ${timeDifferenceMins}`);
-    // console.log(`Time difference in hours: ${timeDifferenceHours}`);
-    // console.log(`Time difference in days: ${timeDifferenceDays}`);
   })
+
+  useEffect(() => {
+    if (isReading) return
+    const booksRef = ref(getDatabase(), `users/${uid}/${book.id}`)
+    onValue(booksRef, snapshot => {
+      if (snapshot.exists()) {
+        const data = snapshot.val()
+        // console.log('data-prog --', data.progress)
+        const prBook = Object.entries(data.progress).map(([id, pr]) => ({
+          id, ...pr
+        }))
+        console.log('prBook --', prBook)
+        const updBook = {
+          ...book,
+          progress: prBook
+        }
+        setBook(updBook)
+      } else {
+        console.log('No data available')
+      }
+    })
+  }, [])
 
   return (
     <>
