@@ -41,7 +41,6 @@ function MyLibrary() {
         setBooks(books)
       } else {
         console.log('No data available')
-        setBooks([])
       }
     })
   }, [setBooks, uid])
