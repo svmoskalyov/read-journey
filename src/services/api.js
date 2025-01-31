@@ -48,46 +48,19 @@ export const addBookApi = async (book) => {
   await set(bookRef, book)
 }
 
-export const updateBookApi = ({ ...book }) => {
-  console.log(book)
-  const uid = auth.currentUser.uid
-  update(ref(db, `users/${uid}/${book.id}`), book)
-}
-
 export const statusBookApi = (idBook) => {
-  // console.log(book)
   const uid = auth.currentUser.uid
   update(ref(db, `users/${uid}/${idBook}`), { status: 'in-progress' })
 }
 
 export const addProgressItemApi = (idBook, progressItem) => {
   const uid = auth.currentUser.uid
-  // console.log(idBook)
-  // console.log(idItem)
   const idItem = nanoid()
   const bookRef = ref(db, `users/${uid}/${idBook}/progress/${idItem}`)
   set(bookRef, progressItem)
 }
 
-export const getProgressItemsApi = async (idBook) => {
-  const uid = auth.currentUser.uid
-  const dbRef = ref(getDatabase())
-  return get(child(dbRef, `users/${uid}/${idBook}`))
-    .then((snapshot) => {
-    if (snapshot.exists()) {
-      console.log(snapshot.val())
-      return snapshot.val()
-    } else {
-      return 'No data available'
-    }
-  }).catch((error) => {
-    console.error(error)
-  })
-}
-
 export const removeProgressItemApi = (idBook, idItem) => {
-  console.log(idBook)
-  console.log(idItem)
   const uid = auth.currentUser.uid
   remove(ref(db, `users/${uid}/${idBook}/progress/${idItem}`))
 }
