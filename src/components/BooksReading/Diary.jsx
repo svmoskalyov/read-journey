@@ -3,17 +3,11 @@ import { Box, Center, Flex, Heading, Image, List, Mark, Text } from '@chakra-ui/
 import trash2 from '@/assets/icons/trash-2.svg'
 import blockStat from '@/assets/icons/block.svg'
 import { useReadingStore } from '@/stores/booksStore.js'
-import { getDatabase, onValue, ref } from 'firebase/database'
-import { useAuthStore } from '@/stores/authStore.js'
 
 function Diary() {
-  const uid = useAuthStore(state => state.uid)
   const book = useReadingStore(state => state.book)
-  const setBook = useReadingStore(state => state.setBook)
-  // const removeProgressItem = useReadingStore(state => state.removeProgressItem)
+  const removeProgressItem = useReadingStore(state => state.removeProgressItem)
   const [progress, setProgress] = useState([])
-  console.log('bbbbook --', book)
-  console.log('pppprog --', book.progress)
 
   const dateToLocal = (startDay) => {
     return new Date(startDay).toLocaleDateString('de-DE')
@@ -58,9 +52,8 @@ function Diary() {
       const booksFilter = book.progress.filter(el =>
         dateToLocal(el.startReading) === date)
       const booksFiltered = booksFilter.map(el => {
-        // const pid = nanoid()
         const id = el.id
-        pages = Math.floor(el.finishPage - el.startPage)
+        pages += Math.floor(el.finishPage - el.startPage)
         const procent = procentReading(el.startPage, el.finishPage)
         const time = timeReading(el.startReading, el.finishReading)
         const pageHour = pagesReadingHour(el.startPage, el.finishPage,
@@ -72,40 +65,10 @@ function Diary() {
     return newBooks
   }
 
-  // useEffect(() => {
-  //   // if (!book.progress) return
-  //   setProgress(progressReading(book.progress))
-  // }, [book.progress])
-
   useEffect(() => {
-    console.log('book.id --', book.id)
-    console.log('book.progress --', Boolean(book.progress))
-    console.log('book.progress --', Boolean(!book.progress))
-    // if (uid === null) return
     if (!book.progress) return
-    const booksRef = ref(getDatabase(), `users/${uid}/${book.id}`)
-    onValue(booksRef, snapshot => {
-      if (snapshot.exists()) {
-        const data = snapshot.val()
-        console.log('data-prog --', data.progress)
-        const prBook = Object.entries(data.progress).map(([id, pr]) => ({
-          id, ...pr
-        }))
-        console.log('prBook --', prBook)
-        const updBook = {
-          ...book,
-          progress: prBook,
-        }
-        console.log('updBook --', updBook)
-        setBook(updBook)
-        // setProgress(progressReading(updBook))
-        // setBook({ ...book, progress: prBook })
-      } else {
-        console.log('No data available')
-        setBook([])
-      }
-    })
-  }, [book])
+    setProgress(progressReading(book.progress))
+  }, [book.progress])
 
   return (
     <Flex
@@ -198,7 +161,7 @@ function Diary() {
                             alt="delete day"
                             cursor="pointer"
                             onClick={() =>
-                              console.log('delete item', book.id, reading.id)}
+                              removeProgressItem(book.id, reading.id)}
                           />
                         </Flex>
                       </Flex>
