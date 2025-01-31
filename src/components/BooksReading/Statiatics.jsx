@@ -1,11 +1,29 @@
-import { Box, Flex, Heading, HStack, Text } from '@chakra-ui/react'
+import { Box, Flex, Heading, HStack, Mark, Text } from '@chakra-ui/react'
 import {
   ProgressCircleRing,
   ProgressCircleRoot,
   ProgressCircleValueText
 } from '@/components/ui/progress-circle.jsx'
+import { useReadingStore } from '@/stores/booksStore.js'
+import { useEffect, useState } from 'react'
 
 function Statiatics() {
+  const book = useReadingStore(state => state.book)
+  const [total, setTotal] = useState({})
+
+  const totalReading = (arr) => {
+    const pages = arr.reduce((acc, cur) => {
+      return acc + (cur.finishPage - cur.startPage)
+    }, 0)
+    const procent = Math.floor((pages / book.totalPages) * 100)
+    return setTotal({ pages, procent })
+  }
+
+  useEffect(() => {
+    if (!book.progress) return
+    totalReading(book.progress)
+  }, [book.progress])
+
   return (
     <Flex
       direction="column"
@@ -19,7 +37,7 @@ function Statiatics() {
       bg="brand.bgInput"
     >
       <HStack w="75px">
-        <ProgressCircleRoot size="xl" value={40} colorPalette="green">
+        <ProgressCircleRoot size="xl" value={total.procent} colorPalette="green">
           <ProgressCircleRing cap="round" />
           <ProgressCircleValueText />
         </ProgressCircleRoot>
@@ -34,7 +52,7 @@ function Statiatics() {
             lineHeight={{ base: '18px', tablet: '20px' }}
             letterSpacing="0.02em"
           >
-            19.14%
+            {total.procent}%
           </Heading>
           <Text
             fontFamily="Gilroy-Medium"
@@ -42,7 +60,8 @@ function Statiatics() {
             lineHeight={{ base: '12px', tablet: '14px' }}
             color="brand.muted"
           >
-            171 pages read
+            {total.pages}
+            <Mark ml="2px">pages read</Mark>
           </Text>
         </Flex>
       </Flex>
