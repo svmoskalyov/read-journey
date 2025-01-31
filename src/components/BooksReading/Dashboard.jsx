@@ -51,10 +51,12 @@ function Dashboard() {
   const page = book.progress ?
     Math.max(...book.progress.map(b => b.finishPage)) : 1
 
-  // console.log('book in dashboard reading -- ', book)
-
   const toogleDialog = () => {
     setOpenDialog(!openDialog)
+  }
+
+  const toogleHourglass = () => {
+    setHourglass(!hourglass)
   }
 
   const onSubmit = handleSubmit(data => {
@@ -221,6 +223,7 @@ function Dashboard() {
                 w={{ base: '16px', tablet: '20px' }}
                 src={hourglass ? hourglassU : hourglassA}
                 alt="button diary"
+                onClick={toogleHourglass}
               />
               <Image
                 cursor="pointer"
@@ -228,6 +231,7 @@ function Dashboard() {
                 w={{ base: '16px', tablet: '20px' }}
                 src={!hourglass ? chartU : chartA}
                 alt="button statistics"
+                onClick={toogleHourglass}
               />
             </Flex>
           </Flex>
