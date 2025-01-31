@@ -33,6 +33,7 @@ const schemaPage = yup
 
 function Dashboard() {
   const {
+    reset,
     register,
     handleSubmit,
     formState: { errors }
@@ -50,7 +51,7 @@ function Dashboard() {
   const page = book.progress ?
     Math.max(...book.progress.map(b => b.finishPage)) : 1
 
-  console.log('book in dashboard reading -- ', book)
+  // console.log('book in dashboard reading -- ', book)
 
   const toogleDialog = () => {
     setOpenDialog(!openDialog)
@@ -58,14 +59,12 @@ function Dashboard() {
 
   const onSubmit = handleSubmit(data => {
     if (!isReading) {
-      console.log('to start page -- ', data)
       if (data.page < page) {
         return console.log('The page number cannot be less than the page number read.')
       }
       setReadingStart(data)
     }
     if (isReading) {
-      console.log('to stop page -- ', data)
       if (data.page === page) {
         return console.log('The page number read must be greater than the starting page number.')
       }
@@ -74,16 +73,18 @@ function Dashboard() {
   })
 
   useEffect(() => {
-    if (isReading) return
     const booksRef = ref(getDatabase(), `users/${uid}/${book.id}`)
     onValue(booksRef, snapshot => {
       if (snapshot.exists()) {
         const data = snapshot.val()
-        // console.log('data-prog --', data.progress)
+        if (!data.progress) {
+          reset()
+          return setBook(data)
+        }
         const prBook = Object.entries(data.progress).map(([id, pr]) => ({
           id, ...pr
         }))
-        console.log('prBook --', prBook)
+        prBook.sort((a, b) => a.finishPage - b.finishPage)
         const updBook = {
           ...book,
           progress: prBook
@@ -91,6 +92,7 @@ function Dashboard() {
         setBook(updBook)
       } else {
         console.log('No data available')
+        // setBook({})
       }
     })
   }, [])
