@@ -2,13 +2,12 @@ import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 import {
   addBookApi,
-  addProgressItemApi, getProgressItemsApi,
+  addProgressItemApi,
   getRecommendedApi,
   removeBookApi,
   removeProgressItemApi, statusBookApi,
-  updateBookApi
+  // updateBookApi
 } from '@/services/api'
-import { nanoid } from 'nanoid'
 
 export const useRecommendedStore = create()(
   persist(
@@ -90,10 +89,6 @@ export const useLibraryStore = create()(
         changeStatus: (id) => {
           statusBookApi(id)
         },
-        updateBook: (book) => {
-          console.log('update book -- ', book)
-          updateBookApi(book)
-        },
         removeBook: (book) => {
           set({ isLoading: true })
           try {
@@ -162,33 +157,16 @@ export const useReadingStore = create()(
             speed: 44,
             status: 'inactive'
           }
-          console.log('readBook --', readBook)
-
-          // const progressBook = book.progress ? book.progress : []
-          // progressBook.push(readBook)
-          // progressBook.push({ ...readBook, id: nanoid() })
-          // console.log('progressBook --', progressBook)
-          // const newBook = {
-          //   ...book,
-          //   status: 'in-progress',
-          //   progress: progressBook
-          // }
-          // console.log('newBook --', newBook)
-
           addProgressItemApi(book.id, readBook)
-          // useLibraryStore.getState().updateBook(newBook)
           useLibraryStore.getState().changeStatus(book.id)
-          // const updProg = await getProgressItemsApi(book.id)
-          // console.log('updProg --', updProg.progress)
-          // const prog = Object.entries(updProg.progress).map(([id, pr]) => ({
-          //   id, ...pr
-          // }))
-          // console.log('prog --', prog)
-
-          // set({ book: newBook, readingBook: {}, isReading: false })
           set({ readingBook: {}, isReading: false })
         },
         removeProgressItem: (idBook, idItem) => {
+          const book = get().book
+          if (book.progress?.length === 1) {
+            removeProgressItemApi(idBook, idItem)
+            set({ readingBook: {}, isReading: false })
+          }
           removeProgressItemApi(idBook, idItem)
         },
         readingFinish: () => {
