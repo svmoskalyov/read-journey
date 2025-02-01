@@ -43,14 +43,14 @@ export const getRecommendedApi = async () => {
 
 export const addBookApi = async (book) => {
   const uid = auth.currentUser.uid
-  const id = book.recommended ? book.id : nanoid()
+  const id = book.id
   const bookRef = ref(db, `users/${uid}/${id}`)
   await set(bookRef, book)
 }
 
-export const statusBookApi = (idBook) => {
+export const statusBookApi = (idBook, status) => {
   const uid = auth.currentUser.uid
-  update(ref(db, `users/${uid}/${idBook}`), { status: 'in-progress' })
+  update(ref(db, `users/${uid}/${idBook}`), { status })
 }
 
 export const addProgressItemApi = (idBook, progressItem) => {
