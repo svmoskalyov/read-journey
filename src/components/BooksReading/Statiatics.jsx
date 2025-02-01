@@ -9,7 +9,7 @@ import { useEffect, useState } from 'react'
 
 function Statiatics() {
   const book = useReadingStore(state => state.book)
-  const [total, setTotal] = useState({})
+  const [total, setTotal] = useState({ pages: 0, procent: 0 })
 
   const totalReading = (arr) => {
     const pages = arr.reduce((acc, cur) => {
