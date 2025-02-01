@@ -4,23 +4,23 @@ import {
 } from '@/components/ui/dialog'
 import like from '@/assets/icons/like.svg'
 import books from '@/assets/icons/books.svg'
-import { useLibraryStore } from '@/stores/booksStore.js'
+import { useLibraryStore, useReadingStore } from '@/stores/booksStore.js'
 
 function DialogBookStat() {
   const isAdded = useLibraryStore(state => state.isAdded)
-  const isRead = useLibraryStore(state => state.isRead)
   const setIsAdded = useLibraryStore(state => state.setIsAdded)
-  const setIsRead = useLibraryStore(state => state.setIsRead)
+  const isReaded = useReadingStore(state => state.isReaded)
+  const setIsReaded = useReadingStore(state => state.setIsReaded)
 
   const toogle = e => {
     if (isAdded) setIsAdded(e.open)
-    if (isRead) setIsRead(e.open)
+    if (isReaded) setIsReaded(e.open)
   }
 
   return (
     <DialogRoot
       lazyMount placement="center"
-      open={isAdded || isRead}
+      open={isAdded || isReaded}
       onOpenChange={toogle}
     >
       <DialogContent
