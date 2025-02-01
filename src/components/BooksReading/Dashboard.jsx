@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { getDatabase, onValue, ref } from 'firebase/database'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import {
@@ -15,7 +16,6 @@ import Diary from './Diary'
 import Statiatics from './Statiatics'
 import DialogBookStat from '../DialogBookStat'
 import { useReadingStore } from '@/stores/booksStore.js'
-import { getDatabase, onValue, ref } from 'firebase/database'
 import { useAuthStore } from '@/stores/authStore.js'
 
 const schemaPage = yup
@@ -48,8 +48,9 @@ function Dashboard() {
   const setReadingStop = useReadingStore(state => state.setReadingStop)
   const [hourglass, setHourglass] = useState(false)
   const [openDialog, setOpenDialog] = useState(false)
+
   const page = book.progress ?
-    Math.max(...book.progress.map(b => b.finishPage)) : 1
+    Math.max(...Object.values(book.progress).map(p => p.finishPage)) : 1
 
   const toogleDialog = () => {
     setOpenDialog(!openDialog)
@@ -91,7 +92,16 @@ function Dashboard() {
           ...book,
           progress: prBook
         }
+        // setPage(() => Math.max(...prBook.map(b => b.finishPage)))
+        console.log('prBook --', prBook)
+        console.log('page --', page)
+        console.log('prBook --', prBook[prBook.length - 1].finishPage)
         setBook(updBook)
+        if (prBook[prBook.length - 1].finishPage === book.totalPages) {
+          console.log('finish reading --')
+          // toogleDialog()
+          // readingFinish()
+        }
       } else {
         console.log('No data available')
         // setBook({})
