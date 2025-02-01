@@ -5,8 +5,8 @@ import {
   addProgressItemApi,
   getRecommendedApi,
   removeBookApi,
-  removeProgressItemApi, statusBookApi,
-  // updateBookApi
+  removeProgressItemApi,
+  statusBookApi
 } from '@/services/api'
 
 export const useRecommendedStore = create()(
@@ -68,26 +68,27 @@ export const useLibraryStore = create()(
       ({
         books: [],
         isAdded: false,
-        isRead: false,
         isLoading: false,
         error: null,
-        addBook: (book) => {
+        addBook: async (book) => {
           set({ isLoading: true })
+          const newBook = {
+            ...book,
+            status: 'unread'
+          }
           try {
-            const newBook = {
-              ...book,
-              status: 'unread'
+            await addBookApi(newBook)
+            if (!book.recommended) {
+              set({ isAdded: true })
             }
-            addBookApi(newBook)
-            set({ isAdded: true })
           } catch (error) {
             set({ error: error.code })
           } finally {
             set({ isLoading: false })
           }
         },
-        changeStatus: (id) => {
-          statusBookApi(id)
+        changeStatus: (id, status) => {
+          statusBookApi(id, status)
         },
         removeBook: (book) => {
           set({ isLoading: true })
@@ -103,8 +104,7 @@ export const useLibraryStore = create()(
           }
         },
         setBooks: (value) => set({ books: value }),
-        setIsAdded: (value) => set({ isAdded: value }),
-        setIsRead: (value) => set({ isRead: value })
+        setIsAdded: (value) => set({ isAdded: value })
       }),
     {
       name: 'books-library',
@@ -114,8 +114,7 @@ export const useLibraryStore = create()(
             ([key]) =>
               !['isLoading'].includes(key) &&
               !['error'].includes(key) &&
-              !['isAdded'].includes(key) &&
-              !['isRead'].includes(key)
+              !['isAdded'].includes(key)
           )
         )
     }
@@ -129,6 +128,9 @@ export const useReadingStore = create()(
         book: {},
         readingBook: {},
         isReading: false,
+        isReaded: false,
+        isLoading: false,
+        error: null,
         setBook: (book) => {
           set({ book })
         },
@@ -157,33 +159,64 @@ export const useReadingStore = create()(
             speed: 44,
             status: 'inactive'
           }
-          addProgressItemApi(book.id, readBook)
-          useLibraryStore.getState().changeStatus(book.id)
-          set({ readingBook: {}, isReading: false })
+          // addProgressItemApi(book.id, readBook)
+          // useLibraryStore.getState().changeStatus(book.id, 'in-progress')
+          // set({ readingBook: {}, isReading: false })
+
+          set({ isLoading: true })
+          try {
+            addProgressItemApi(book.id, readBook)
+            useLibraryStore.getState().changeStatus(book.id, 'in-progress')
+            set({ readingBook: {}, isReading: false })
+          } catch (error) {
+            set({ error: error.code })
+          } finally {
+            set({ isLoading: false })
+          }
         },
         removeProgressItem: (idBook, idItem) => {
           const book = get().book
-          if (book.progress?.length === 1) {
+          // if (book.progress?.length === 1) {
+          //   removeProgressItemApi(idBook, idItem)
+          //   set({ readingBook: {}, isReading: false })
+          // }
+          // removeProgressItemApi(idBook, idItem)
+
+          set({ isLoading: true })
+          try {
+            if (book.progress?.length === 1) {
+              removeProgressItemApi(idBook, idItem)
+              set({ readingBook: {}, isReading: false })
+            }
             removeProgressItemApi(idBook, idItem)
-            set({ readingBook: {}, isReading: false })
+          } catch (error) {
+            set({ error: error.code })
+          } finally {
+            set({ isLoading: false })
           }
-          removeProgressItemApi(idBook, idItem)
         },
         readingFinish: () => {
           console.log('readingFinish -- ')
-          // const readingBook = get().readingBook
-          // const readBook = {
-          //   ...readingBook,
-          // }
-          // console.log('readingStop -- ', readBook)
-          // set({ readingBook: readBook })
-          // set({ isReading: false })
+          // const book = get().book
+          // useLibraryStore.getState().changeStatus(book.id, 'done')
+          // set({ isReaded: true })
         },
         setIsReading: (value) => set({ isReading: value }),
+        setIsReaded: (value) => set({ isReaded: value }),
         deleteBook: () => set({ book: {} })
       }),
     {
-      name: 'book-reading'
+      name: 'book-reading',
+      partialize: state =>
+        Object.fromEntries(
+          Object.entries(state).filter(
+            ([key]) =>
+              !['isLoading'].includes(key) &&
+              !['error'].includes(key) &&
+              !['isReading'].includes(key) &&
+              !['isReaded'].includes(key)
+          )
+        )
     }
   )
 )
