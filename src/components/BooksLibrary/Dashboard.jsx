@@ -11,6 +11,7 @@ import { Field } from '@/components/ui/field'
 import DialogBookStat from '../DialogBookStat'
 import RecommendedBooks from './RecommendedBooks'
 import { useLibraryStore } from '@/stores/booksStore.js'
+import { nanoid } from 'nanoid'
 
 const schemaLib = yup
   .object({
@@ -44,7 +45,7 @@ function Dashboard() {
   const isAdded = useLibraryStore(state => state.isAdded)
 
   const onSubmit = (data) => {
-    addBook(data)
+    addBook({ ...data, id: nanoid() })
     reset()
   }
 
