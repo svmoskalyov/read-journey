@@ -65,6 +65,15 @@ export const removeProgressItemApi = (idBook, idItem) => {
   remove(ref(db, `users/${uid}/${idBook}/progress/${idItem}`))
 }
 
+export const readingFinishApi = (idBook, timeLeftToRead, status) => {
+  console.log('api --', idBook)
+  console.log('api --', timeLeftToRead)
+  const uid = auth.currentUser.uid
+  // const idBook = readedBook.id
+  const bookRef = ref(db, `users/${uid}/${idBook}`)
+  update(bookRef, { timeLeftToRead, status })
+}
+
 export const removeBookApi = (id) => {
   const uid = auth.currentUser.uid
   remove(ref(db, `users/${uid}/${id}`))
