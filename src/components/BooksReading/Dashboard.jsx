@@ -7,6 +7,7 @@ import {
   Button, Input, InputElement, Stack, Flex, Heading, Circle, Text, Image
 } from '@chakra-ui/react'
 import { Field } from '@/components/ui/field.jsx'
+import toast from '@/utils/toast'
 import star from '@/assets/icons/star.svg'
 import hourglassA from '@/assets/icons/hourglass-active.svg'
 import hourglassU from '@/assets/icons/hourglass-unactive.svg'
@@ -14,7 +15,7 @@ import chartA from '@/assets/icons/pie-chart-active.svg'
 import chartU from '@/assets/icons/pie-chart-unactive.svg'
 import Diary from './Diary'
 import Statiatics from './Statiatics'
-import DialogBookStat from '../DialogBookStat'
+// import DialogBookStat from '../DialogBookStat'
 import { useReadingStore } from '@/stores/booksStore.js'
 import { useAuthStore } from '@/stores/authStore.js'
 
@@ -25,7 +26,7 @@ const schemaPage = yup
       .typeError('Must be only digits')
       .positive('Must be a positive number')
       .integer('Must be an integer')
-      .min(1, 'Must be greater than 0')
+      .min(0, 'Must be greater than')
       .max(9999, 'Must be less than 9999')
       .required('Page is required')
   })
@@ -44,17 +45,19 @@ function Dashboard() {
   const book = useReadingStore(state => state.book)
   const setBook = useReadingStore(state => state.setBook)
   const isReading = useReadingStore(state => state.isReading)
+  // const isReaded = useReadingStore(state => state.isReaded)
   const setReadingStart = useReadingStore(state => state.setReadingStart)
   const setReadingStop = useReadingStore(state => state.setReadingStop)
+  const readingFinish = useReadingStore(state => state.readingFinish)
   const [hourglass, setHourglass] = useState(false)
-  const [openDialog, setOpenDialog] = useState(false)
+  // const [openDialog, setOpenDialog] = useState(false)
 
   const page = book.progress ?
-    Math.max(...Object.values(book.progress).map(p => p.finishPage)) : 1
+    Math.max(...Object.values(book.progress).map(p => p.finishPage)) : 0
 
-  const toogleDialog = () => {
-    setOpenDialog(!openDialog)
-  }
+  // const toogleDialog = () => {
+  //   setOpenDialog(!openDialog)
+  // }
 
   const toogleHourglass = () => {
     setHourglass(!hourglass)
@@ -63,13 +66,19 @@ function Dashboard() {
   const onSubmit = handleSubmit(data => {
     if (!isReading) {
       if (data.page < page) {
-        return console.log('The page number cannot be less than the page number read.')
+        return toast('warning', 'The page number cannot be less than the page number read')
+        // return console.log('The page number cannot be less than the page number read.')
+      }
+      if (data.page >= book.totalPages) {
+        return toast('warning', 'The page number cannot be greater than the last page number')
+        // return console.log('The page number cannot be greater than the last page number.')
       }
       setReadingStart(data)
     }
     if (isReading) {
       if (data.page === page) {
-        return console.log('The page number read must be greater than the starting page number.')
+        return toast('warning', 'The page number read must be greater than the starting page number')
+        // return console.log('The page number read must be greater than the starting page number.')
       }
       setReadingStop(data)
     }
@@ -92,19 +101,25 @@ function Dashboard() {
           ...book,
           progress: prBook
         }
-        // setPage(() => Math.max(...prBook.map(b => b.finishPage)))
-        console.log('prBook --', prBook)
-        console.log('page --', page)
-        console.log('prBook --', prBook[prBook.length - 1].finishPage)
+        // console.log('updBook --', updBook)
         setBook(updBook)
-        if (prBook[prBook.length - 1].finishPage === book.totalPages) {
+
+        console.log('book.totalPages --', book.totalPages)
+        console.log('prBook --', prBook[prBook.length - 1].finishPage)
+
+        if (prBook[prBook.length - 1].finishPage === 24) {
           console.log('finish reading --')
           // toogleDialog()
-          // readingFinish()
+          readingFinish()
         }
+
+        // if (prBook[prBook.length - 1].finishPage === book.totalPages) {
+        //   console.log('finish reading --')
+        //   // toogleDialog()
+        //   readingFinish()
+        // }
       } else {
         console.log('No data available')
-        // setBook({})
       }
     })
   }, [])
@@ -265,7 +280,7 @@ function Dashboard() {
           )}
 
           {hourglass ? <Statiatics /> : <Diary />}
-          {openDialog && <DialogBookStat statBook={false} />}
+          {/*{openDialog && <DialogBookStat />}*/}
         </Flex>
       )}
     </>
