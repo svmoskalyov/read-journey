@@ -7,32 +7,6 @@ import DialogBookStat from '@/components/DialogBookStat.jsx'
 function MyReading() {
   const book = useReadingStore(state => state.book)
   const isReading = useReadingStore(state => state.isReading)
-  const isReaded = useReadingStore(state => state.isReaded)
-
-  console.log(isReaded)
-  console.log(book)
-  console.log(book.timeLeftToRead)
-  // console.log(book.timeLeftToRead.days)
-  // const [time, setTime] = useState({ days: 0, hours: 0, minutes: 0 })
-  //
-  // const getTimeReaded = (startime, endtime) => {
-  //   const total = Date.parse(endtime) - Date.parse(startime)
-  //   // const seconds = Math.floor( (total/1000) % 60 )
-  //   const minutes = Math.floor((total / 1000 / 60) % 60)
-  //   const hours = Math.floor((total / (1000 * 60 * 60)) % 24)
-  //   const days = Math.floor(total / (1000 * 60 * 60 * 24))
-  //   return {
-  //     days,
-  //     hours,
-  //     minutes
-  //   }
-  // }
-  //
-  // if (isReading && time.minutes === 0) {
-  //   const dateStart = book.progress[0].startReading
-  //   const dateEnd = book.progress[book.progress.length - 1].finishReading
-  //   setTime(getTimeReaded(dateStart, dateEnd))
-  // }
 
   return (
     <Flex
@@ -54,7 +28,7 @@ function MyReading() {
         >
           My reading
         </Heading>
-        {isReaded && (
+        {book.status === 'done' && (
           <Text
             fontFamily="Gilroy-Medium"
             fontSize={{ base: '12px', tablet: '14px' }}
@@ -62,7 +36,7 @@ function MyReading() {
             letterSpacing="-0.02em"
             color="brand.muted"
           >
-            2 hour 22 minutes
+            1 hour 11 minutes
             {/*{book.timeLeftToRead.days !== 0 &&*/}
             {/*  <><Mark mx="2px">{book.timeLeftToRead.days}</Mark>days</>}*/}
             {/*{book.timeLeftToRead.hours !== 0 &&*/}
@@ -71,19 +45,6 @@ function MyReading() {
             {/*  <><Mark mx="2px">{book.timeLeftToRead.minutes}</Mark>*/}
             {/*    minutes left</>}*/}
           </Text>
-
-          // <Text
-          //   fontFamily="Gilroy-Medium"
-          //   fontSize={{ base: '12px', tablet: '14px' }}
-          //   lineHeight={{ base: '16px', tablet: '18px' }}
-          //   letterSpacing="-0.02em"
-          //   color="brand.muted"
-          // >
-          //   {time.days !== 0 && <><Mark mx="2px">{time.days}</Mark>days</>}
-          //   {time.hours !== 0 && <><Mark mx="2px">{time.hours}</Mark>hours</>}
-          //   {time.minutes !== 0 &&
-          //     <><Mark mx="2px">{time.minutes}</Mark>minutes left</>}
-          // </Text>
         )}
       </Flex>
 
@@ -175,7 +136,7 @@ function MyReading() {
         />
       )}
 
-      {isReaded && <DialogBookStat />}
+      {book.status === 'done' && <DialogBookStat />}
     </Flex>
   )
 }
