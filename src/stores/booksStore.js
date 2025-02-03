@@ -87,9 +87,6 @@ export const useLibraryStore = create()(
             set({ isLoading: false })
           }
         },
-        // changeStatus: (id, status) => {
-        //   statusBookApi(id, status)
-        // },
         removeBook: (book) => {
           set({ isLoading: true })
           try {
@@ -132,7 +129,7 @@ export const useReadingStore = create()(
         isLoading: false,
         error: null,
         setBook: (book) => {
-          console.log(book)
+          console.log('setBook --', book)
           set({ book })
         },
         setReadingStart: ({ page }) => {
@@ -141,8 +138,7 @@ export const useReadingStore = create()(
             startReading: new Date().toJSON(),
             status: 'active'
           }
-          set({ readingBook: readBook })
-          set({ isReading: true })
+          set({ readingBook: readBook, isReading: true })
         },
         setReadingStop: async ({ page }) => {
           const book = get().book
@@ -160,52 +156,47 @@ export const useReadingStore = create()(
             speed: 44,
             status: 'inactive'
           }
-
-          if (readingBook.startPage === 0) {
-            statusBookApi(book.id, 'in-progress')
-            // useLibraryStore.getState().changeStatus(book.id, 'in-progress')
-          }
-          addProgressItemApi(book.id, readBook)
-          set({ readingBook: {}, isReading: false })
-
-          // set({ isLoading: true })
-          // try {
-          //   if (readingBook.startPage === 0) {
-          //   useLibraryStore.getState().changeStatus(book.id, 'in-progress')
-          //   }
-          //   addProgressItemApi(book.id, readBook)
-          //   set({ readingBook: {}, isReading: false })
-          // } catch (error) {
-          //   set({ error: error.code })
-          // } finally {
-          //   set({ isLoading: false })
+          // if (readingBook.startPage === 0) {
+          //   statusBookApi(book.id, 'in-progress')
           // }
+          // addProgressItemApi(book.id, readBook)
+          // set({ readingBook: {}, isReading: false })
+
+          set({ isLoading: true })
+          try {
+            if (readingBook.startPage === 0) {
+              statusBookApi(book.id, 'in-progress')
+            }
+            addProgressItemApi(book.id, readBook)
+            set({ readingBook: {}, isReading: false })
+          } catch (error) {
+            set({ error: error.code })
+          } finally {
+            set({ isLoading: false })
+          }
         },
         removeProgressItem: (idBook, idItem) => {
           const book = get().book
-          if (book.progress?.length === 1) {
-            removeProgressItemApi(idBook, idItem)
-            set({ readingBook: {}, isReading: false })
-          }
-          removeProgressItemApi(idBook, idItem)
-
-          // set({ isLoading: true })
-          // try {
-          //   if (book.progress?.length === 1) {
-          //     removeProgressItemApi(idBook, idItem)
-          //     set({ readingBook: {}, isReading: false })
-          //   }
+          // if (book.progress?.length === 1) {
           //   removeProgressItemApi(idBook, idItem)
-          // } catch (error) {
-          //   set({ error: error.code })
-          // } finally {
-          //   set({ isLoading: false })
+          //   set({ readingBook: {}, isReading: false })
           // }
+          // removeProgressItemApi(idBook, idItem)
+
+          set({ isLoading: true })
+          try {
+            if (book.progress?.length === 1) {
+              removeProgressItemApi(idBook, idItem)
+              set({ readingBook: {}, isReading: false })
+            }
+            removeProgressItemApi(idBook, idItem)
+          } catch (error) {
+            set({ error: error.code })
+          } finally {
+            set({ isLoading: false })
+          }
         },
-        readingFinish: () => {
-          console.log('readingFinish -- ')
-          const book = get().book
-          console.log(book)
+        readingFinish: (book) => {
           // const dateStart = book.progress[0].startReading
           // const dateEnd = book.progress[book.progress.length - 1].finishReading
           // const total = Date.parse(dateEnd) - Date.parse(dateStart)
@@ -213,28 +204,20 @@ export const useReadingStore = create()(
           // const minutes = Math.floor((total / 1000 / 60) % 60)
           // const hours = Math.floor((total / (1000 * 60 * 60)) % 24)
           // const days = Math.floor(total / (1000 * 60 * 60 * 24))
-          // const timeLeftToRead = {
-          //   days,
-          //   hours,
-          //   minutes
-          // }
-          const timeLeftToRead = {
-            days: 0,
-            hours: 1,
-            minutes: 14
-          }
-          // const readedBook = {
-          //   // ...book,
-          //   status: 'done',
-          //   timeLeftToRead
-          // }
-          // console.log(readedBook)
-          // readingFinishApi(readedBook)
-          readingFinishApi(book.id, timeLeftToRead, 'done')
-          // statusBookApi(book.id, 'done')
-          // useLibraryStore.getState().changeStatus(book.id, 'done')
-          // set({ book: readedBook, isReaded: true })
+          // const timeLeftToRead = { days, hours, minutes }
+          const timeLeftToRead = { days: 0, hours: 1, minutes: 11 }
+          // readingFinishApi(book.id, timeLeftToRead, 'done')
           // set({ isReaded: true })
+
+          set({ isLoading: true })
+          try {
+            readingFinishApi(book.id, timeLeftToRead, 'done')
+            set({ isReaded: true })
+          } catch (error) {
+            set({ error: error.code })
+          } finally {
+            set({ isLoading: false })
+          }
         },
         setIsReading: (value) => set({ isReading: value }),
         setIsReaded: (value) => set({ isReaded: value }),
