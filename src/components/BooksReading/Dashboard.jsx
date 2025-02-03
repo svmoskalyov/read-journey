@@ -15,7 +15,6 @@ import chartA from '@/assets/icons/pie-chart-active.svg'
 import chartU from '@/assets/icons/pie-chart-unactive.svg'
 import Diary from './Diary'
 import Statiatics from './Statiatics'
-// import DialogBookStat from '../DialogBookStat'
 import { useReadingStore } from '@/stores/booksStore.js'
 import { useAuthStore } from '@/stores/authStore.js'
 
@@ -45,19 +44,13 @@ function Dashboard() {
   const book = useReadingStore(state => state.book)
   const setBook = useReadingStore(state => state.setBook)
   const isReading = useReadingStore(state => state.isReading)
-  // const isReaded = useReadingStore(state => state.isReaded)
   const setReadingStart = useReadingStore(state => state.setReadingStart)
   const setReadingStop = useReadingStore(state => state.setReadingStop)
   const readingFinish = useReadingStore(state => state.readingFinish)
   const [hourglass, setHourglass] = useState(false)
-  // const [openDialog, setOpenDialog] = useState(false)
 
   const page = book.progress ?
     Math.max(...Object.values(book.progress).map(p => p.finishPage)) : 0
-
-  // const toogleDialog = () => {
-  //   setOpenDialog(!openDialog)
-  // }
 
   const toogleHourglass = () => {
     setHourglass(!hourglass)
@@ -66,30 +59,33 @@ function Dashboard() {
   const onSubmit = handleSubmit(data => {
     if (!isReading) {
       if (data.page < page) {
-        return toast('warning', 'The page number cannot be less than the page number read')
-        // return console.log('The page number cannot be less than the page number read.')
+        return toast('warning',
+          'The page number cannot be less than the page number read')
       }
       if (data.page >= book.totalPages) {
-        return toast('warning', 'The page number cannot be greater than the last page number')
-        // return console.log('The page number cannot be greater than the last page number.')
+        return toast('warning',
+          'The page number cannot be greater than the last page number')
       }
       setReadingStart(data)
     }
     if (isReading) {
       if (data.page === page) {
-        return toast('warning', 'The page number read must be greater than the starting page number')
-        // return console.log('The page number read must be greater than the starting page number.')
+        return toast('warning',
+          'The page number read must be greater than the starting page number')
       }
       setReadingStop(data)
     }
   })
 
   useEffect(() => {
+    if (book.status === 'done') return
     const booksRef = ref(getDatabase(), `users/${uid}/${book.id}`)
     onValue(booksRef, snapshot => {
+      if (book.status === 'done') return
       if (snapshot.exists()) {
         const data = snapshot.val()
-        if (!data.progress) {
+        if (!data.progress) return
+        if (data.status === 'done') {
           reset()
           return setBook(data)
         }
@@ -98,26 +94,14 @@ function Dashboard() {
         }))
         prBook.sort((a, b) => a.finishPage - b.finishPage)
         const updBook = {
-          ...book,
+          ...data,
           progress: prBook
         }
-        // console.log('updBook --', updBook)
-        setBook(updBook)
-
-        console.log('book.totalPages --', book.totalPages)
-        console.log('prBook --', prBook[prBook.length - 1].finishPage)
-
+        //  if (prBook[prBook.length - 1].finishPage === data.totalPages) {
         if (prBook[prBook.length - 1].finishPage === 24) {
-          console.log('finish reading --')
-          // toogleDialog()
-          readingFinish()
+          return readingFinish(updBook)
         }
-
-        // if (prBook[prBook.length - 1].finishPage === book.totalPages) {
-        //   console.log('finish reading --')
-        //   // toogleDialog()
-        //   readingFinish()
-        // }
+        setBook(updBook)
       } else {
         console.log('No data available')
       }
@@ -280,7 +264,6 @@ function Dashboard() {
           )}
 
           {hourglass ? <Statiatics /> : <Diary />}
-          {/*{openDialog && <DialogBookStat />}*/}
         </Flex>
       )}
     </>
