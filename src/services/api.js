@@ -66,10 +66,7 @@ export const removeProgressItemApi = (idBook, idItem) => {
 }
 
 export const readingFinishApi = (idBook, timeLeftToRead, status) => {
-  console.log('api --', idBook)
-  console.log('api --', timeLeftToRead)
   const uid = auth.currentUser.uid
-  // const idBook = readedBook.id
   const bookRef = ref(db, `users/${uid}/${idBook}`)
   update(bookRef, { timeLeftToRead, status })
 }
