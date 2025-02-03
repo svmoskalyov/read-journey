@@ -12,7 +12,7 @@ import { useLibraryStore } from '@/stores/booksStore.js'
 const filter = createListCollection({
   items: [
     { label: 'Unread', value: 'unread' },
-    { label: 'In progress', value: 'progress' },
+    { label: 'In progress', value: 'in-progress' },
     { label: 'Done', value: 'done' },
     { label: 'All books', value: 'all' }
   ]
