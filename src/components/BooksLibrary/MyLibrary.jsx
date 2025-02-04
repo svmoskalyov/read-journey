@@ -5,11 +5,11 @@ import {
 } from '@/components/ui/select.jsx'
 import BookZeroItem from './BookZeroItem'
 import BookItem from './BookItem'
-import { useAuthStore } from '@/stores/authStore.js'
 import { getDatabase, ref, onValue } from 'firebase/database'
+import { useAuthStore } from '@/stores/authStore.js'
 import { useLibraryStore } from '@/stores/booksStore.js'
 
-const filter = createListCollection({
+const filterList = createListCollection({
   items: [
     { label: 'Unread', value: 'unread' },
     { label: 'In progress', value: 'in-progress' },
@@ -19,15 +19,13 @@ const filter = createListCollection({
 })
 
 function MyLibrary() {
-  const [value, setValue] = useState(['all'])
   const uid = useAuthStore(state => state.uid)
   const books = useLibraryStore(state => state.books)
   const setBooks = useLibraryStore(state => state.setBooks)
-
-  const handleChange = e => {
-    setValue(e.value)
-    console.log('🚀 ~ handleChange ~ value:', e.value[0])
-  }
+  const [value, setValue] = useState(['all'])
+  const handleChange = e => setValue(e.value)
+  const filteredBooks = value[0] === 'all' ?
+    books : books.filter(book => value[0] === book.status)
 
   useEffect(() => {
     if (uid === null) return
@@ -63,7 +61,7 @@ function MyLibrary() {
         <SelectRoot
           size="md"
           width={{ base: '120px', tablet: '153px' }}
-          collection={filter}
+          collection={filterList}
           value={value}
           onValueChange={handleChange}
           fontFamily="Gilroy-Medium"
@@ -87,7 +85,7 @@ function MyLibrary() {
             bg="brand.bgInput"
             rounded="12px"
           >
-            {filter.items.map(el => (
+            {filterList.items.map(el => (
               <SelectItem key={el.value} item={el}>
                 {el.label}
               </SelectItem>
@@ -96,13 +94,13 @@ function MyLibrary() {
         </SelectRoot>
       </Flex>
 
-      {books.length === 0 &&
+      {filteredBooks.length === 0 &&
         <Flex justify="center" align="center" h="full">
           <BookZeroItem />
         </Flex>
       }
 
-      {books.length > 0 &&
+      {filteredBooks.length > 0 &&
         <Grid
           gapX="25px"
           gapY="27px"
@@ -117,7 +115,7 @@ function MyLibrary() {
             desktop: 'repeat(5, 1fr)'
           }}
         >
-          {books.map((book) => (
+          {filteredBooks.map((book) => (
             <BookItem key={book.id} book={book} />
           ))}
         </Grid>
