@@ -129,7 +129,6 @@ export const useReadingStore = create()(
         isLoading: false,
         error: null,
         setBook: (book) => {
-          console.log('setBook --', book)
           set({ book })
         },
         setReadingStart: ({ page }) => {
