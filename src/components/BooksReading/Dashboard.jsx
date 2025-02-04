@@ -97,8 +97,7 @@ function Dashboard() {
           ...data,
           progress: prBook
         }
-        //  if (prBook[prBook.length - 1].finishPage === data.totalPages) {
-        if (prBook[prBook.length - 1].finishPage === 24) {
+        if (prBook[prBook.length - 1].finishPage === data.totalPages) {
           return readingFinish(updBook)
         }
         setBook(updBook)
