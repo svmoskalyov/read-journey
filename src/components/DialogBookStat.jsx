@@ -4,7 +4,8 @@ import {
 } from '@/components/ui/dialog'
 import like from '@/assets/icons/like.svg'
 import books from '@/assets/icons/books.svg'
-import { useLibraryStore, useReadingStore } from '@/stores/booksStore.js'
+import { useLibraryStore } from '@/stores/libraryStore.js'
+import { useReadingStore } from '@/stores/readingStore.js'
 
 function DialogBookStat() {
   const isAdded = useLibraryStore(state => state.isAdded)
