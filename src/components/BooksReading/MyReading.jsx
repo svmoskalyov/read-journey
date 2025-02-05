@@ -1,7 +1,7 @@
 import { Flex, Heading, Image, Card, Text, Mark } from '@chakra-ui/react'
 import unread from '@/assets/icons/block-run.svg'
 import read from '@/assets/icons/block-stop.svg'
-import { useReadingStore } from '@/stores/booksStore.js'
+import { useReadingStore } from '@/stores/readingStore.js'
 import DialogBookStat from '@/components/DialogBookStat.jsx'
 
 function MyReading() {

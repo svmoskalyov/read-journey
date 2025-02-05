@@ -4,7 +4,7 @@ import {
   ProgressCircleRoot,
   ProgressCircleValueText
 } from '@/components/ui/progress-circle.jsx'
-import { useReadingStore } from '@/stores/booksStore.js'
+import { useReadingStore } from '@/stores/readingStore.js'
 import { useEffect, useState } from 'react'
 
 function Statiatics() {

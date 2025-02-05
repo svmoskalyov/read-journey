@@ -15,7 +15,7 @@ import chartA from '@/assets/icons/pie-chart-active.svg'
 import chartU from '@/assets/icons/pie-chart-unactive.svg'
 import Diary from './Diary'
 import Statiatics from './Statiatics'
-import { useReadingStore } from '@/stores/booksStore.js'
+import { useReadingStore } from '@/stores/readingStore.js'
 import { useAuthStore } from '@/stores/authStore.js'
 
 const schemaPage = yup

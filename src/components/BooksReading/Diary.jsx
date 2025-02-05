@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Box, Center, Flex, Heading, Image, List, Mark, Text } from '@chakra-ui/react'
 import trash2 from '@/assets/icons/trash-2.svg'
 import blockStat from '@/assets/icons/block.svg'
-import { useReadingStore } from '@/stores/booksStore.js'
+import { useReadingStore } from '@/stores/readingStore.js'
 
 function Diary() {
   const book = useReadingStore(state => state.book)
