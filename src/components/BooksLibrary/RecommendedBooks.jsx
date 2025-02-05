@@ -16,8 +16,8 @@ function RecommendedBooks() {
     <>
       <Flex
         direction="column"
-        justifyContent="space-around"
-        mt={{ base: '20px', tablet: '0' }}
+        justifyContent="space-between"
+        mt="20px"
         p="5"
         h={{ base: '244px', tablet: '312px', desktop: '259px' }}
         w={{ base: '295px', tablet: '313px', desktop: '313px' }}

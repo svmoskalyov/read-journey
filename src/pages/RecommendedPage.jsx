@@ -29,7 +29,8 @@ function RecommendedPage() {
       </Flex>
       <Flex
         px={{ base: '20px', tablet: '40px' }}
-        py={{ base: '40px', tablet: '40px' }}
+        pt={{ base: '40px', tablet: '40px' }}
+        pb='28px'
         h={{ base: '382px', tablet: '663px', desktop: '651px' }}
         bg="brand.bgSecondary"
         rounded="30px"

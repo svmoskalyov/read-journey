@@ -12,7 +12,7 @@ function BookItem({ book }) {
   return (
     <>
       <Card.Root
-        maxW="248px"
+        maxW="137px"
         bg="brand.bgSecondary"
         color="brand.accent"
         border="none"
@@ -59,7 +59,7 @@ function BookItem({ book }) {
             {book.title}
           </Heading>
         </Flex>
-        <Card.Body p="0" pt="2">
+        <Card.Body p="0" pt="2" w="137px">
           <Card.Title
             fontFamily="Gilroy-Bold"
             fontSize="14px"
@@ -68,6 +68,7 @@ function BookItem({ book }) {
             overflow="hidden"
             textWrap="nowrap"
             textOverflow="ellipsis"
+            userSelect="none"
           >
             {book.title}
           </Card.Title>

@@ -46,7 +46,7 @@ function MyLibrary() {
   return (
     <Flex
       direction="column"
-      gap={{ base: '23px', tablet: '14px', desktop: '161px' }}
+      gap={{ base: '23px', tablet: '14px' }}
       w="full"
       overflow="hidden"
     >

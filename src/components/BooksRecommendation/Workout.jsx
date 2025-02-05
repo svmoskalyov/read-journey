@@ -7,10 +7,10 @@ function Workout() {
   return (
     <Flex
       direction="column"
-      justifyContent="space-around"
-      mt={{ base: '20px', tablet: '0' }}
+      justifyContent="space-between"
+      mt="20px"
       p="5"
-      h={{ base: '244px', tablet: '312px' }}
+      h={{ base: '244px', tablet: '272px' }}
       w={{ base: '295px', tablet: '313px' }}
       bg="brand.bgInput"
       rounded="12px"

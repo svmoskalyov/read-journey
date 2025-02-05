@@ -24,7 +24,7 @@ function ReadingPage() {
         pt={{ base: '20px', tablet: '32px', desktop: '40px' }}
         pr={{ base: '20px', tablet: '16px', desktop: '20px' }}
         pb={{ base: '20px', tablet: '16px', desktop: '20px' }}
-        h={{ base: '390px', tablet: '336px', desktop: '651px' }}
+        h={{ base: '450px', tablet: '336px', desktop: '651px' }}
         bg="brand.bgSecondary"
         rounded="30px"
       >
@@ -34,7 +34,7 @@ function ReadingPage() {
         px={{ base: '20px', tablet: '40px', desktop: '20px' }}
         py={{ base: '40px', tablet: '40px', desktop: '20px' }}
         pb={{ base: '20px', tablet: '25px', desktop: '20px' }}
-        h={{ base: '382px', tablet: '518px', desktop: '651px' }}
+        h={{ base: '471px', tablet: '518px', desktop: '651px' }}
         bg="brand.bgSecondary"
         rounded="30px"
       >

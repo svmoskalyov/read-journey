@@ -61,7 +61,7 @@ function MyReading() {
           direction="column"
           alignItems="center"
           p="4"
-          mb={{ base: '8px', tablet: '25px' }}
+          mb={{ base: '8px', tablet: '16px' }}
           h={{ base: '208px', tablet: '256px', desktop: '340px' }}
           w={{ base: '137px', tablet: '169px', desktop: '224px' }}
           rounded="8px"
@@ -121,6 +121,7 @@ function MyReading() {
 
       {!isReading && (
         <Image
+          mt='8px'
           src={read}
           h={{ base: '40px', tablet: '50px' }}
           w={{ base: '40px', tablet: '50px' }}
@@ -129,6 +130,7 @@ function MyReading() {
       )}
       {isReading && (
         <Image
+          mt='8px'
           src={unread}
           h={{ base: '40px', tablet: '50px' }}
           w={{ base: '40px', tablet: '50px' }}
