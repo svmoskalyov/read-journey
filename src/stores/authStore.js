@@ -1,13 +1,12 @@
 import { create } from 'zustand'
 import { devtools, persist } from 'zustand/middleware'
 import {
-  signupUserApi,
-  signinUserApi,
-  currentUserApi,
-  signoutUserApi
+  signupUserApi, signinUserApi, currentUserApi, signoutUserApi
 } from '@/services/api'
 import toast from '@/utils/toast'
-import { useRecommendedStore } from '@/stores/booksStore'
+import { useRecommendedStore } from '@/stores/recommendedStore.js'
+import { useReadingStore } from '@/stores/readingStore.js'
+import { useLibraryStore } from '@/stores/libraryStore.js'
 
 const initialState = {
   name: null,
@@ -88,8 +87,9 @@ export const useAuthStore = create()(
           try {
             await signoutUserApi()
             set(initialState)
-            // useRecommendedStore.setState(initialState)
-            useRecommendedStore.getState().resetBooks()
+            useRecommendedStore.getState().resetDefault()
+            useLibraryStore.getState().resetDefault()
+            useReadingStore.getState().resetDefault()
             toast('success', 'Sign-out successful')
           } catch (error) {
             set({ error: error.code })
