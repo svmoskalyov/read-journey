@@ -1,8 +1,13 @@
-# React + Vite
+# 📚 [READ JOURNEY](https://read-journey-two.vercel.app/)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### 📝 About the application
+ text
 
-Currently, two official plugins are available:
+### 🧰 Technologies stack 
+React, Chakra UI, Zustand, Firebase Database, Firebase Auth, React DOM, React Router, React-hook-form, Yup, Nanoid, Vite, Prettier, ESLint.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
+![image](https://github.com/user-attachments/assets/7d8a8c4c-b86f-45c2-b676-bc3e203f98ec)
+![image](https://github.com/user-attachments/assets/99481317-ea0e-4fd6-8208-40327af88a20)
+![image](https://github.com/user-attachments/assets/42f01064-ca11-4d9e-9e4f-e1014dabd55c)
+![image](https://github.com/user-attachments/assets/4fe39128-925b-4f0d-8c4f-ba941e8ba6c4)
