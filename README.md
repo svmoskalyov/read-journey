@@ -1,7 +1,7 @@
 # 📚 [READ JOURNEY](https://read-journey-two.vercel.app/)
 
 ### 📝 About the application
- text
+Read Journey, an application for travel lovers who can read their favorite books on the go. To start using the application, you need to register. On the home page, recommended books for reading are recommended, which you can add to your library, there is also a filter for sorting books. On the library page, there are your books for reading, there is also a form for creating a new book. We select a book and start reading, a redirection is made to the reading page. On the reading page there is a page setting field, there is also a diary and statistics in the form of a book reading graph.
 
 ### 🧰 Technologies stack 
 React, Chakra UI, Zustand, Firebase Database, Firebase Auth, React DOM, React Router, React-hook-form, Yup, Nanoid, Vite, Prettier, ESLint.
