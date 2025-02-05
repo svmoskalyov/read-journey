@@ -10,7 +10,7 @@ import {
 import { Field } from '@/components/ui/field'
 import DialogBookStat from '../DialogBookStat'
 import RecommendedBooks from './RecommendedBooks'
-import { useLibraryStore } from '@/stores/booksStore.js'
+import { useLibraryStore } from '@/stores/libraryStore.js'
 import { nanoid } from 'nanoid'
 
 const schemaLib = yup

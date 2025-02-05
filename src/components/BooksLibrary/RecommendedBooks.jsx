@@ -1,7 +1,7 @@
 import { useRef } from 'react'
 import { Flex, Heading, Card, Image, Link, Text } from '@chakra-ui/react'
 import arrow from '@/assets/icons/arrow-right.svg'
-import { useRecommendedStore } from '@/stores/booksStore.js'
+import { useRecommendedStore } from '@/stores/recommendedStore.js'
 
 function RecommendedBooks() {
   const books = useRecommendedStore(state => state.books)

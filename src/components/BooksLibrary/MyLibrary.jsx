@@ -7,7 +7,7 @@ import BookZeroItem from './BookZeroItem'
 import BookItem from './BookItem'
 import { getDatabase, ref, onValue } from 'firebase/database'
 import { useAuthStore } from '@/stores/authStore.js'
-import { useLibraryStore } from '@/stores/booksStore.js'
+import { useLibraryStore } from '@/stores/libraryStore.js'
 
 const filterList = createListCollection({
   items: [

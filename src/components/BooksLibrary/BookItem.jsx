@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Card, Flex, Heading, IconButton, Image, Text } from '@chakra-ui/react'
 import trash from '@/assets/icons/trash.svg'
 import DialogBook from '@/components/DialogBook.jsx'
-import { useLibraryStore } from '@/stores/booksStore.js'
+import { useLibraryStore } from '@/stores/libraryStore.js'
 
 function BookItem({ book }) {
   const [openDialog, setOpenDialog] = useState(false)
