@@ -4,7 +4,9 @@ import { Button } from '@/components/ui/button'
 import {
   DialogBody, DialogCloseTrigger, DialogContent, DialogRoot
 } from '@/components/ui/dialog'
-import { useLibraryStore, useReadingStore, useRecommendedStore } from '@/stores/booksStore.js'
+import { useRecommendedStore } from '@/stores/recommendedStore.js'
+import { useReadingStore } from '@/stores/readingStore.js'
+import { useLibraryStore } from '@/stores/libraryStore.js'
 import { useNavigate } from 'react-router'
 
 function DialogBook({ statBook, book }) {
