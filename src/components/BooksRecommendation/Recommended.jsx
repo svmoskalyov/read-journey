@@ -50,7 +50,7 @@ function Recommended() {
           Recommended
         </Heading>
         <PaginationRoot
-          count={books.length}
+          count={filteredBooks.length}
           pageSize={itemsLimit}
           defaultPage={1}
           maxW="240px"
