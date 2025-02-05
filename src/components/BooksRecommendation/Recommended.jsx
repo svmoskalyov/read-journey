@@ -3,7 +3,7 @@ import { Flex, Heading, HStack, Grid } from '@chakra-ui/react'
 import {
   PaginationNextTrigger, PaginationPrevTrigger, PaginationRoot
 } from '@/components/ui/pagination.jsx'
-import { useRecommendedStore } from '@/stores/booksStore.js'
+import { useRecommendedStore } from '@/stores/recommendedStore.js'
 import useMediaQuery from '@/hooks/useMediaQuery.js'
 import usePagination from '@/hooks/usePagination.js'
 import BookItem from './BookItem'

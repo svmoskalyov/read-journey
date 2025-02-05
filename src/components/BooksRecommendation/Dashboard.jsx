@@ -7,7 +7,7 @@ import {
 import { Field } from '@/components/ui/field'
 import Workout from './Workout'
 import Expression from './Expression'
-import { useRecommendedStore } from '@/stores/booksStore.js'
+import { useRecommendedStore } from '@/stores/recommendedStore.js'
 
 const schemaRec = yup.object({
   title: yup.string().notRequired(),
