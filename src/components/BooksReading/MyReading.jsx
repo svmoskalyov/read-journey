@@ -36,14 +36,13 @@ function MyReading() {
             letterSpacing="-0.02em"
             color="brand.muted"
           >
-            1 hour 11 minutes
-            {/*{book.timeLeftToRead.days !== 0 &&*/}
-            {/*  <><Mark mx="2px">{book.timeLeftToRead.days}</Mark>days</>}*/}
-            {/*{book.timeLeftToRead.hours !== 0 &&*/}
-            {/*  <><Mark mx="2px">{book.timeLeftToRead.hours}</Mark>hours</>}*/}
-            {/*{book.timeLeftToRead.minutes !== 0 &&*/}
-            {/*  <><Mark mx="2px">{book.timeLeftToRead.minutes}</Mark>*/}
-            {/*    minutes left</>}*/}
+            {book.timeLeftToRead.days !== 0 &&
+              <><Mark mx="2px">{book.timeLeftToRead.days}</Mark>days</>}
+            {book.timeLeftToRead.hours !== 0 &&
+              <><Mark mx="2px">{book.timeLeftToRead.hours}</Mark>hours</>}
+            {book.timeLeftToRead.minutes !== 0 &&
+              <><Mark mx="2px">{book.timeLeftToRead.minutes}</Mark>
+                minutes left</>}
           </Text>
         )}
       </Flex>
@@ -121,7 +120,7 @@ function MyReading() {
 
       {!isReading && (
         <Image
-          mt='8px'
+          mt="8px"
           src={read}
           h={{ base: '40px', tablet: '50px' }}
           w={{ base: '40px', tablet: '50px' }}
@@ -130,7 +129,7 @@ function MyReading() {
       )}
       {isReading && (
         <Image
-          mt='8px'
+          mt="8px"
           src={unread}
           h={{ base: '40px', tablet: '50px' }}
           w={{ base: '40px', tablet: '50px' }}

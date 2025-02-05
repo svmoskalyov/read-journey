@@ -33,25 +33,18 @@ export const useReadingStore = create()(
         setReadingStop: async ({ page }) => {
           const book = get().book
           const readingBook = get().readingBook
-          // const dateStart = new Date(readingBook.startReading)
-          // const dateEnd = Date.now()
-          // const timeDifferenceMS = dateEnd - dateStart
-          // const timeDifferenceMins = Math.floor(timeDifferenceMS / 60000) % 60
-          // const readingSpeed = Math.floor((page * 60) / timeDifferenceMins)
+          const dateStart = new Date(readingBook.startReading)
+          const dateEnd = Date.now()
+          const timeDifferenceMS = dateEnd - dateStart
+          const timeDifferenceMins = Math.floor(timeDifferenceMS / 60000) % 60
+          const readingSpeed = Math.floor((page * 60) / timeDifferenceMins)
           const readBook = {
             ...readingBook,
             finishPage: page,
             finishReading: new Date().toJSON(),
-            // speed: readingSpeed,
-            speed: 44,
+            speed: readingSpeed,
             status: 'inactive'
           }
-          // if (readingBook.startPage === 0) {
-          //   statusBookApi(book.id, 'in-progress')
-          // }
-          // addProgressItemApi(book.id, readBook)
-          // set({ readingBook: {}, isReading: false })
-
           set({ isLoading: true })
           try {
             if (readingBook.startPage === 0) {
@@ -67,12 +60,6 @@ export const useReadingStore = create()(
         },
         removeProgressItem: (idBook, idItem) => {
           const book = get().book
-          // if (book.progress?.length === 1) {
-          //   removeProgressItemApi(idBook, idItem)
-          //   set({ readingBook: {}, isReading: false })
-          // }
-          // removeProgressItemApi(idBook, idItem)
-
           set({ isLoading: true })
           try {
             if (book.progress?.length === 1) {
@@ -87,18 +74,14 @@ export const useReadingStore = create()(
           }
         },
         readingFinish: (book) => {
-          // const dateStart = book.progress[0].startReading
-          // const dateEnd = book.progress[book.progress.length - 1].finishReading
-          // const total = Date.parse(dateEnd) - Date.parse(dateStart)
-          // // const seconds = Math.floor( (total/1000) % 60 )
-          // const minutes = Math.floor((total / 1000 / 60) % 60)
-          // const hours = Math.floor((total / (1000 * 60 * 60)) % 24)
-          // const days = Math.floor(total / (1000 * 60 * 60 * 24))
-          // const timeLeftToRead = { days, hours, minutes }
-          const timeLeftToRead = { days: 0, hours: 1, minutes: 11 }
-          // readingFinishApi(book.id, timeLeftToRead, 'done')
-          // set({ isReaded: true })
-
+          const dateStart = book.progress[0].startReading
+          const dateEnd = book.progress[book.progress.length - 1].finishReading
+          const total = Date.parse(dateEnd) - Date.parse(dateStart)
+          // const seconds = Math.floor( (total/1000) % 60 )
+          const minutes = Math.floor((total / 1000 / 60) % 60)
+          const hours = Math.floor((total / (1000 * 60 * 60)) % 24)
+          const days = Math.floor(total / (1000 * 60 * 60 * 24))
+          const timeLeftToRead = { days, hours, minutes }
           set({ isLoading: true })
           try {
             readingFinishApi(book.id, timeLeftToRead, 'done')
